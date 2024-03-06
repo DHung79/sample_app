@@ -42,7 +42,7 @@ class ComingSoonAppBar extends StatelessWidget {
             ),
             Text(
               title ?? 'Sample App',
-              style: GGTextStyles.h2Bold(
+              style: GGTextStyle.h2Bold(
                 color: TextColors.textWhite,
               ),
             ),

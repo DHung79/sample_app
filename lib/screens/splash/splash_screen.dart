@@ -33,33 +33,40 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
-    Timer(const Duration(milliseconds: 2500), () {
-      context.go(
-        '/$homeRoute',
-      );
-      _controller?.dispose();
-      _controller = null;
-    });
+    final currentRoute =
+        GoRouter.of(context).routerDelegate.currentConfiguration.uri.toString();
+    if (currentRoute == initialRoute) {
+      Timer(const Duration(milliseconds: 2500), () {
+        context.go(
+          '/$homeRoute',
+        );
+        _controller?.dispose();
+        _controller = null;
+      });
+    }
+
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Center(
-          child: AnimatedBuilder(
-            animation: _controller!,
-            builder: (_, child) {
-              return Transform.rotate(
-                angle: _controller!.value * pi,
-                child: child,
-              );
-            },
-            child: Image(
-              image: AssetImage(ImgAssets.splash),
-              height: 150,
-              fit: BoxFit.contain,
-              filterQuality: FilterQuality.high,
-            ),
-          ),
+          child: _controller != null
+              ? AnimatedBuilder(
+                  animation: _controller!,
+                  builder: (_, child) {
+                    return Transform.rotate(
+                      angle: _controller!.value * pi,
+                      child: child,
+                    );
+                  },
+                  child: Image(
+                    image: AssetImage(ImgAssets.splash),
+                    height: 150,
+                    fit: BoxFit.contain,
+                    filterQuality: FilterQuality.high,
+                  ),
+                )
+              : Container(),
         ),
       ),
     );

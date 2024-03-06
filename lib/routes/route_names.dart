@@ -1,7 +1,6 @@
 const String initialRoute = '/';
 const String pageNotFoundRoute = 'page-not-found';
 const String homeRoute = 'home';
-const String authenticationRoute = 'auth';
-const String loginRoute = 'login';
+const String userRoute = 'user';
+const String feedRoute = 'feed';
 const String signUpRoute = 'signup';
-

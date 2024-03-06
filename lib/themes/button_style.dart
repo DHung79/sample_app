@@ -2,7 +2,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'theme_config.dart';
 
-class ButtonStyle {
+class CustomButtonStyle {
   static Widget rounded({
     required void Function()? onPressed,
     required Widget child,

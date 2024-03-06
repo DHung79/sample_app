@@ -35,7 +35,7 @@ class ComingSoonScreen extends StatelessWidget {
               ),
               Text(
                 appBarTitle ?? 'Coming Soon',
-                style: GGTextStyles.h2Bold(
+                style: GGTextStyle.h2Bold(
                   color: TextColors.textHighEm,
                 ),
               ),

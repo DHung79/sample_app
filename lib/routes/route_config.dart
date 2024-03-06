@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../logger/logger.dart';
 import '../screens/coming_soon/coming_soon_screen.dart';
+import '../screens/feed/feed_screen.dart';
 import '../screens/home/home_screen.dart';
+import '../screens/user/user_screen.dart';
 import '../screens/splash/splash_screen.dart';
 import 'route_names.dart';
 
@@ -11,6 +13,8 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: initialRoute,
       builder: (BuildContext context, GoRouterState state) {
+        // final currentRoute = state.uri.toString();
+        // logDebug('currentRoute: $currentRoute');
         return const SplashScreen();
       },
       routes: <RouteBase>[
@@ -20,7 +24,27 @@ final GoRouter router = GoRouter(
             return _screenFor(
               state: state,
               route: homeRoute,
-              child: const ListDataScreen(),
+              child: const HomeScreen(),
+            );
+          },
+        ),
+        GoRoute(
+          path: userRoute,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return _screenFor(
+              state: state,
+              route: userRoute,
+              child: const UserScreen(),
+            );
+          },
+        ),
+        GoRoute(
+          path: feedRoute,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return _screenFor(
+              state: state,
+              route: feedRoute,
+              child: const FeedScreen(),
             );
           },
         ),
@@ -28,7 +52,7 @@ final GoRouter router = GoRouter(
     ),
   ],
   errorBuilder: (context, state) {
-    logDebug('error location: ${state.uri.toString()}');
+    logDebug('Route error builder : ${state.uri.toString()}');
     return const ComingSoonScreen(
       appBarTitle: 'Unknow Route',
     );

@@ -27,7 +27,7 @@ class UserDetailAppBar extends StatelessWidget {
                 children: [
                   Text(
                     'User Info',
-                    style: GGTextStyles.h2Bold(
+                    style: GGTextStyle.h2Bold(
                       color: TextColors.textWhite,
                     ),
                   ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class GGTextStyles {
+class GGTextStyle {
   static TextStyle h5Bold({Color color = Colors.black, double? height}) {
     return GoogleFonts.inter(
       fontWeight: FontWeight.w700,
