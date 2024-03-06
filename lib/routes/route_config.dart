@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-// import '../screens/authentication/authentication_screen.dart';
 import '../logger/logger.dart';
 import '../screens/coming_soon/coming_soon_screen.dart';
 import '../screens/home/home_screen.dart';
+import '../screens/splash/splash_screen.dart';
 import 'route_names.dart';
 
 final GoRouter router = GoRouter(
@@ -11,7 +11,7 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: initialRoute,
       builder: (BuildContext context, GoRouterState state) {
-        return const HomeScreen();
+        return const SplashScreen();
       },
       routes: <RouteBase>[
         GoRoute(
@@ -20,7 +20,7 @@ final GoRouter router = GoRouter(
             return _screenFor(
               state: state,
               route: homeRoute,
-              child: const HomeScreen(),
+              child: const ListDataScreen(),
             );
           },
         ),

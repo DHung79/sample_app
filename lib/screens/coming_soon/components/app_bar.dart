@@ -1,41 +1,54 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import '../../../routes/route_names.dart';
 import '../../../themes/theme_config.dart';
 
-class UserDetailAppBar extends StatelessWidget {
-  const UserDetailAppBar({super.key});
+class ComingSoonAppBar extends StatelessWidget {
+  final String? title;
+  const ComingSoonAppBar({
+    super.key,
+    this.title,
+  });
 
   @override
   Widget build(BuildContext context) {
     final statusBarHeight = MediaQuery.of(context).viewPadding.top;
+    const String goToHomeRoute = '/$homeRoute';
     return AppBar(
       automaticallyImplyLeading: false,
       backgroundColor: Colors.blueAccent,
       flexibleSpace: Padding(
         padding: EdgeInsets.fromLTRB(8, statusBarHeight + 8, 8, 8),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             _appBarButton(
-              icon: Icons.arrow_back_ios_new_rounded,
+              icon: Icons.home,
               ontap: () {
-                //change screen using route
-                Navigator.pop(context);
+                final currentRoute = GoRouter.of(context)
+                    .routerDelegate
+                    .currentConfiguration
+                    .uri
+                    .toString();
+                if (currentRoute != goToHomeRoute) {
+                  context.go(
+                    goToHomeRoute,
+                  );
+                } else {
+                  context.pop();
+                }
               },
             ),
-            Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'User Info',
-                    style: GGTextStyles.h2Bold(
-                      color: TextColors.textWhite,
-                    ),
-                  ),
-                ],
+            Text(
+              title ?? 'Sample App',
+              style: GGTextStyles.h2Bold(
+                color: TextColors.textWhite,
               ),
             ),
-            _appBarButton(visionable: false),
+            _appBarButton(
+              visionable: false,
+            ),
           ],
         ),
       ),
@@ -55,7 +68,7 @@ class UserDetailAppBar extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
           child: Icon(
-            icon ?? Icons.navigate_next_sharp,
+            icon,
             color: visionable ? TextColors.textWhite : Colors.transparent,
             size: 32,
           ),

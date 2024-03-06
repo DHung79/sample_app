@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:sample_app/screens/coming_soon/coming_soon_screen.dart';
-import '../../routes/route_names.dart';
-import '../../themes/theme_config.dart';
+import '../../../../themes/theme_config.dart';
 
-class HomeAppBar extends StatelessWidget {
-  const HomeAppBar({super.key});
+class UserDetailAppBar extends StatelessWidget {
+  const UserDetailAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,19 +16,9 @@ class HomeAppBar extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             _appBarButton(
-              icon: Icons.route_sharp,
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: TextColors.textWhite,
-                  width: 2,
-                ),
-                shape: BoxShape.circle,
-              ),
+              icon: Icons.arrow_back_ios_new_rounded,
               ontap: () {
-                //change screen using route
-                context.go(
-                  '/$pageNotFoundRoute',
-                );
+                Navigator.pop(context);
               },
             ),
             Expanded(
@@ -39,7 +26,7 @@ class HomeAppBar extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Dummy Json Api',
+                    'User Info',
                     style: GGTextStyles.h2Bold(
                       color: TextColors.textWhite,
                     ),
@@ -47,17 +34,7 @@ class HomeAppBar extends StatelessWidget {
                 ],
               ),
             ),
-            _appBarButton(
-              ontap: () {
-                //change screen using navigator
-                NavigatorStyle.navigatorTo(
-                  context: context,
-                  transitionDuration: 350,
-                  tween: NavigatorStyle.pushRight,
-                  toScreen: const ComingSoonScreen(),
-                );
-              },
-            ),
+            _appBarButton(visionable: false),
           ],
         ),
       ),
@@ -68,6 +45,7 @@ class HomeAppBar extends StatelessWidget {
     Function()? ontap,
     IconData? icon,
     Decoration? decoration,
+    bool visionable = true,
   }) {
     return GestureDetector(
       onTap: ontap,
@@ -77,7 +55,7 @@ class HomeAppBar extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
           child: Icon(
             icon ?? Icons.navigate_next_sharp,
-            color: TextColors.textWhite,
+            color: visionable ? TextColors.textWhite : Colors.transparent,
             size: 32,
           ),
         ),

@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:sample_app/themes/theme_config.dart';
 
 import '../../apis/user/user.dart';
-import 'home_app_bar.dart';
-import 'user_detail/user_detail_screen.dart';
+import 'components/app_bar.dart';
+import 'components/user_detail/user_detail_screen.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class ListDataScreen extends StatefulWidget {
+  const ListDataScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<ListDataScreen> createState() => _ListDataScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _ListDataScreenState extends State<ListDataScreen> {
   final _userBloc = UserBloc();
   final _scrollController = ScrollController();
   int limit = 20;

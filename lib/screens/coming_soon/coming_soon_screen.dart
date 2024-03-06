@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../themes/theme_config.dart';
-import 'coming_soon_app_bar.dart';
+import 'components/app_bar.dart';
 
 class ComingSoonScreen extends StatelessWidget {
   final String? appBarTitle;
