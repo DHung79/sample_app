@@ -48,13 +48,16 @@ class HomeScreen extends StatelessWidget {
     Function()? onPressed,
     required String name,
   }) {
-    return CustomButtonStyle.roundDark(
-      color: Colors.blueAccent,
-      onPressed: onPressed,
-      child: Text(
-        name,
-        style: CustomTextStyle.boldStandard(
-          color: TextColors.textWhite,
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0, 8, 0, 16),
+      child: CustomButtonStyle.roundDark(
+        color: Colors.blueAccent,
+        onPressed: onPressed,
+        child: Text(
+          name,
+          style: CustomTextStyle.boldStandard(
+            color: TextColors.textWhite,
+          ),
         ),
       ),
     );
