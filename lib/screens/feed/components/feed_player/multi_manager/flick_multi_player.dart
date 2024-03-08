@@ -59,16 +59,11 @@ class _FlickMultiPlayerState extends State<FlickMultiPlayer> {
           playerLoadingFallback: const Positioned.fill(
             child: Stack(
               children: <Widget>[
-                Positioned(
-                  right: 10,
-                  top: 10,
-                  child: SizedBox(
-                    width: 20,
-                    height: 20,
-                    child: CircularProgressIndicator(
-                      backgroundColor: Colors.white,
-                      strokeWidth: 4,
-                    ),
+                Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.white,
+                    backgroundColor: Colors.black,
+                    strokeWidth: 4,
                   ),
                 ),
               ],

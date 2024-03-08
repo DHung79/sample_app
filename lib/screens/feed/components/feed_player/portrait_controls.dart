@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flick_video_player/flick_video_player.dart';
+import 'package:provider/provider.dart';
+import 'package:sample_app/screens/feed/components/feed_player/custom_widget/left_duration.dart';
 import './multi_manager/flick_multi_manager.dart';
+import 'custom_widget/total_duration.dart';
 
 class FeedPlayerPortraitControls extends StatelessWidget {
   const FeedPlayerPortraitControls({
@@ -20,25 +23,33 @@ class FeedPlayerPortraitControls extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FlickControlManager controlManager =
+        Provider.of<FlickControlManager>(context);
+    var videoStatus = flickManager!.flickVideoManager!;
     return Container(
       color: Colors.transparent,
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       child: Stack(
         children: <Widget>[
           FlickTogglePlayAction(
+            togglePlay: () {
+              controlManager.togglePlay();
+            },
             child: FlickSeekVideoAction(
               child: Center(
                 child: AnimatedOpacity(
-                  opacity: !flickManager!.flickVideoManager!.isPlaying ? 1 : 0,
+                  opacity:
+                      videoStatus.isBuffering || videoStatus.isPlaying ? 0 : 1,
                   duration: const Duration(milliseconds: 300),
                   child: Container(
                     decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       color: Colors.black38,
                     ),
-                    child: const Padding(
-                      padding: EdgeInsets.all(8),
-                      child: FlickPlayToggle(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: Icon(
+                        videoStatus.isPlaying ? Icons.play_arrow : Icons.pause,
                         size: 50,
                       ),
                     ),
@@ -73,7 +84,7 @@ class FeedPlayerPortraitControls extends StatelessWidget {
                       ),
                       Row(
                         children: <Widget>[
-                          FlickCurrentPosition(
+                          LeftDuration(
                             fontSize: fontSize,
                           ),
                           FlickAutoHideChild(
@@ -83,7 +94,7 @@ class FeedPlayerPortraitControls extends StatelessWidget {
                                   color: Colors.white, fontSize: fontSize),
                             ),
                           ),
-                          FlickTotalDuration(
+                          TotalDuration(
                             fontSize: fontSize,
                           ),
                         ],

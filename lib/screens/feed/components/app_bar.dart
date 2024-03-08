@@ -4,7 +4,11 @@ import '../../../routes/route_names.dart';
 import '../../../themes/theme_config.dart';
 
 class FeedAppBar extends StatelessWidget {
-  const FeedAppBar({super.key});
+  final String title;
+  const FeedAppBar({
+    super.key,
+    this.title = 'Feed',
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +34,7 @@ class FeedAppBar extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Feed',
+                    title,
                     style: GGTextStyle.h2Bold(
                       color: TextColors.textWhite,
                     ),
