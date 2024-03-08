@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flick_video_player/flick_video_player.dart';
 import 'package:provider/provider.dart';
-import 'package:sample_app/screens/feed/components/feed_player/custom_widget/left_duration.dart';
+import 'package:sample_app/screens/feed/components/feed_player/custom_widget/played_time.dart';
+import 'package:video_player/video_player.dart';
+import '../../../../themes/theme_config.dart';
 import './multi_manager/flick_multi_manager.dart';
 import 'custom_widget/total_duration.dart';
 
@@ -23,101 +25,134 @@ class FeedPlayerPortraitControls extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    FlickControlManager controlManager =
-        Provider.of<FlickControlManager>(context);
-    var videoStatus = flickManager!.flickVideoManager!;
     return Container(
       color: Colors.transparent,
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
       child: Stack(
-        children: <Widget>[
-          FlickTogglePlayAction(
-            togglePlay: () {
-              controlManager.togglePlay();
-            },
-            child: FlickSeekVideoAction(
-              child: Center(
-                child: AnimatedOpacity(
-                  opacity:
-                      videoStatus.isBuffering || videoStatus.isPlaying ? 0 : 1,
-                  duration: const Duration(milliseconds: 300),
-                  child: Container(
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.black38,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: Icon(
-                        videoStatus.isPlaying ? Icons.play_arrow : Icons.pause,
-                        size: 50,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+        children: [
+          _togglePlayAction(
+            context: context,
           ),
-          FlickAutoHideChild(
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  FlickVideoProgressBar(
-                    flickProgressBarSettings: progressBarSettings,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      FlickPlayToggle(
-                        size: iconSize,
-                      ),
-                      SizedBox(
-                        width: iconSize / 2,
-                      ),
-                      FlickSoundToggle(
-                        size: iconSize,
-                      ),
-                      SizedBox(
-                        width: iconSize / 2,
-                      ),
-                      Row(
-                        children: <Widget>[
-                          LeftDuration(
-                            fontSize: fontSize,
-                          ),
-                          FlickAutoHideChild(
-                            child: Text(
-                              ' / ',
-                              style: TextStyle(
-                                  color: Colors.white, fontSize: fontSize),
-                            ),
-                          ),
-                          TotalDuration(
-                            fontSize: fontSize,
-                          ),
-                        ],
-                      ),
-                      Expanded(
-                        child: Container(),
-                      ),
-                      FlickSubtitleToggle(
-                        size: iconSize,
-                      ),
-                      SizedBox(
-                        width: iconSize / 2,
-                      ),
-                      FlickFullScreenToggle(
-                        size: iconSize,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
+          _videoActionBar(),
         ],
+      ),
+    );
+  }
+
+  Widget _togglePlayAction({
+    required BuildContext context,
+  }) {
+    FlickControlManager controlManager =
+        Provider.of<FlickControlManager>(context);
+
+    VideoPlayerController? videoPlayerController =
+        Provider.of<FlickVideoManager>(context).videoPlayerController;
+
+    return FlickTogglePlayAction(
+      togglePlay: () {
+        controlManager.togglePlay();
+      },
+      child: FlickSeekVideoAction(
+        child: Center(
+          child: _getChildWidget(videoPlayerController),
+        ),
+      ),
+    );
+  }
+
+  Widget _getChildWidget(
+    VideoPlayerController? videoPlayerController,
+  ) {
+    var videoStatus = flickManager!.flickVideoManager!;
+    if (videoPlayerController?.value.isBuffering == true) {
+      return Center(
+        child: CircularProgressIndicator(
+          color: ColorPalettes.g100,
+          backgroundColor: Colors.transparent,
+          strokeWidth: 4,
+        ),
+      );
+    } else {
+      return AnimatedOpacity(
+        opacity: !videoStatus.isPlaying ? 1 : 0,
+        duration: const Duration(milliseconds: 300),
+        child: Container(
+          decoration: const BoxDecoration(
+            shape: BoxShape.circle,
+            color: Colors.black38,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8),
+            child: Icon(
+              !videoStatus.isPlaying ? Icons.play_arrow : Icons.pause,
+              size: 50,
+            ),
+          ),
+        ),
+      );
+    }
+  }
+
+  Widget _videoActionBar() {
+    return FlickAutoHideChild(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+            FlickVideoProgressBar(
+              flickProgressBarSettings: progressBarSettings,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                FlickPlayToggle(
+                  size: iconSize,
+                ),
+                SizedBox(
+                  width: iconSize / 2,
+                ),
+                FlickSoundToggle(
+                  size: iconSize,
+                ),
+                SizedBox(
+                  width: iconSize / 2,
+                ),
+                Row(
+                  children: <Widget>[
+                    PlayedTime(
+                      fontSize: fontSize,
+                    ),
+                    FlickAutoHideChild(
+                      child: Text(
+                        ' / ',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: fontSize,
+                        ),
+                      ),
+                    ),
+                    TotalDuration(
+                      fontSize: fontSize,
+                    ),
+                  ],
+                ),
+                Expanded(
+                  child: Container(),
+                ),
+                FlickSubtitleToggle(
+                  size: iconSize,
+                ),
+                SizedBox(
+                  width: iconSize / 2,
+                ),
+                FlickFullScreenToggle(
+                  size: iconSize,
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

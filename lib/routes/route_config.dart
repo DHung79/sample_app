@@ -8,14 +8,25 @@ import '../screens/user/user_screen.dart';
 import '../screens/splash/splash_screen.dart';
 import 'route_names.dart';
 
+String currentRoute = '';
+String previousRoute = '';
+
 final GoRouter router = GoRouter(
   routes: <RouteBase>[
     GoRoute(
       path: initialRoute,
       builder: (BuildContext context, GoRouterState state) {
-        // final currentRoute = state.uri.toString();
+        if (currentRoute != previousRoute) {
+          previousRoute = currentRoute;
+        }
+        currentRoute = state.uri.toString();
+        // logDebug('previousRoute: $previousRoute');
         // logDebug('currentRoute: $currentRoute');
-        return const SplashScreen();
+        if (previousRoute.isEmpty) {
+          return const SplashScreen();
+        } else {
+          return const HomeScreen();
+        }
       },
       routes: <RouteBase>[
         GoRoute(

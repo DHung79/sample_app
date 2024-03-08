@@ -56,19 +56,6 @@ class _FlickMultiPlayerState extends State<FlickMultiPlayer> {
         flickManager: flickManager,
         flickVideoWithControls: FlickVideoWithControls(
           videoFit: BoxFit.contain,
-          playerLoadingFallback: const Positioned.fill(
-            child: Stack(
-              children: <Widget>[
-                Center(
-                  child: CircularProgressIndicator(
-                    color: Colors.white,
-                    backgroundColor: Colors.black,
-                    strokeWidth: 4,
-                  ),
-                ),
-              ],
-            ),
-          ),
           controls: FeedPlayerPortraitControls(
             flickMultiManager: widget.flickMultiManager,
             flickManager: flickManager,
@@ -80,7 +67,10 @@ class _FlickMultiPlayerState extends State<FlickMultiPlayer> {
             size: 40,
             color: Colors.white,
           ),
-          textStyle: TextStyle(fontSize: 16, color: Colors.white),
+          textStyle: TextStyle(
+            fontSize: 16,
+            color: Colors.white,
+          ),
         ),
       ),
     );

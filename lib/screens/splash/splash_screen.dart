@@ -1,9 +1,8 @@
 import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:sample_app/routes/route_names.dart';
 import '../../themes/theme_config.dart';
+import '../home/home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -33,25 +32,22 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
-    final currentRoute =
-        GoRouter.of(context).routerDelegate.currentConfiguration.uri.toString();
-    if (currentRoute == initialRoute) {
+    if (_controller != null) {
       Timer(const Duration(milliseconds: 2500), () {
-        context.go(
-          '/$homeRoute',
-        );
         _controller?.dispose();
         _controller = null;
+        setState(() {});
       });
     }
 
-    return Scaffold(
-      resizeToAvoidBottomInset: true,
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Center(
-          child: _controller != null
-              ? AnimatedBuilder(
+    return _controller == null
+        ? const HomeScreen()
+        : Scaffold(
+            resizeToAvoidBottomInset: true,
+            backgroundColor: Colors.white,
+            body: SafeArea(
+              child: Center(
+                child: AnimatedBuilder(
                   animation: _controller!,
                   builder: (_, child) {
                     return Transform.rotate(
@@ -65,10 +61,9 @@ class _SplashScreenState extends State<SplashScreen>
                     fit: BoxFit.contain,
                     filterQuality: FilterQuality.high,
                   ),
-                )
-              : Container(),
-        ),
-      ),
-    );
+                ),
+              ),
+            ),
+          );
   }
 }
