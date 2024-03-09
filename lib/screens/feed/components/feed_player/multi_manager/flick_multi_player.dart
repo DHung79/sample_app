@@ -63,8 +63,6 @@ class _FlickMultiPlayerState extends State<FlickMultiPlayer> {
           }
         },
         child: custom.FlickVideoPlayer(
-          wakelockEnabledFullscreen: false,
-          wakelockEnabled: false,
           flickManager: flickManager,
           flickVideoWithControls: FlickVideoWithControls(
             videoFit: BoxFit.contain,
@@ -80,13 +78,17 @@ class _FlickMultiPlayerState extends State<FlickMultiPlayer> {
               flickManager: flickManager,
             ),
           ),
-          flickVideoWithControlsFullscreen: const FlickVideoWithControls(
-            controls: FlickLandscapeControls(),
-            iconThemeData: IconThemeData(
+          flickVideoWithControlsFullscreen: FlickVideoWithControls(
+            videoFit: BoxFit.contain,
+            controls: FeedPlayerPortraitControls(
+              flickMultiManager: widget.flickMultiManager,
+              flickManager: flickManager,
+            ),
+            iconThemeData: const IconThemeData(
               size: 40,
               color: Colors.white,
             ),
-            textStyle: TextStyle(
+            textStyle: const TextStyle(
               fontSize: 16,
               color: Colors.white,
             ),

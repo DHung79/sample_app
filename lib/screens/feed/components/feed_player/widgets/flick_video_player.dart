@@ -2,6 +2,7 @@ import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+// import 'package:sample_app/logger/logger.dart';
 import 'package:universal_html/html.dart';
 import 'package:wakelock/wakelock.dart';
 import 'web_key_bindings.dart';
@@ -77,14 +78,20 @@ class _FlickVideoPlayerState extends State<FlickVideoPlayer>
   double? _videoHeight;
 
   @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (flickManager.flickControlManager!.isFullscreen) {
+      flickManager.flickControlManager!.exitFullscreen();
+    }
+    super.didChangeAppLifecycleState(state);
+  }
+
+  @override
   void initState() {
     WidgetsBinding.instance.addObserver(this);
     flickManager = widget.flickManager;
     flickManager.registerContext(context);
     flickManager.flickControlManager!.addListener(listener);
-    _setSystemUIOverlays();
-    _setPreferredOrientation();
-
+    
     if (widget.wakelockEnabled) {
       Wakelock.enable();
     }
@@ -122,8 +129,8 @@ class _FlickVideoPlayerState extends State<FlickVideoPlayer>
   void listener() async {
     if (flickManager.flickControlManager!.isFullscreen && !_isFullscreen) {
       _switchToFullscreen();
-    } else if (_isFullscreen &&
-        !flickManager.flickControlManager!.isFullscreen) {
+    }
+    if (_isFullscreen && !flickManager.flickControlManager!.isFullscreen) {
       _exitFullscreen();
     }
   }
@@ -146,15 +153,17 @@ class _FlickVideoPlayerState extends State<FlickVideoPlayer>
         setState(() {});
       });
     } else {
-      _overlayEntry = OverlayEntry(builder: (context) {
-        return Scaffold(
-          body: FlickManagerBuilder(
-            flickManager: flickManager,
-            child: widget.flickVideoWithControlsFullscreen ??
-                widget.flickVideoWithControls,
-          ),
-        );
-      });
+      _overlayEntry = OverlayEntry(
+          canSizeOverlay: true,
+          builder: (context) {
+            return Scaffold(
+              body: FlickManagerBuilder(
+                flickManager: flickManager,
+                child: widget.flickVideoWithControlsFullscreen ??
+                    widget.flickVideoWithControls,
+              ),
+            );
+          });
 
       Overlay.of(context).insert(_overlayEntry!);
     }
