@@ -1,7 +1,7 @@
 import 'package:flick_video_player/flick_video_player.dart';
 import '../../../../../themes/theme_config.dart';
 import '../portrait_controls.dart';
-import '../widgets/flick_video_player.dart' as custom;
+import '../custom_package/flick_video_player.dart' as custom;
 import './flick_multi_manager.dart';
 
 import 'package:flutter/material.dart';
