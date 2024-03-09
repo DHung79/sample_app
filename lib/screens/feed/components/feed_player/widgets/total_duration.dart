@@ -19,13 +19,6 @@ class TotalDuration extends StatelessWidget {
 
     Duration? duration = videoManager.videoPlayerValue?.duration;
 
-    String? durationInMinutes = duration != null
-        ? (duration - Duration(hours: duration.inHours))
-            .inMinutes
-            .toString()
-            .padLeft(2, '0')
-        : null;
-
     String? durationInSeconds = duration != null
         ? (duration - Duration(minutes: duration.inMinutes))
             .inSeconds
@@ -33,11 +26,32 @@ class TotalDuration extends StatelessWidget {
             .padLeft(2, '0')
         : null;
 
-    String textDuration = duration != null
-        ? duration.inHours > 0
-            ? '${duration.inHours}:$durationInMinutes:$durationInSeconds'
-            : '${duration.inMinutes}:$durationInSeconds'
-        : '0:00';
+    String? durationInMinutes = duration != null
+        ? (duration - Duration(hours: duration.inHours))
+            .inMinutes
+            .toString()
+            .padLeft(2, '0')
+        : null;
+
+    String? durationInHours = duration != null
+        ? (duration - Duration(days: duration.inDays))
+            .inHours
+            .toString()
+            .padLeft(2, '0')
+        : null;
+
+    String textDuration = '0:00';
+    if (duration != null) {
+      if (duration.inDays > 0) {
+        textDuration =
+            '${duration.inDays}:$durationInHours:$durationInMinutes:$durationInSeconds';
+      } else if (duration.inHours > 0) {
+        textDuration =
+            '${duration.inHours}:$durationInMinutes:$durationInSeconds';
+      } else {
+        textDuration = '${duration.inMinutes}:$durationInSeconds';
+      }
+    }
 
     return Text(
       textDuration,

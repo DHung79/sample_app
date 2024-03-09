@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flick_video_player/flick_video_player.dart';
 import 'package:provider/provider.dart';
-import 'package:sample_app/screens/feed/components/feed_player/custom_widget/played_time.dart';
+import 'package:sample_app/screens/feed/components/feed_player/widgets/played_time.dart';
 import 'package:video_player/video_player.dart';
 import '../../../../themes/theme_config.dart';
 import './multi_manager/flick_multi_manager.dart';
-import 'custom_widget/total_duration.dart';
+import 'widgets/total_duration.dart';
 
 class FeedPlayerPortraitControls extends StatelessWidget {
   const FeedPlayerPortraitControls({

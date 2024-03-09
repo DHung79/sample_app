@@ -19,13 +19,6 @@ class PlayedTime extends StatelessWidget {
 
     Duration? playedTime = videoManager.videoPlayerValue?.position;
 
-    String? playedTimeInMinutes = playedTime != null
-        ? (playedTime - Duration(hours: playedTime.inHours))
-            .inMinutes
-            .toString()
-            .padLeft(2, '0')
-        : null;
-
     String? playedTimeInSeconds = playedTime != null
         ? (playedTime - Duration(minutes: playedTime.inMinutes))
             .inSeconds
@@ -33,11 +26,32 @@ class PlayedTime extends StatelessWidget {
             .padLeft(2, '0')
         : null;
 
-    String textDuration = playedTime != null
-        ? playedTime.inHours > 0
-            ? '${playedTime.inHours}:$playedTimeInMinutes:$playedTimeInSeconds'
-            : '${playedTime.inMinutes}:$playedTimeInSeconds'
-        : '0:00';
+    String? playedTimeInMinutes = playedTime != null
+        ? (playedTime - Duration(hours: playedTime.inHours))
+            .inMinutes
+            .toString()
+            .padLeft(2, '0')
+        : null;
+
+    String? playedTimeInHours = playedTime != null
+        ? (playedTime - Duration(days: playedTime.inDays))
+            .inHours
+            .toString()
+            .padLeft(2, '0')
+        : null;
+
+    String textDuration = '0:00';
+    if (playedTime != null) {
+      if (playedTime.inDays > 0) {
+        textDuration =
+            '${playedTime.inDays}:$playedTimeInHours:$playedTimeInMinutes:$playedTimeInSeconds';
+      } else if (playedTime.inHours > 0) {
+        textDuration =
+            '${playedTime.inHours}:$playedTimeInMinutes:$playedTimeInSeconds';
+      } else {
+        textDuration = '${playedTime.inMinutes}:$playedTimeInSeconds';
+      }
+    }
 
     return Text(
       textDuration,

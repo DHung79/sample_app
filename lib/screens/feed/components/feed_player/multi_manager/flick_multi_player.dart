@@ -1,17 +1,20 @@
-import '../portrait_controls.dart';
-import './flick_multi_manager.dart';
 import 'package:flick_video_player/flick_video_player.dart';
+import '../../../../../themes/theme_config.dart';
+import '../portrait_controls.dart';
+import '../widgets/flick_video_player.dart' as custom;
+import './flick_multi_manager.dart';
 
 import 'package:flutter/material.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import 'package:video_player/video_player.dart';
 
 class FlickMultiPlayer extends StatefulWidget {
-  const FlickMultiPlayer(
-      {super.key,
-      required this.url,
-      this.image,
-      required this.flickMultiManager});
+  const FlickMultiPlayer({
+    super.key,
+    required this.url,
+    this.image,
+    required this.flickMultiManager,
+  });
 
   final String url;
   final String? image;
@@ -33,7 +36,6 @@ class _FlickMultiPlayerState extends State<FlickMultiPlayer> {
       autoPlay: false,
     );
     widget.flickMultiManager.init(flickManager);
-
     super.initState();
   }
 
@@ -52,24 +54,42 @@ class _FlickMultiPlayerState extends State<FlickMultiPlayer> {
           widget.flickMultiManager.play(flickManager);
         }
       },
-      child: FlickVideoPlayer(
-        flickManager: flickManager,
-        flickVideoWithControls: FlickVideoWithControls(
-          videoFit: BoxFit.contain,
-          controls: FeedPlayerPortraitControls(
-            flickMultiManager: widget.flickMultiManager,
-            flickManager: flickManager,
+      child: PopScope(
+        canPop: !flickManager.flickControlManager!.isFullscreen,
+        onPopInvoked: (didPop) {
+          if (flickManager.flickControlManager!.isFullscreen) {
+            flickManager.flickControlManager!.exitFullscreen();
+            setState(() {});
+          }
+        },
+        child: custom.FlickVideoPlayer(
+          wakelockEnabledFullscreen: false,
+          wakelockEnabled: false,
+          flickManager: flickManager,
+          flickVideoWithControls: FlickVideoWithControls(
+            videoFit: BoxFit.contain,
+            playerLoadingFallback: Center(
+              child: CircularProgressIndicator(
+                color: ColorPalettes.g100,
+                backgroundColor: Colors.transparent,
+                strokeWidth: 4,
+              ),
+            ),
+            controls: FeedPlayerPortraitControls(
+              flickMultiManager: widget.flickMultiManager,
+              flickManager: flickManager,
+            ),
           ),
-        ),
-        flickVideoWithControlsFullscreen: const FlickVideoWithControls(
-          controls: FlickLandscapeControls(),
-          iconThemeData: IconThemeData(
-            size: 40,
-            color: Colors.white,
-          ),
-          textStyle: TextStyle(
-            fontSize: 16,
-            color: Colors.white,
+          flickVideoWithControlsFullscreen: const FlickVideoWithControls(
+            controls: FlickLandscapeControls(),
+            iconThemeData: IconThemeData(
+              size: 40,
+              color: Colors.white,
+            ),
+            textStyle: TextStyle(
+              fontSize: 16,
+              color: Colors.white,
+            ),
           ),
         ),
       ),

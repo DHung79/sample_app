@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import '../../../routes/route_names.dart';
 import '../../../themes/theme_config.dart';
@@ -16,6 +17,10 @@ class FeedAppBar extends StatelessWidget {
     return AppBar(
       automaticallyImplyLeading: false,
       backgroundColor: Colors.blueAccent,
+      systemOverlayStyle: const SystemUiOverlayStyle(
+        statusBarColor: Colors.blueAccent,
+        systemNavigationBarColor: Colors.blueAccent,
+      ),
       flexibleSpace: Padding(
         padding: EdgeInsets.fromLTRB(8, statusBarHeight + 8, 8, 8),
         child: Row(
