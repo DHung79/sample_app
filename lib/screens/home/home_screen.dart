@@ -36,6 +36,12 @@ class HomeScreen extends StatelessWidget {
                     context.go('/$feedRoute');
                   },
                 ),
+                _navigaterButton(
+                  name: 'Shipping Sample',
+                  onPressed: () {
+                    context.go('/$shippingRoute');
+                  },
+                ),
               ],
             ),
           ),

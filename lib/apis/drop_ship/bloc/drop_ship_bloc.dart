@@ -2,16 +2,18 @@ import 'package:rxdart/rxdart.dart';
 import '../../base/blocs/block_state.dart';
 import '../../base/rest/api_helpers/api_exception.dart';
 import '../../base/rest/models/rest_api_response.dart';
-import '../user.dart';
+import '../models/drop_ship.dart';
+import '../resources/drop_ship_repository.dart';
 
-class UserBloc {
-  final _repository = ShippingRepository();
-  final BehaviorSubject<ApiResponse<ShippingModel?>> _allDataFetcher =
-      BehaviorSubject<ApiResponse<ShippingModel>>();
-  Stream<ApiResponse<ShippingModel?>> get allData => _allDataFetcher.stream;
+class DropShipBloc {
+  final _repository = DropShipRepository();
+  final BehaviorSubject<ApiResponse<DropShipModel?>> _allDataFetcher =
+      BehaviorSubject<ApiResponse<DropShipModel>>();
+  Stream<ApiResponse<DropShipModel?>> get allData => _allDataFetcher.stream;
 
   final _allDataState = BehaviorSubject<BlocState>();
   Stream<BlocState> get allDataState => _allDataState.stream;
+
   bool _isFetching = false;
 
   fetchAllData({Map<String, dynamic>? params}) async {
@@ -22,7 +24,7 @@ class UserBloc {
     try {
       // Await response from server.
       final data =
-          await _repository.fetchAllData<ShippingModel>(params: params!);
+          await _repository.fetchAllData<DropShipModel>(params: params!);
       if (_allDataFetcher.isClosed) return;
       if (data.error != null) {
         // Error exist

@@ -19,17 +19,17 @@ class UserAppBar extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             _appBarButton(
-              icon: Icons.webhook_rounded,
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: TextColors.textWhite,
-                  width: 2,
-                ),
-                shape: BoxShape.circle,
-              ),
+              icon: Icons.home,
+              // decoration: BoxDecoration(
+              //   border: Border.all(
+              //     color: TextColors.textWhite,
+              //     width: 2,
+              //   ),
+              //   shape: BoxShape.circle,
+              // ),
               ontap: () {
                 context.go(
-                  '/$pageNotFoundRoute',
+                  '/$homeRoute',
                 );
               },
             ),

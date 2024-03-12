@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../screens/shipping/shipping_screen.dart';
 import '../logger/logger.dart';
 import '../screens/coming_soon/coming_soon_screen.dart';
 import '../screens/feed/feed_screen.dart';
@@ -56,6 +57,16 @@ final GoRouter router = GoRouter(
               state: state,
               route: feedRoute,
               child: const FeedScreen(),
+            );
+          },
+        ),
+        GoRoute(
+          path: shippingRoute,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return _screenFor(
+              state: state,
+              route: shippingRoute,
+              child: const ShippingScreen(),
             );
           },
         ),

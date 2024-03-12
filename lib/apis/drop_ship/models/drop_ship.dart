@@ -1,6 +1,6 @@
 import '../../base/rest/models/rest_api_response.dart';
 
-class UserModel extends BaseModel {
+class DropShipModel extends BaseModel {
   final int _id;
   final String _firstName;
   final String _lastName;
@@ -22,7 +22,7 @@ class UserModel extends BaseModel {
   final String _macAddress;
   final String _university;
 
-  UserModel.fromJson(Map<String, dynamic> json)
+  DropShipModel.fromJson(Map<String, dynamic> json)
       : _id = json['id'],
         _firstName = json['firstName'] ?? '',
         _lastName = json['lastName'] ?? '',
@@ -89,14 +89,14 @@ class UserModel extends BaseModel {
   String get university => _university;
 }
 
-class ShippingModel extends BaseModel {
-  List<UserModel> _data = [];
+class ListDropShipModel extends BaseModel {
+  List<DropShipModel> _data = [];
   int _total = 0;
   int _skip = 0;
-  ShippingModel.fromJson(Map<String, dynamic> parsedJson) {
-    List<UserModel> tmp = [];
+  ListDropShipModel.fromJson(Map<String, dynamic> parsedJson) {
+    List<DropShipModel> tmp = [];
     for (int i = 0; i < parsedJson['users'].length; i++) {
-      var result = BaseModel.fromJson<UserModel>(parsedJson['users'][i]);
+      var result = BaseModel.fromJson<DropShipModel>(parsedJson['users'][i]);
       tmp.add(result);
     }
     _data = tmp;
@@ -104,7 +104,7 @@ class ShippingModel extends BaseModel {
     _skip = parsedJson['skip'];
   }
 
-  List<UserModel> get records => _data;
+  List<DropShipModel> get records => _data;
   int get total => _total;
   int get skip => _skip;
 }

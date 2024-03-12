@@ -64,7 +64,7 @@ class FeedScreen extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.fromLTRB(0, 8, 0, 16),
       child: CustomButtonStyle.roundDark(
-        color: Colors.blueAccent,
+        color: Colors.deepPurpleAccent,
         onPressed: onPressed,
         child: Text(
           name,
@@ -82,7 +82,7 @@ class FeedScreen extends StatelessWidget {
   }) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      backgroundColor: Colors.white,
+      backgroundColor: const Color.fromARGB(255, 224, 187, 187),
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(80.0),
         child: FeedAppBar(

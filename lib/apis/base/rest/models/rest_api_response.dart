@@ -57,8 +57,8 @@ class BaseModel {
     if (T == UserModel) {
       return UserModel.fromJson(json) as T;
     }
-    if (T == ListUserModel) {
-      return ListUserModel.fromJson(json) as T;
+    if (T == ShippingModel) {
+      return ShippingModel.fromJson(json) as T;
     }
     logError("Unknown BaseModel class: $T");
     throw Exception("Unknown BaseModel class: $T");
@@ -107,4 +107,3 @@ class BaseModel {
     return BaseModel.fromJson({});
   }
 }
-
