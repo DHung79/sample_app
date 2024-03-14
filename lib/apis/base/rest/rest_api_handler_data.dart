@@ -54,6 +54,18 @@ class RestApiHandlerData {
     return response;
   }
 
+  static Future getDynamic({
+    required String path,
+    Map<String, String>? headers,
+    dynamic body,
+  }) async {
+    final response = await _apiBaseHelper.getDynamic(
+      path: path,
+      headers: headers,
+    );
+    return response;
+  }
+
   static Future postDynamic({
     required String path,
     Map<String, String>? headers,

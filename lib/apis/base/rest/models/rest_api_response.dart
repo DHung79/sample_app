@@ -1,4 +1,5 @@
 import '../../../../logger/logger.dart';
+import '../../../bank/bank.dart';
 import '../../../user/user.dart';
 
 class ApiError implements Exception {
@@ -59,6 +60,12 @@ class BaseModel {
     }
     if (T == ShippingModel) {
       return ShippingModel.fromJson(json) as T;
+    }
+    if (T == BankModel) {
+      return BankModel.fromJson(json) as T;
+    }
+    if (T == ListBankModel) {
+      return ListBankModel.fromJson(json) as T;
     }
     logError("Unknown BaseModel class: $T");
     throw Exception("Unknown BaseModel class: $T");

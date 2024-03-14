@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class LayoutWidget extends StatelessWidget {
-  final Widget appBar;
+  final Widget? appBar;
   final Widget body;
   const LayoutWidget({
     super.key,
-    required this.appBar,
+    this.appBar,
     required this.body,
   });
 
@@ -14,10 +14,12 @@ class LayoutWidget extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(80.0),
-        child: appBar,
-      ),
+      appBar: appBar != null
+          ? PreferredSize(
+              preferredSize: const Size.fromHeight(80.0),
+              child: appBar!,
+            )
+          : null,
       body: body,
     );
   }

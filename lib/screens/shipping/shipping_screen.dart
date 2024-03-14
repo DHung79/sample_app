@@ -4,7 +4,8 @@ import '../../routes/route_names.dart';
 import '../../themes/theme_config.dart';
 import '../../widgets/app_bar.dart';
 import '../../widgets/layout_widget.dart';
-import 'components/viettel_post.dart';
+import 'components/bank_screen.dart';
+import 'components/animation_3d.dart';
 
 class ShippingScreen extends StatelessWidget {
   const ShippingScreen({super.key});
@@ -27,7 +28,7 @@ class ShippingScreen extends StatelessWidget {
             children: [
               CustomButtonStyle.roundDark(
                 child: Text(
-                  'Viettel Post API',
+                  'animation 3d',
                   style: CustomTextStyle.boldStandard(
                     color: TextColors.textWhite,
                   ),
@@ -37,9 +38,10 @@ class ShippingScreen extends StatelessWidget {
                     context: context,
                     transitionDuration: 350,
                     tween: NavigatorStyle.pushRight,
-                    toScreen: LayoutWidget(
-                      appBar: AppBar(),
-                      body: const ViettelPost(),
+                    toScreen: const LayoutWidget(
+                      body: SafeArea(
+                        child: Animation3D(),
+                      ),
                     ),
                   );
                 },
@@ -49,7 +51,7 @@ class ShippingScreen extends StatelessWidget {
               ),
               CustomButtonStyle.roundDark(
                 child: Text(
-                  'GHTK API',
+                  'bank Api',
                   style: CustomTextStyle.boldStandard(
                     color: TextColors.textWhite,
                   ),
@@ -59,9 +61,10 @@ class ShippingScreen extends StatelessWidget {
                     context: context,
                     transitionDuration: 350,
                     tween: NavigatorStyle.pushRight,
-                    toScreen: LayoutWidget(
-                      appBar: AppBar(),
-                      body: Container(),
+                    toScreen: const LayoutWidget(
+                      body: SafeArea(
+                        child: BankScreen(),
+                      ),
                     ),
                   );
                 },

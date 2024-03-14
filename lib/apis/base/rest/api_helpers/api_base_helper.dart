@@ -167,6 +167,23 @@ class ApiBaseHelper {
     );
   }
 
+  Future getDynamic<T extends BaseModel>({
+    required String path,
+    Map<String, String>? headers,
+  }) async {
+    dynamic responseJson;
+    try {
+      final response = await http.get(
+        Uri.parse(path),
+        headers: headers,
+      );
+      responseJson = json.decode(response.body.toString());
+    } on SocketException {
+      return 'No Internet Connection';
+    }
+    return responseJson;
+  }
+
   Future postDynamic<T extends BaseModel>({
     required String path,
     Map<String, String>? headers,
