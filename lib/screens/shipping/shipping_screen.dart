@@ -5,7 +5,7 @@ import '../../themes/theme_config.dart';
 import '../../widgets/app_bar.dart';
 import '../../widgets/layout_widget.dart';
 import 'components/bank_screen.dart';
-import 'components/animation_3d.dart';
+import 'components/shop_screen.dart';
 
 class ShippingScreen extends StatelessWidget {
   const ShippingScreen({super.key});
@@ -28,7 +28,7 @@ class ShippingScreen extends StatelessWidget {
             children: [
               CustomButtonStyle.roundDark(
                 child: Text(
-                  'animation 3d',
+                  'Shop UI',
                   style: CustomTextStyle.boldStandard(
                     color: TextColors.textWhite,
                   ),
@@ -40,7 +40,7 @@ class ShippingScreen extends StatelessWidget {
                     tween: NavigatorStyle.pushRight,
                     toScreen: const LayoutWidget(
                       body: SafeArea(
-                        child: Animation3D(),
+                        child: ShopScreen(),
                       ),
                     ),
                   );
