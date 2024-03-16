@@ -50,7 +50,7 @@ class UserCard extends StatelessWidget {
                   child: Material(
                     color: Colors.transparent,
                     child: Container(
-                      margin: const EdgeInsets.fromLTRB(0, 0, 48, 18),
+                      margin: const EdgeInsets.fromLTRB(0, 0, 48, 0),
                       decoration: BoxDecoration(
                         borderRadius:
                             const BorderRadius.all(Radius.circular(16)),

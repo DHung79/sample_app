@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sample_app/themes/theme_config.dart';
-
 import '../../apis/user/user.dart';
 import 'components/app_bar.dart';
 import 'components/user_card/user_card.dart';
@@ -138,15 +137,21 @@ class _UserScreenState extends State<UserScreen> {
               if (index != _currentIndex && size == 1) {
                 return const SizedBox.shrink();
               }
-              return AnimatedPadding(
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.ease,
-                padding: EdgeInsets.all(
-                  _currentIndex != index ? 8 : 0,
-                ),
-                child: UserCard(
-                  user: user,
-                  size: size,
+
+              return Transform(
+                alignment: Alignment.centerRight,
+                transform: Matrix4.identity()
+                  ..rotateY(_currentIndex != index ? 0 : 120 / 360),
+                child: AnimatedPadding(
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.ease,
+                  padding: _currentIndex != index
+                      ? const EdgeInsets.fromLTRB(8, 16, 8, 16)
+                      : const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                  child: UserCard(
+                    user: user,
+                    size: size,
+                  ),
                 ),
               );
             },
