@@ -23,7 +23,7 @@ class FeedScreen extends StatelessWidget {
               _navigaterButton(
                 name: 'Slider Video',
                 onPressed: () {
-                  NavigatorStyle.navigatorTo(
+                  NavigatorStyle.slideNavigator(
                     context: context,
                     transitionDuration: 350,
                     tween: NavigatorStyle.pushRight,
@@ -37,7 +37,7 @@ class FeedScreen extends StatelessWidget {
               _navigaterButton(
                 name: 'Content Video',
                 onPressed: () {
-                  NavigatorStyle.navigatorTo(
+                  NavigatorStyle.slideNavigator(
                     context: context,
                     transitionDuration: 350,
                     tween: NavigatorStyle.pushRight,

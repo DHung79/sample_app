@@ -424,3 +424,17 @@ Color hexToColor(String hex) {
         (hex.length == 7 ? 0xff000000 : 0x00000000),
   );
 }
+
+int stringToHexInt(String value) {
+  String c = (hashString(value) & 0x00FFFFFF).toRadixString(16).toUpperCase();
+  String hex = "FF00000".substring(0, 8 - c.length) + c;
+  return int.parse(hex, radix: 16);
+}
+
+int hashString(String value) {
+  int hash = 0;
+  for (var code in value.runes) {
+    hash = code + ((hash << 5) - hash);
+  }
+  return hash;
+}

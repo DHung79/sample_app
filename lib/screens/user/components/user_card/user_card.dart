@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../apis/user/user.dart';
 import '../../../../themes/theme_config.dart';
+import '../user_detail/user_detail_screen.dart';
 import 'dynamic_ink_well.dart';
 
 class UserCard extends StatelessWidget {
@@ -15,25 +16,12 @@ class UserCard extends StatelessWidget {
   final UserModel user;
   final double size;
 
-  int stringToHexInt(String value) {
-    String c = (_hash(value) & 0x00FFFFFF).toRadixString(16).toUpperCase();
-    String hex = "FF00000".substring(0, 8 - c.length) + c;
-    return int.parse(hex, radix: 16);
-  }
-
-  int _hash(String value) {
-    int hash = 0;
-    for (var code in value.runes) {
-      hash = code + ((hash << 5) - hash);
-    }
-    return hash;
-  }
-
   @override
   Widget build(BuildContext context) {
     final estimatedColor = Color(stringToHexInt(user.eyeColor.toLowerCase()));
     final cardRotateAngle = -pi / 10 * size;
     final userFullName = '${user.lastName} ${user.firstName}';
+    var sizePosition = size.clamp(0, 0.25);
     return Stack(
       children: [
         DynamicInkWell(
@@ -86,43 +74,56 @@ class UserCard extends StatelessWidget {
             ),
           ),
         ),
-        Positioned(
-          right: size * 200 + 8,
-          bottom: 0,
-          child: DynamicInkWell(
-            onTap: () {},
-            child: (tappedDown) {
-              return Hero(
-                transitionOnUserGestures: true,
-                tag: '${user.id}image',
-                flightShuttleBuilder: (
-                  BuildContext flightContext,
-                  Animation<double> animation,
-                  HeroFlightDirection flightDirection,
-                  BuildContext fromHeroContext,
-                  BuildContext toHeroContext,
-                ) {
-                  if (flightDirection == HeroFlightDirection.pop) {
-                    return RotationTransition(
-                      turns: const AlwaysStoppedAnimation(-15 / 360),
-                      child: fromHeroContext.widget,
-                    );
-                  } else {
-                    return toHeroContext.widget;
-                  }
-                },
-                child: Material(
-                  color: Colors.transparent,
-                  child: AnimatedScale(
-                    scale: tappedDown ? 0.8 : 1.0,
-                    duration: const Duration(milliseconds: 100),
-                    child: Image.network(
-                      user.image,
+        Positioned.fill(
+          right: sizePosition * 250 + 8,
+          bottom: sizePosition * 150,
+          child: Align(
+            alignment: Alignment.bottomCenter,
+            child: DynamicInkWell(
+              onTap: () {
+                NavigatorStyle.fadeNavigator(
+                  context: context,
+                  transitionDuration: 350,
+                  toScreen: UserDetailScreen(user: user),
+                );
+              },
+              child: (tappedDown) {
+                return Hero(
+                  transitionOnUserGestures: true,
+                  tag: '${user.id}image',
+                  flightShuttleBuilder: (
+                    BuildContext flightContext,
+                    Animation<double> animation,
+                    HeroFlightDirection flightDirection,
+                    BuildContext fromHeroContext,
+                    BuildContext toHeroContext,
+                  ) {
+                    if (flightDirection == HeroFlightDirection.pop) {
+                      return ScaleTransition(
+                        scale: const AlwaysStoppedAnimation(0.85),
+                        child: fromHeroContext.widget,
+                      );
+                    } else {
+                      return toHeroContext.widget;
+                    }
+                  },
+                  child: Material(
+                    color: Colors.transparent,
+                    child: AnimatedScale(
+                      scale: tappedDown ? 0.85 : 1.0,
+                      duration: const Duration(milliseconds: 100),
+                      child: ImgFromUrl(
+                        url: user.image,
+                      ),
+                      // child: Align(
+                      //   alignment: Alignment.center,
+                      //   child: CircularProgressIndicator(),
+                      // ),
                     ),
                   ),
-                ),
-              );
-            },
+                );
+              },
+            ),
           ),
         ),
       ],

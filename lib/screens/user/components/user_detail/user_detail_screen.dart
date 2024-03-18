@@ -12,35 +12,31 @@ class UserDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final estimatedColor = Color(stringToHexInt(user.eyeColor.toLowerCase()));
     return Scaffold(
+      backgroundColor: estimatedColor,
       resizeToAvoidBottomInset: false,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(80.0),
         child: UserDetailAppBar(),
       ),
       body: SafeArea(
-        bottom: false,
-        child: Container(
-          decoration: const BoxDecoration(
-            color: Colors.white,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
-                    child: Wrap(
-                      children: [
-                        _userImg(),
-                        _userDetail(),
-                      ],
-                    ),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
+                  child: Wrap(
+                    children: [
+                      _userImg(),
+                      _userDetail(),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
@@ -50,20 +46,9 @@ class UserDetailScreen extends StatelessWidget {
 
   Widget _userImg() {
     return Hero(
-      tag: user.id,
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(
-            width: 4,
-            color: Colors.blueAccent,
-          ),
-          borderRadius: BorderRadius.circular(12),
-          boxShadow: [
-            BoxShadowStyle.e01,
-          ],
-          color: Colors.lightBlueAccent.shade200,
-        ),
-        child: Image.network(user.image),
+      tag: '${user.id}image',
+      child: ImgFromUrl(
+        url: user.image,
       ),
     );
   }
@@ -121,24 +106,24 @@ class UserDetailScreen extends StatelessWidget {
       children: [
         Text(
           title,
-          style: CustomTextStyle.mediumH5(
-            color: TextColors.textHighEm,
+          style: CustomTextStyle.boldH6(
+            color: TextColors.textWhite,
           ),
         ),
         Padding(
           padding: const EdgeInsets.fromLTRB(4, 0, 16, 0),
           child: Text(
             ':',
-            style: CustomTextStyle.mediumH5(
-              color: TextColors.textHighEm,
+            style: CustomTextStyle.boldH6(
+              color: TextColors.textWhite,
             ),
           ),
         ),
         if (contentText != null)
           Text(
             contentText,
-            style: CustomTextStyle.boldH5(
-              color: TextColors.textHighEm,
+            style: CustomTextStyle.mediumH6(
+              color: TextColors.textWhite.withOpacity(0.85),
             ),
           ),
         if (customContent != null) customContent,
@@ -151,14 +136,14 @@ class UserDetailScreen extends StatelessWidget {
     Color? iconColor;
     if (gender.toLowerCase() == 'male') {
       icon = Icons.male_rounded;
-      iconColor = Colors.blue.shade200;
+      iconColor = Colors.blue.shade300;
     } else {
       icon = Icons.female_rounded;
-      iconColor = Colors.pink.shade200;
+      iconColor = Colors.pink.shade300;
     }
     return Icon(
       icon,
-      size: 40,
+      size: 35,
       color: iconColor,
     );
   }

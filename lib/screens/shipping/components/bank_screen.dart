@@ -157,8 +157,8 @@ class _BankListViewState extends State<BankListView> {
                             ),
                             ClipRRect(
                               borderRadius: BorderRadius.circular(16),
-                              child: Image.network(
-                                bank.logo,
+                              child: ImgFromUrl(
+                                url: bank.logo,
                               ),
                             ),
                           ],

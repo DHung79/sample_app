@@ -49,7 +49,7 @@ class UserAppBar extends StatelessWidget {
             _appBarButton(
               ontap: () {
                 //change screen using navigator
-                NavigatorStyle.navigatorTo(
+                NavigatorStyle.slideNavigator(
                   context: context,
                   transitionDuration: 350,
                   tween: NavigatorStyle.pushRight,

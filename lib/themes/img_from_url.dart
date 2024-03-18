@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'svg_icons.dart';
 
@@ -20,47 +21,24 @@ class ImgFromUrl extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final transitionDuration = Duration(milliseconds: duration ?? 1);
-    final uri = Uri.tryParse(url)!;
-    //loop return wiget to fix bug: some time Image network request is closed for some reason;
-    return FadeInImage(
+    return CachedNetworkImage(
       width: width,
       height: height,
       fadeInDuration: transitionDuration,
       fadeOutDuration: transitionDuration,
-      placeholder: placeholder ?? AssetImage(ImgAssets.comingSoon),
-      image: NetworkImage(
-        uri.toString(),
-      ),
+      placeholderFadeInDuration: transitionDuration,
       fit: fit,
-      imageErrorBuilder: (context, error, stacktrace) {
-        return FadeInImage(
-          width: width,
-          height: height,
-          fadeInDuration: transitionDuration,
-          fadeOutDuration: transitionDuration,
-          placeholder: placeholder ?? AssetImage(ImgAssets.comingSoon),
-          image: NetworkImage(
-            uri.toString(),
+      imageUrl: url,
+      placeholder: (context, url) {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+      errorWidget: (context, url, error) {
+        return Center(
+          child: Image(
+            image: placeholder ?? AssetImage(ImgAssets.placeholder),
           ),
-          fit: fit,
-          imageErrorBuilder: (context, error, stacktrace) {
-            return FadeInImage(
-              width: width,
-              height: height,
-              fadeInDuration: transitionDuration,
-              fadeOutDuration: transitionDuration,
-              placeholder: placeholder ?? AssetImage(ImgAssets.comingSoon),
-              image: NetworkImage(
-                uri.toString(),
-              ),
-              fit: fit,
-              imageErrorBuilder: (context, error, stacktrace) {
-                return Image(
-                  image: placeholder ?? AssetImage(ImgAssets.comingSoon),
-                );
-              },
-            );
-          },
         );
       },
     );

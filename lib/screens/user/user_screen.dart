@@ -141,56 +141,16 @@ class _UserScreenState extends State<UserScreen> {
               return Transform(
                 alignment: Alignment.centerRight,
                 transform: Matrix4.identity()
-                  ..rotateY(_currentIndex != index ? 0 : 120 / 360),
-                child: AnimatedPadding(
-                  duration: const Duration(milliseconds: 300),
-                  curve: Curves.ease,
-                  padding: _currentIndex != index
-                      ? const EdgeInsets.fromLTRB(8, 16, 8, 16)
-                      : const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                  child: UserCard(
-                    user: user,
-                    size: size,
-                  ),
+                  ..rotateY(_currentIndex == index ? 0 : 120 / 360),
+                child: UserCard(
+                  user: user,
+                  size: size,
                 ),
               );
             },
           );
         },
       ),
-      // child: ListView.builder(
-      //   padding: EdgeInsets.zero,
-      //   shrinkWrap: true,
-      //   itemCount: _users.length,
-      //   scrollDirection: Axis.horizontal,
-      //   itemBuilder: (context, index) {
-      //     final user = _users[index];
-      //     return Padding(
-      //       padding: const EdgeInsets.fromLTRB(32, 0, 0, 0),
-      //       child: GestureDetector(
-      //         onTap: () {
-      //           NavigatorStyle.navigatorTo(
-      //             context: context,
-      //             transitionDuration: 350,
-      //             toScreen: UserDetailScreen(user: user),
-      //           );
-      //         },
-      //         child: Hero(
-      //           tag: user.id,
-      //           child: Container(
-      //             width: itemWidth,
-      //             decoration: BoxDecoration(
-      //               borderRadius: BorderRadius.circular(12),
-      //               boxShadow: [
-      //                 BoxShadowStyle.e01,
-      //               ],
-      //             ),
-      //           ),
-      //         ),
-      //       ),
-      //     );
-      //   },
-      // ),
     );
   }
 
@@ -213,7 +173,7 @@ class _UserScreenState extends State<UserScreen> {
         final user = _users[index];
         return InkWell(
           onTap: () {
-            NavigatorStyle.navigatorTo(
+            NavigatorStyle.slideNavigator(
               context: context,
               transitionDuration: 350,
               toScreen: UserDetailScreen(user: user),
@@ -235,7 +195,9 @@ class _UserScreenState extends State<UserScreen> {
                 ],
                 color: Colors.lightBlueAccent.shade200,
               ),
-              child: Image.network(user.image),
+              child: ImgFromUrl(
+                url: user.image,
+              ),
             ),
           ),
         );

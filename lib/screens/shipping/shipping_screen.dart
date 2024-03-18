@@ -34,7 +34,7 @@ class ShippingScreen extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  NavigatorStyle.navigatorTo(
+                  NavigatorStyle.slideNavigator(
                     context: context,
                     transitionDuration: 350,
                     tween: NavigatorStyle.pushRight,
@@ -57,7 +57,7 @@ class ShippingScreen extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  NavigatorStyle.navigatorTo(
+                  NavigatorStyle.slideNavigator(
                     context: context,
                     transitionDuration: 350,
                     tween: NavigatorStyle.pushRight,

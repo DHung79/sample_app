@@ -538,6 +538,6 @@ class SvgIcon extends StatelessWidget {
 }
 
 class ImgAssets {
-  static String comingSoon = 'assets/image/coming_soon.png';
+  static String placeholder = 'assets/image/placeholder.png';
   static String splash = 'assets/image/splash.png';
 }
