@@ -1,10 +1,13 @@
+import 'dart:math';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:sample_app/themes/theme_config.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import './multi_manager/flick_multi_manager.dart';
 import './multi_manager/flick_multi_player.dart';
-import '../utils/mock_data.dart';
+import '../../utils/mock_data.dart';
 
 class FeedPlayer extends StatefulWidget {
   final bool isSlider;
@@ -19,6 +22,7 @@ class FeedPlayer extends StatefulWidget {
 
 class _FeedPlayerState extends State<FeedPlayer> {
   List items = mockData['items'];
+  final _now = DateTime.now();
 
   late FlickMultiManager flickMultiManager;
 
@@ -49,13 +53,68 @@ class _FeedPlayerState extends State<FeedPlayer> {
     return CarouselSlider.builder(
       itemCount: items.length,
       itemBuilder: (context, index, id) {
-        return ClipRRect(
-          borderRadius: BorderRadius.circular(5),
-          child: FlickMultiPlayer(
-            url: items[index]['trailer_url'],
-            flickMultiManager: flickMultiManager,
-          ),
-        );
+        var show = false;
+        return StatefulBuilder(
+            builder: (BuildContext context, StateSetter setState) {
+          return Stack(
+            alignment: AlignmentDirectional.bottomCenter,
+            children: [
+              Column(
+                children: [
+                  Expanded(
+                    child: FlickMultiPlayer(
+                      url: items[index]['trailer_url'],
+                      flickMultiManager: flickMultiManager,
+                      isSlider: widget.isSlider,
+                    ),
+                  ),
+                  Container(
+                    height: 60,
+                    color: Colors.white,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              show = !show;
+                            });
+                          },
+                          child: Icon(
+                            Icons.arrow_upward_rounded,
+                            color: ColorPalettes.nBlack,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              if (show)
+                Container(
+                  height: 360,
+                  color: Colors.white,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            show = !show;
+                          });
+                        },
+                        child: Icon(
+                          Icons.arrow_downward_rounded,
+                          color: ColorPalettes.nBlack,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+            ],
+          );
+        });
       },
       options: CarouselOptions(
         height: playerHeight,
@@ -85,44 +144,164 @@ class _FeedPlayerState extends State<FeedPlayer> {
       ),
       itemCount: items.length,
       itemBuilder: (context, index) {
+        final randomSeconds = Random().nextInt(24 * 60 * 60);
+        final postTime = _now.subtract(
+          Duration(
+            seconds: randomSeconds,
+          ),
+        );
         return Container(
-          color: Colors.amber,
-          height: playerHeight,
+          color: Colors.white,
+          constraints: BoxConstraints(
+            minHeight: playerHeight,
+            maxHeight: playerSize.height,
+          ),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
             children: [
-              Expanded(
-                flex: 2,
+              Flexible(
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(8, 16, 8, 16),
-                  child: Text(
-                    items[index]['title'],
-                    style: CustomTextStyle.boldBody(
-                      color: Colors.black,
+                  padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const ClipOval(
+                              child: ImgFromUrl(
+                                url:
+                                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJIwASCJpICHRbFDOQXQ2S-pmikc8vs6K2GA&usqp=CAU',
+                                width: 50,
+                                height: 50,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(0, 0, 0, 2),
+                                    child: Text(
+                                      'User Avatar',
+                                      style: CustomTextStyle.boldBody(
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        timeAgoFromNow(
+                                          postTime,
+                                          context,
+                                        ),
+                                        style: CustomTextStyle.mediumBody(
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                      _iconButton(
+                                        icon: Icons.public_outlined,
+                                        padding: const EdgeInsets.fromLTRB(
+                                            4, 0, 4, 0),
+                                        color: TextColors.iconHighEm,
+                                        size: 16,
+                                        onTap: () {},
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Flexible(
+                        child: Text(
+                          items[index]['title'],
+                          style: CustomTextStyle.boldBody(
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: playerHeight - 150,
+                child: FlickMultiPlayer(
+                  url: items[index]['trailer_url'],
+                  flickMultiManager: flickMultiManager,
+                  isSlider: widget.isSlider,
+                ),
+              ),
+              Container(
+                height: 50,
+                decoration: const BoxDecoration(),
+                child: Row(
+                  children: [
+                    Transform.flip(
+                      flipX: true,
+                      child: _iconButton(
+                        icon: Icons.thumb_up_alt_outlined,
+                        onTap: () {},
+                      ),
                     ),
-                  ),
-                ),
-              ),
-              Expanded(
-                flex: 5,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(5),
-                  child: FlickMultiPlayer(
-                    url: items[index]['trailer_url'],
-                    flickMultiManager: flickMultiManager,
-                  ),
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: Container(
-                  color: Colors.white38,
+                    const Spacer(),
+                    Row(
+                      children: [
+                        _iconButton(
+                          icon: Icons.comment_outlined,
+                          onTap: () {},
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                          child: _iconButton(
+                            icon: Icons.share_outlined,
+                            onTap: () {},
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
             ],
           ),
         );
       },
+    );
+  }
+
+  Widget _iconButton({
+    Function()? onTap,
+    IconData? icon,
+    Color? color,
+    double size = 24,
+    Decoration? decoration,
+    EdgeInsetsGeometry? padding,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        decoration: decoration,
+        child: Padding(
+          padding: padding ?? const EdgeInsets.fromLTRB(16, 8, 16, 8),
+          child: Icon(
+            icon ?? Icons.navigate_next_sharp,
+            color: color ?? TextColors.iconHighEm,
+            size: size,
+          ),
+        ),
+      ),
     );
   }
 }

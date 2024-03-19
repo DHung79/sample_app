@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../themes/theme_config.dart';
 import 'components/app_bar.dart';
+import 'components/feed_player/app_bar.dart';
 import 'components/feed_player/feed_player.dart';
 
 class FeedScreen extends StatelessWidget {
@@ -27,10 +28,7 @@ class FeedScreen extends StatelessWidget {
                     context: context,
                     transitionDuration: 350,
                     tween: NavigatorStyle.pushRight,
-                    toScreen: _layoutWidget(
-                      appBarTitle: 'Slider Video',
-                      child: const FeedPlayer(),
-                    ),
+                    toScreen: _sliderPlayer(),
                   );
                 },
               ),
@@ -41,12 +39,7 @@ class FeedScreen extends StatelessWidget {
                     context: context,
                     transitionDuration: 350,
                     tween: NavigatorStyle.pushRight,
-                    toScreen: _layoutWidget(
-                      appBarTitle: 'Content Video',
-                      child: const FeedPlayer(
-                        isSlider: false,
-                      ),
-                    ),
+                    toScreen: _contentPlayer(),
                   );
                 },
               ),
@@ -76,21 +69,40 @@ class FeedScreen extends StatelessWidget {
     );
   }
 
-  Widget _layoutWidget({
-    required String appBarTitle,
-    required Widget child,
-  }) {
-    return Scaffold(
+  Widget _sliderPlayer() {
+    return const Scaffold(
       resizeToAvoidBottomInset: true,
-      backgroundColor: const Color.fromARGB(255, 224, 187, 187),
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(80.0),
-        child: FeedAppBar(
-          title: appBarTitle,
+      backgroundColor: Colors.black,
+      body: SafeArea(
+        child: Stack(
+          children: [
+            FeedPlayer(),
+            FeedPlayerAppBar(
+              title: 'Slider Video',
+            ),
+          ],
         ),
       ),
+    );
+  }
+
+  Widget _contentPlayer() {
+    return const Scaffold(
+      resizeToAvoidBottomInset: true,
+      backgroundColor: Colors.black,
       body: SafeArea(
-        child: child,
+        child: Column(
+          children: [
+            FeedPlayerAppBar(
+              title: 'Content Video',
+            ),
+            Expanded(
+              child: FeedPlayer(
+                isSlider: false,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

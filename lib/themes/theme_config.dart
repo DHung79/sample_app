@@ -8,6 +8,7 @@ export 'indicator_style.dart';
 export 'navigator_style.dart';
 export 'img_from_url.dart';
 export '/logger/logger.dart';
+export 'display_date_time.dart';
 
 class ThemeConfig {
   static ThemeData createTheme({
@@ -15,6 +16,9 @@ class ThemeConfig {
   }) {
     return ThemeData(
       brightness: brightness,
+      progressIndicatorTheme: ProgressIndicatorThemeData(
+        color: Colors.blue.withOpacity(0.8),
+      ),
     );
   }
 

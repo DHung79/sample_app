@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'svg_icons.dart';
+import 'theme_config.dart';
 
 class ImgFromUrl extends StatelessWidget {
   final String url;
@@ -30,9 +31,7 @@ class ImgFromUrl extends StatelessWidget {
       fit: fit,
       imageUrl: url,
       placeholder: (context, url) {
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
+        return const IndicatorStyle();
       },
       errorWidget: (context, url, error) {
         return Center(

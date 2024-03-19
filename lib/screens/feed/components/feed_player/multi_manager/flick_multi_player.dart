@@ -1,6 +1,7 @@
 import 'package:flick_video_player/flick_video_player.dart';
 import '../../../../../themes/theme_config.dart';
-import '../portrait_controls.dart';
+import '../player_display_controls/landscape_controls.dart';
+import '../player_display_controls/portrait_controls.dart';
 import '../custom_package/flick_video_player.dart' as custom;
 import './flick_multi_manager.dart';
 
@@ -14,12 +15,13 @@ class FlickMultiPlayer extends StatefulWidget {
     required this.url,
     this.image,
     required this.flickMultiManager,
+    required this.isSlider,
   });
 
   final String url;
   final String? image;
   final FlickMultiManager flickMultiManager;
-
+  final bool isSlider;
   @override
   State<FlickMultiPlayer> createState() => _FlickMultiPlayerState();
 }
@@ -73,10 +75,15 @@ class _FlickMultiPlayerState extends State<FlickMultiPlayer> {
                 strokeWidth: 4,
               ),
             ),
-            controls: FeedPlayerPortraitControls(
-              flickMultiManager: widget.flickMultiManager,
-              flickManager: flickManager,
-            ),
+            controls: widget.isSlider
+                ? FeedPlayerLandscapeControls(
+                    flickMultiManager: widget.flickMultiManager,
+                    flickManager: flickManager,
+                  )
+                : FeedPlayerPortraitControls(
+                    flickMultiManager: widget.flickMultiManager,
+                    flickManager: flickManager,
+                  ),
           ),
           flickVideoWithControlsFullscreen: FlickVideoWithControls(
             videoFit: BoxFit.contain,

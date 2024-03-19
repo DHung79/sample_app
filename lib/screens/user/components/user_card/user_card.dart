@@ -115,10 +115,6 @@ class UserCard extends StatelessWidget {
                       child: ImgFromUrl(
                         url: user.image,
                       ),
-                      // child: Align(
-                      //   alignment: Alignment.center,
-                      //   child: CircularProgressIndicator(),
-                      // ),
                     ),
                   ),
                 );

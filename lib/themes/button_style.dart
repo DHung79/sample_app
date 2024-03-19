@@ -512,8 +512,9 @@ class CustomButtonStyle {
     });
   }
 
-  static Widget buttonIcon(
-    SvgIconData icon, {
+  static Widget buttonIcon({
+    SvgIconData? svgIcon,
+    IconData? icon,
     Color? backgroundColor,
     Color? borderColor,
     Color? iconColor,
@@ -571,11 +572,17 @@ class CustomButtonStyle {
               if (!textOnRight && textWidget != null) textWidget,
               Padding(
                 padding: iconPadding ?? const EdgeInsets.all(8),
-                child: SvgIcon(
-                  icon,
-                  color: iconColor ?? TextColors.iconHighEm,
-                  size: iconSize,
-                ),
+                child: svgIcon != null
+                    ? SvgIcon(
+                        svgIcon,
+                        color: iconColor ?? TextColors.iconHighEm,
+                        size: iconSize,
+                      )
+                    : Icon(
+                        icon,
+                        color: iconColor ?? TextColors.iconHighEm,
+                        size: iconSize,
+                      ),
               ),
               if (textOnRight && textWidget != null) textWidget,
             ],

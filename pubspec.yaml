@@ -58,6 +58,7 @@ dependencies:
   wakelock: ^0.6.2
   universal_html: ^2.2.4
   cached_network_image: ^3.3.1
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:

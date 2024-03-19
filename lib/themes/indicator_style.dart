@@ -6,9 +6,9 @@ class IndicatorStyle extends StatelessWidget {
   final Color? color;
   const IndicatorStyle({
     super.key,
-    this.size = 24,
+    this.size = 32,
     this.color,
-  }) ;
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +17,8 @@ class IndicatorStyle extends StatelessWidget {
         width: size,
         height: size,
         child: CircularProgressIndicator(
-          strokeWidth: 2.0,
-          color: color ?? ColorPalettes.pBlue,
+          strokeWidth: 4.0,
+          color: color ?? ColorPalettes.info500,
         ),
       ),
     );
