@@ -14,6 +14,7 @@ class FeedPlayerPortraitControls extends StatelessWidget {
     this.iconSize = 32,
     this.fontSize = 12,
     this.progressBarSettings,
+    required this.avatar,
   });
 
   final FlickMultiManager? flickMultiManager;
@@ -21,6 +22,7 @@ class FeedPlayerPortraitControls extends StatelessWidget {
   final double iconSize;
   final double fontSize;
   final FlickProgressBarSettings? progressBarSettings;
+  final String avatar;
 
   @override
   Widget build(BuildContext context) {
@@ -106,8 +108,6 @@ class FeedPlayerPortraitControls extends StatelessWidget {
   }
 
   Widget _videoActionBar() {
-    String avatar =
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJIwASCJpICHRbFDOQXQ2S-pmikc8vs6K2GA&usqp=CAU';
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 0, 16, 48),
       child: Row(

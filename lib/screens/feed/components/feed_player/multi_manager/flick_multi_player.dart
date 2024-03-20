@@ -107,6 +107,7 @@ class _FlickMultiPlayerState extends State<FlickMultiPlayer> {
                 ? FeedPlayerPortraitControls(
                     flickMultiManager: widget.flickMultiManager,
                     flickManager: flickManager,
+                    avatar: widget.image ?? '',
                   )
                 : FeedPlayerLandscapeControls(
                     flickMultiManager: widget.flickMultiManager,
@@ -115,7 +116,7 @@ class _FlickMultiPlayerState extends State<FlickMultiPlayer> {
           ),
           flickVideoWithControlsFullscreen: FlickVideoWithControls(
             videoFit: BoxFit.contain,
-            controls: FeedPlayerPortraitControls(
+            controls: FeedPlayerLandscapeControls(
               flickMultiManager: widget.flickMultiManager,
               flickManager: flickManager,
             ),

@@ -1,6 +1,8 @@
+import 'dart:math';
+
 String cloudStorage =
     'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/';
-List<String> widgets = [
+List<String> names = [
   'BigBuckBunny',
   'DesigningForGoogleCast',
   'ElephantsDream',
@@ -60,14 +62,31 @@ Map<String, dynamic> mockData = {
       {
         "title": video.name,
         "trailer_url": video.fileUrl,
+        "avatar": avatars[Random().nextInt(avatars.length)],
       },
-    for (var i = 0; i < widgets.length; i++)
+    for (var i = 0; i < names.length; i++)
       {
-        "title": widgets[i],
-        "trailer_url": "$cloudStorage${widgets[i]}.mp4",
+        "title": names[i],
+        "trailer_url": "$cloudStorage${names[i]}.mp4",
+        "avatar": avatars[Random().nextInt(avatars.length)],
       },
   ]
 };
+
+List<String> avatars = [
+  'https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?size=626&ext=jpg&ga=GA1.1.1391464843.1710838680&semt=ais',
+  'https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_23-2150671142.jpg?size=626&ext=jpg&ga=GA1.1.1391464843.1710838680&semt=ais',
+  'https://img.freepik.com/free-psd/3d-render-avatar-character_23-2150611716.jpg?size=626&ext=jpg&ga=GA1.1.1391464843.1710838680&semt=ais',
+  'https://img.freepik.com/premium-psd/3d-illustration-business-man-with-glasses_23-2149436193.jpg?size=626&ext=jpg&ga=GA1.1.1391464843.1710838680&semt=ais',
+  'https://img.freepik.com/free-psd/3d-illustration-person-with-glasses_23-2149436185.jpg?size=626&ext=jpg&ga=GA1.1.1391464843.1710838680&semt=ais',
+  'https://img.freepik.com/free-psd/3d-rendering-avatar_23-2150833572.jpg?size=626&ext=jpg&ga=GA1.1.1391464843.1710838680&semt=ais',
+  'https://img.freepik.com/free-psd/3d-rendering-avatar_23-2150833554.jpg?size=626&ext=jpg&ga=GA1.1.1391464843.1710838680&semt=ais',
+  'https://img.freepik.com/premium-psd/3d-illustration-person-with-purple-hair-glasses_23-2149436204.jpg?size=626&ext=jpg&ga=GA1.1.1391464843.1710838680&semt=ais',
+  'https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436180.jpg?size=626&ext=jpg&ga=GA1.1.1391464843.1710838680&semt=ais',
+  'https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436178.jpg?size=626&ext=jpg&ga=GA1.1.1391464843.1710838680&semt=ais',
+  'https://img.freepik.com/free-psd/3d-render-avatar-character_23-2150611746.jpg?size=626&ext=jpg&ga=GA1.1.1391464843.1710838680&semt=ais',
+  'https://img.freepik.com/premium-psd/3d-render-avatar-character_23-2150611774.jpg?size=626&ext=jpg&ga=GA1.1.1391464843.1710838680&semt=ais',
+];
 
 class SampleVideo {
   final String name;

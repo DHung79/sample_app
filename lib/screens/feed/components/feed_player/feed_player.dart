@@ -21,7 +21,7 @@ class FeedPlayer extends StatefulWidget {
 }
 
 class _FeedPlayerState extends State<FeedPlayer> {
-  List items = mockData['items'];
+  List items = mockData['items']..shuffle();
   final _now = DateTime.now();
   final _cacheManager = DefaultCacheManager();
   late FlickMultiManager flickMultiManager;
@@ -73,6 +73,7 @@ class _FeedPlayerState extends State<FeedPlayer> {
                       flickMultiManager: flickMultiManager,
                       cacheManager: _cacheManager,
                       isSlider: widget.isSlider,
+                      image: items[index]['avatar'],
                     ),
                   ),
                   Container(
@@ -226,8 +227,7 @@ class _FeedPlayerState extends State<FeedPlayer> {
         seconds: randomSeconds,
       ),
     );
-    String avatar =
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJIwASCJpICHRbFDOQXQ2S-pmikc8vs6K2GA&usqp=CAU';
+
     double imgSize = 50;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -240,7 +240,7 @@ class _FeedPlayerState extends State<FeedPlayer> {
             children: [
               ClipOval(
                 child: ImgFromUrl(
-                  url: avatar,
+                  url: items[index]['avatar'],
                   width: imgSize,
                   height: imgSize,
                   placeholder: Container(
