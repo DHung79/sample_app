@@ -5,7 +5,7 @@ import '../themes/theme_config.dart';
 class ImgFromUrl extends StatelessWidget {
   final String url;
   final BoxFit fit;
-  final ImageProvider<Object>? placeholder;
+  final Widget? placeholder;
   final double? width;
   final double? height;
   final int? duration;
@@ -30,12 +30,24 @@ class ImgFromUrl extends StatelessWidget {
       fit: fit,
       imageUrl: url,
       placeholder: (context, url) {
-        return const IndicatorStyle();
+        return placeholder ??
+            Center(
+              child: Image(
+                width: width,
+                height: height,
+                image: AssetImage(ImgAssets.placeholder),
+              ),
+            );
       },
       errorWidget: (context, url, error) {
         return Center(
-          child: Image(
-            image: placeholder ?? AssetImage(ImgAssets.placeholder),
+          child: Opacity(
+            opacity: 0.5,
+            child: Image(
+              width: width,
+              height: height,
+              image: AssetImage(ImgAssets.brokenImg),
+            ),
           ),
         );
       },

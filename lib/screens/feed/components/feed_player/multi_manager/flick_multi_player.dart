@@ -33,7 +33,6 @@ class FlickMultiPlayer extends StatefulWidget {
 
 class _FlickMultiPlayerState extends State<FlickMultiPlayer> {
   late FlickManager flickManager;
-  File? file;
 
   @override
   void initState() {
@@ -49,27 +48,22 @@ class _FlickMultiPlayerState extends State<FlickMultiPlayer> {
   }
 
   _getFile() async {
-    File? fileFromCache;
-    var fileInCache = await widget.cacheManager.getFileFromCache(widget.url);
-    fileFromCache = fileInCache?.file;
+    var fileFromCache = await widget.cacheManager.getFileFromCache(widget.url);
     if (fileFromCache != null) {
       flickManager = FlickManager(
-        videoPlayerController: VideoPlayerController.file(fileFromCache)
+        videoPlayerController: VideoPlayerController.file(fileFromCache.file)
           ..setLooping(true),
         autoPlay: false,
       );
     } else {
-      file =
+      File file =
           await widget.cacheManager.getSingleFile(widget.url, key: widget.url);
       flickManager = FlickManager(
-        videoPlayerController: file != null
-            ? VideoPlayerController.file(file!)
-            : VideoPlayerController.networkUrl(Uri.parse(widget.url))
+        videoPlayerController: VideoPlayerController.file(file)
           ..setLooping(true),
         autoPlay: false,
       );
     }
-
     if (mounted) {
       setState(() {});
     }
@@ -110,11 +104,11 @@ class _FlickMultiPlayerState extends State<FlickMultiPlayer> {
               ),
             ),
             controls: widget.isSlider
-                ? FeedPlayerLandscapeControls(
+                ? FeedPlayerPortraitControls(
                     flickMultiManager: widget.flickMultiManager,
                     flickManager: flickManager,
                   )
-                : FeedPlayerPortraitControls(
+                : FeedPlayerLandscapeControls(
                     flickMultiManager: widget.flickMultiManager,
                     flickManager: flickManager,
                   ),

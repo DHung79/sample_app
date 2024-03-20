@@ -228,6 +228,7 @@ class _FeedPlayerState extends State<FeedPlayer> {
     );
     String avatar =
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJIwASCJpICHRbFDOQXQ2S-pmikc8vs6K2GA&usqp=CAU';
+    double imgSize = 50;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
@@ -240,8 +241,20 @@ class _FeedPlayerState extends State<FeedPlayer> {
               ClipOval(
                 child: ImgFromUrl(
                   url: avatar,
-                  width: 50,
-                  height: 50,
+                  width: imgSize,
+                  height: imgSize,
+                  placeholder: Container(
+                    color: ColorPalettes.g100,
+                    width: imgSize,
+                    height: imgSize,
+                    child: Center(
+                      child: Icon(
+                        Icons.person,
+                        size: 40,
+                        color: TextColors.iconHighEm,
+                      ),
+                    ),
+                  ),
                 ),
               ),
               Padding(

@@ -32,7 +32,9 @@ class FeedPlayerAppBar extends StatelessWidget {
                     Text(
                       title,
                       style: GGTextStyle.h2Bold(
-                        color: ColorPalettes.g200,
+                        color: ColorPalettes.white100,
+                      ).copyWith(
+                        shadows: [BoxShadowStyle.e01],
                       ),
                     ),
                   ],
@@ -54,16 +56,20 @@ class FeedPlayerAppBar extends StatelessWidget {
     Decoration? decoration,
     bool visionable = true,
   }) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        decoration: decoration,
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-          child: Icon(
-            icon ?? Icons.navigate_next_sharp,
-            color: visionable ? ColorPalettes.g200 : Colors.transparent,
-            size: 32,
+    return Opacity(
+      opacity: visionable ? 1 : 0,
+      child: GestureDetector(
+        onTap: onTap,
+        child: Container(
+          decoration: decoration,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+            child: Icon(
+              icon ?? Icons.navigate_next_sharp,
+              color: ColorPalettes.white100,
+              size: 32,
+              shadows: [BoxShadowStyle.e01],
+            ),
           ),
         ),
       ),

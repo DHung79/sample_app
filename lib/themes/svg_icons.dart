@@ -539,5 +539,6 @@ class SvgIcon extends StatelessWidget {
 
 class ImgAssets {
   static String placeholder = 'assets/image/placeholder.png';
+  static String brokenImg = 'assets/image/broken_image.png';
   static String splash = 'assets/image/splash.png';
 }

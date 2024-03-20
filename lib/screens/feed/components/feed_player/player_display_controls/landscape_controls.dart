@@ -3,6 +3,8 @@ import 'package:flick_video_player/flick_video_player.dart';
 import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 import '../../../../../themes/theme_config.dart';
+import '../custom_package/played_time.dart';
+import '../custom_package/total_duration.dart';
 import '../multi_manager/flick_multi_manager.dart';
 
 class FeedPlayerLandscapeControls extends StatelessWidget {
@@ -10,7 +12,7 @@ class FeedPlayerLandscapeControls extends StatelessWidget {
     super.key,
     this.flickMultiManager,
     this.flickManager,
-    this.iconSize = 32,
+    this.iconSize = 20,
     this.fontSize = 12,
     this.progressBarSettings,
   });
@@ -32,16 +34,6 @@ class FeedPlayerLandscapeControls extends StatelessWidget {
             context: context,
           ),
           _videoActionBar(),
-          FlickAutoHideChild(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                FlickVideoProgressBar(
-                  flickProgressBarSettings: progressBarSettings,
-                ),
-              ],
-            ),
-          ),
         ],
       ),
     );
@@ -102,56 +94,65 @@ class FeedPlayerLandscapeControls extends StatelessWidget {
   }
 
   Widget _videoActionBar() {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(0, 0, 0, 48),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-              iconButon(
-                icon: Icons.favorite_rounded,
-                onTap: () {},
-              ),
-              SizedBox(
-                height: iconSize,
-              ),
-              iconButon(
-                icon: Icons.mode_comment_rounded,
-                onTap: () {},
-              ),
-              SizedBox(
-                height: iconSize,
-              ),
-              iconButon(
-                icon: Icons.turned_in_rounded,
-                onTap: () {},
-              ),
-              SizedBox(
-                height: iconSize,
-              ),
-              iconButon(
-                icon: Icons.tiktok_rounded,
-                onTap: () {},
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget iconButon({
-    Function()? onTap,
-    IconData? icon,
-  }) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Icon(
-        icon,
-        color: ColorPalettes.g200,
-        size: iconSize,
+    return FlickAutoHideChild(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+            FlickVideoProgressBar(
+              flickProgressBarSettings: progressBarSettings,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                FlickPlayToggle(
+                  size: iconSize,
+                ),
+                SizedBox(
+                  width: iconSize / 2,
+                ),
+                FlickSoundToggle(
+                  size: iconSize,
+                ),
+                SizedBox(
+                  width: iconSize / 2,
+                ),
+                Row(
+                  children: <Widget>[
+                    PlayedTime(
+                      fontSize: fontSize,
+                    ),
+                    FlickAutoHideChild(
+                      child: Text(
+                        ' / ',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: fontSize,
+                        ),
+                      ),
+                    ),
+                    TotalDuration(
+                      fontSize: fontSize,
+                    ),
+                  ],
+                ),
+                Expanded(
+                  child: Container(),
+                ),
+                FlickSubtitleToggle(
+                  size: iconSize,
+                ),
+                SizedBox(
+                  width: iconSize / 2,
+                ),
+                FlickFullScreenToggle(
+                  size: iconSize,
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

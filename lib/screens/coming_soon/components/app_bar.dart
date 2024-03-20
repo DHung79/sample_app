@@ -61,16 +61,19 @@ class ComingSoonAppBar extends StatelessWidget {
     Decoration? decoration,
     bool visionable = true,
   }) {
-    return GestureDetector(
-      onTap: ontap,
-      child: Container(
-        decoration: decoration,
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-          child: Icon(
-            icon,
-            color: visionable ? TextColors.textWhite : Colors.transparent,
-            size: 32,
+    return Opacity(
+      opacity: visionable ? 1 : 0,
+      child: GestureDetector(
+        onTap: ontap,
+        child: Container(
+          decoration: decoration,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+            child: Icon(
+              icon,
+              color: TextColors.textWhite,
+              size: 32,
+            ),
           ),
         ),
       ),
