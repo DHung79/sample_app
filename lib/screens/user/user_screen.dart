@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sample_app/themes/theme_config.dart';
 import '../../apis/user/user.dart';
+import '../../themes/theme_config.dart';
 import 'components/app_bar.dart';
 import 'components/user_card/user_card.dart';
-import 'components/user_detail/user_detail_screen.dart';
 
 class UserScreen extends StatefulWidget {
   const UserScreen({super.key});
@@ -154,54 +153,5 @@ class _UserScreenState extends State<UserScreen> {
     );
   }
 
-  Widget _gridView() {
-    final screenSize = MediaQuery.of(context).size;
-    double itemWidth = 200;
-    double itemHeight = 250;
-    final maxColumnCount = (screenSize.width / itemWidth).floor();
-    return GridView.builder(
-      padding: EdgeInsets.zero,
-      shrinkWrap: true,
-      itemCount: _users.length,
-      physics: const NeverScrollableScrollPhysics(),
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: maxColumnCount,
-        crossAxisSpacing: 16,
-        mainAxisSpacing: 16,
-      ),
-      itemBuilder: (context, index) {
-        final user = _users[index];
-        return InkWell(
-          onTap: () {
-            NavigatorStyle.slideNavigator(
-              context: context,
-              transitionDuration: 350,
-              toScreen: UserDetailScreen(user: user),
-            );
-          },
-          child: Hero(
-            tag: user.id,
-            child: Container(
-              width: itemWidth,
-              height: itemHeight,
-              decoration: BoxDecoration(
-                border: Border.all(
-                  width: 4,
-                  color: Colors.blueAccent,
-                ),
-                borderRadius: BorderRadius.circular(12),
-                boxShadow: [
-                  BoxShadowStyle.e01,
-                ],
-                color: Colors.lightBlueAccent.shade200,
-              ),
-              child: ImgFromUrl(
-                url: user.image,
-              ),
-            ),
-          ),
-        );
-      },
-    );
-  }
+ 
 }

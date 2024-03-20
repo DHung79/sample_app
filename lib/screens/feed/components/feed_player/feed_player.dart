@@ -1,10 +1,10 @@
 import 'dart:math';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:sample_app/themes/theme_config.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:visibility_detector/visibility_detector.dart';
+import '../../../../themes/theme_config.dart';
+import '../../../../widgets/img_from_url.dart';
 import './multi_manager/flick_multi_manager.dart';
 import './multi_manager/flick_multi_player.dart';
 import '../../utils/mock_data.dart';
@@ -23,13 +23,19 @@ class FeedPlayer extends StatefulWidget {
 class _FeedPlayerState extends State<FeedPlayer> {
   List items = mockData['items'];
   final _now = DateTime.now();
-
+  final _cacheManager = DefaultCacheManager();
   late FlickMultiManager flickMultiManager;
 
   @override
   void initState() {
     super.initState();
     flickMultiManager = FlickMultiManager();
+  }
+
+  @override
+  void dispose() {
+    _cacheManager.emptyCache();
+    super.dispose();
   }
 
   @override
@@ -65,6 +71,7 @@ class _FeedPlayerState extends State<FeedPlayer> {
                     child: FlickMultiPlayer(
                       url: items[index]['trailer_url'],
                       flickMultiManager: flickMultiManager,
+                      cacheManager: _cacheManager,
                       isSlider: widget.isSlider,
                     ),
                   ),
@@ -144,12 +151,6 @@ class _FeedPlayerState extends State<FeedPlayer> {
       ),
       itemCount: items.length,
       itemBuilder: (context, index) {
-        final randomSeconds = Random().nextInt(24 * 60 * 60);
-        final postTime = _now.subtract(
-          Duration(
-            seconds: randomSeconds,
-          ),
-        );
         return Container(
           color: Colors.white,
           constraints: BoxConstraints(
@@ -164,74 +165,8 @@ class _FeedPlayerState extends State<FeedPlayer> {
               Flexible(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const ClipOval(
-                              child: ImgFromUrl(
-                                url:
-                                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJIwASCJpICHRbFDOQXQ2S-pmikc8vs6K2GA&usqp=CAU',
-                                width: 50,
-                                height: 50,
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(0, 0, 0, 2),
-                                    child: Text(
-                                      'User Avatar',
-                                      style: CustomTextStyle.boldBody(
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        timeAgoFromNow(
-                                          postTime,
-                                          context,
-                                        ),
-                                        style: CustomTextStyle.mediumBody(
-                                          color: Colors.black,
-                                        ),
-                                      ),
-                                      _iconButton(
-                                        icon: Icons.public_outlined,
-                                        padding: const EdgeInsets.fromLTRB(
-                                            4, 0, 4, 0),
-                                        color: TextColors.iconHighEm,
-                                        size: 16,
-                                        onTap: () {},
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Flexible(
-                        child: Text(
-                          items[index]['title'],
-                          style: CustomTextStyle.boldBody(
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                    ],
+                  child: _contentHeader(
+                    index: index,
                   ),
                 ),
               ),
@@ -240,6 +175,7 @@ class _FeedPlayerState extends State<FeedPlayer> {
                 child: FlickMultiPlayer(
                   url: items[index]['trailer_url'],
                   flickMultiManager: flickMultiManager,
+                  cacheManager: _cacheManager,
                   isSlider: widget.isSlider,
                 ),
               ),
@@ -278,6 +214,85 @@ class _FeedPlayerState extends State<FeedPlayer> {
           ),
         );
       },
+    );
+  }
+
+  Widget _contentHeader({
+    required int index,
+  }) {
+    final randomSeconds = Random().nextInt(24 * 60 * 60);
+    final postTime = _now.subtract(
+      Duration(
+        seconds: randomSeconds,
+      ),
+    );
+    String avatar =
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJIwASCJpICHRbFDOQXQ2S-pmikc8vs6K2GA&usqp=CAU';
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ClipOval(
+                child: ImgFromUrl(
+                  url: avatar,
+                  width: 50,
+                  height: 50,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 2),
+                      child: Text(
+                        'User Avatar',
+                        style: CustomTextStyle.boldBody(
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          timeAgoFromNow(
+                            postTime,
+                            context,
+                          ),
+                          style: CustomTextStyle.mediumBody(
+                            color: Colors.black,
+                          ),
+                        ),
+                        _iconButton(
+                          icon: Icons.public_outlined,
+                          padding: const EdgeInsets.fromLTRB(4, 0, 4, 0),
+                          color: TextColors.iconHighEm,
+                          size: 16,
+                          onTap: () {},
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+        Flexible(
+          child: Text(
+            items[index]['title'],
+            style: CustomTextStyle.boldBody(
+              color: Colors.black,
+            ),
+          ),
+        ),
+      ],
     );
   }
 

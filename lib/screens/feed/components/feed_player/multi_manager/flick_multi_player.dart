@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flick_video_player/flick_video_player.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import '../../../../../themes/theme_config.dart';
 import '../player_display_controls/landscape_controls.dart';
 import '../player_display_controls/portrait_controls.dart';
@@ -10,24 +13,27 @@ import 'package:visibility_detector/visibility_detector.dart';
 import 'package:video_player/video_player.dart';
 
 class FlickMultiPlayer extends StatefulWidget {
+  final String url;
+  final String? image;
+  final FlickMultiManager flickMultiManager;
+  final DefaultCacheManager cacheManager;
+  final bool isSlider;
   const FlickMultiPlayer({
     super.key,
     required this.url,
     this.image,
     required this.flickMultiManager,
+    required this.cacheManager,
     required this.isSlider,
   });
 
-  final String url;
-  final String? image;
-  final FlickMultiManager flickMultiManager;
-  final bool isSlider;
   @override
   State<FlickMultiPlayer> createState() => _FlickMultiPlayerState();
 }
 
 class _FlickMultiPlayerState extends State<FlickMultiPlayer> {
   late FlickManager flickManager;
+  File? file;
 
   @override
   void initState() {
@@ -38,7 +44,35 @@ class _FlickMultiPlayerState extends State<FlickMultiPlayer> {
       autoPlay: false,
     );
     widget.flickMultiManager.init(flickManager);
+    _getFile();
     super.initState();
+  }
+
+  _getFile() async {
+    File? fileFromCache;
+    var fileInCache = await widget.cacheManager.getFileFromCache(widget.url);
+    fileFromCache = fileInCache?.file;
+    if (fileFromCache != null) {
+      flickManager = FlickManager(
+        videoPlayerController: VideoPlayerController.file(fileFromCache)
+          ..setLooping(true),
+        autoPlay: false,
+      );
+    } else {
+      file =
+          await widget.cacheManager.getSingleFile(widget.url, key: widget.url);
+      flickManager = FlickManager(
+        videoPlayerController: file != null
+            ? VideoPlayerController.file(file!)
+            : VideoPlayerController.networkUrl(Uri.parse(widget.url))
+          ..setLooping(true),
+        autoPlay: false,
+      );
+    }
+
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   @override

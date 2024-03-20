@@ -6,7 +6,6 @@ export 'svg_icons.dart';
 export 'divider_style.dart';
 export 'indicator_style.dart';
 export 'navigator_style.dart';
-export 'img_from_url.dart';
 export '/logger/logger.dart';
 export 'display_date_time.dart';
 

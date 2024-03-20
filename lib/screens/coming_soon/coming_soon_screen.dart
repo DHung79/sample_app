@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../themes/theme_config.dart';
+import '../../widgets/img_from_url.dart';
 import 'components/app_bar.dart';
 
 class ComingSoonScreen extends StatelessWidget {

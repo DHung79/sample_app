@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../apis/bank/bank.dart';
 import '../../../apis/base/rest/rest_api_handler_data.dart';
 import '../../../themes/theme_config.dart';
+import '../../../widgets/img_from_url.dart';
 
 class BankScreen extends StatelessWidget {
   const BankScreen({super.key});

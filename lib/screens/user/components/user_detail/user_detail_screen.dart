@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../apis/user/user.dart';
 import '../../../../themes/theme_config.dart';
+import '../../../../widgets/img_from_url.dart';
 import 'app_bar.dart';
 
 class UserDetailScreen extends StatelessWidget {
