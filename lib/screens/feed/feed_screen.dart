@@ -71,7 +71,7 @@ class FeedScreen extends StatelessWidget {
 
   Widget _sliderPlayer() {
     return const Scaffold(
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.black,
       body: SafeArea(
         child: Stack(
@@ -80,6 +80,7 @@ class FeedScreen extends StatelessWidget {
             FeedPlayerAppBar(
               title: 'Slider Video',
             ),
+            // CommentField(),
           ],
         ),
       ),

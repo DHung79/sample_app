@@ -59,6 +59,7 @@ dependencies:
   wakelock: ^0.6.2
   cached_network_image: ^3.3.1
   flutter_cache_manager: ^3.3.1
+  control_style: ^0.1.0
 
 
 dev_dependencies:

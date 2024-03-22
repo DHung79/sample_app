@@ -95,64 +95,61 @@ class FeedPlayerLandscapeControls extends StatelessWidget {
 
   Widget _videoActionBar() {
     return FlickAutoHideChild(
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: <Widget>[
-            FlickVideoProgressBar(
-              flickProgressBarSettings: progressBarSettings,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                FlickPlayToggle(
-                  size: iconSize,
-                ),
-                SizedBox(
-                  width: iconSize / 2,
-                ),
-                FlickSoundToggle(
-                  size: iconSize,
-                ),
-                SizedBox(
-                  width: iconSize / 2,
-                ),
-                Row(
-                  children: <Widget>[
-                    PlayedTime(
-                      fontSize: fontSize,
-                    ),
-                    FlickAutoHideChild(
-                      child: Text(
-                        ' / ',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: fontSize,
-                        ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: <Widget>[
+          FlickVideoProgressBar(
+            flickProgressBarSettings: progressBarSettings,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              FlickPlayToggle(
+                size: iconSize,
+              ),
+              SizedBox(
+                width: iconSize / 2,
+              ),
+              FlickSoundToggle(
+                size: iconSize,
+              ),
+              SizedBox(
+                width: iconSize / 2,
+              ),
+              Row(
+                children: <Widget>[
+                  PlayedTime(
+                    fontSize: fontSize,
+                  ),
+                  FlickAutoHideChild(
+                    child: Text(
+                      ' / ',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: fontSize,
                       ),
                     ),
-                    TotalDuration(
-                      fontSize: fontSize,
-                    ),
-                  ],
-                ),
-                Expanded(
-                  child: Container(),
-                ),
-                FlickSubtitleToggle(
-                  size: iconSize,
-                ),
-                SizedBox(
-                  width: iconSize / 2,
-                ),
-                FlickFullScreenToggle(
-                  size: iconSize,
-                ),
-              ],
-            ),
-          ],
-        ),
+                  ),
+                  TotalDuration(
+                    fontSize: fontSize,
+                  ),
+                ],
+              ),
+              Expanded(
+                child: Container(),
+              ),
+              FlickSubtitleToggle(
+                size: iconSize,
+              ),
+              SizedBox(
+                width: iconSize / 2,
+              ),
+              FlickFullScreenToggle(
+                size: iconSize,
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flick_video_player/flick_video_player.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 import '../../../../../themes/theme_config.dart';
@@ -127,7 +128,9 @@ class FeedPlayerPortraitControls extends StatelessWidget {
                 flipX: true,
                 child: iconButon(
                   icon: Icons.sms_rounded,
-                  onTap: () {},
+                  onTap: () {
+                    SystemChannels.textInput.invokeMethod("TextInput.show");
+                  },
                 ),
               ),
               SizedBox(

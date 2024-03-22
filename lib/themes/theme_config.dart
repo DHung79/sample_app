@@ -8,6 +8,7 @@ export 'indicator_style.dart';
 export 'navigator_style.dart';
 export '/logger/logger.dart';
 export 'display_date_time.dart';
+export 'text_field_style.dart';
 
 class ThemeConfig {
   static ThemeData createTheme({

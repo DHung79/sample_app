@@ -17,6 +17,7 @@ class _UserScreenState extends State<UserScreen> {
   int limit = 10;
   int maxPage = 1;
   int currentPage = 1;
+  int previousPage = 1;
   final _users = <UserModel>[];
   final PageController _pageController = PageController(viewportFraction: 0.8);
   var _currentIndex = 0;
@@ -41,10 +42,11 @@ class _UserScreenState extends State<UserScreen> {
 
   _scrollListener() {
     if (currentPage < maxPage) {
-      // if (_scrollController.position.extentAfter < 200) {
       if (_users.length - _pageController.page!.ceil() < 3) {
-        currentPage += 1;
-        _fetchDataOnPage(currentPage);
+        if (currentPage == previousPage) {
+          currentPage += 1;
+          _fetchDataOnPage(currentPage);
+        }
       }
     }
   }
@@ -81,6 +83,7 @@ class _UserScreenState extends State<UserScreen> {
           if (snapshot.hasData) {
             maxPage = snapshot.data!.model!.total ~/ limit;
             currentPage = snapshot.data!.model!.skip ~/ limit + 1;
+            previousPage = currentPage;
             final users = snapshot.data!.model!.records;
             for (var user in users) {
               if (_users.where((e) => e.id == user.id).isEmpty) {
@@ -152,6 +155,4 @@ class _UserScreenState extends State<UserScreen> {
       ),
     );
   }
-
- 
 }
