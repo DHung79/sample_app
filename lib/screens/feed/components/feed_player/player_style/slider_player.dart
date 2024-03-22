@@ -1,7 +1,6 @@
 import 'dart:math';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import '../../../../../themes/theme_config.dart';
 import '../../../../../widgets/img_from_url.dart';
@@ -93,6 +92,7 @@ class _SlideVideoState extends State<SlideVideo> {
   final _focus = FocusNode();
   bool _showComments = false;
   final _formKey = GlobalKey<FormState>();
+  double _keyboardHeight = 0;
 
   @override
   void initState() {
@@ -108,11 +108,12 @@ class _SlideVideoState extends State<SlideVideo> {
   }
 
   _onFocus() {
-    // setState(() {
-    _showComments = !_showComments;
-    // widget.onFocus();
-    // });
-    // SystemChannels.textInput.invokeMethod("TextInput.show");
+    setState(() {
+      if (_focus.hasFocus) {
+        _showComments = true;
+        widget.onFocus();
+      }
+    });
   }
 
   @override
@@ -142,8 +143,13 @@ class _SlideVideoState extends State<SlideVideo> {
 
   Widget _commentField() {
     final screenSize = MediaQuery.of(context).size;
-    final keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
-    final double inputHeight = 60;
+    if (MediaQuery.of(context).viewInsets.bottom >= _keyboardHeight) {
+      _keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
+    }
+    const double inputHeight = 60;
+    double commentPadding =
+        _focus.hasFocus ? _keyboardHeight + inputHeight : inputHeight;
+    double inputPadding = _focus.hasFocus ? _keyboardHeight : 0;
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
@@ -152,13 +158,16 @@ class _SlideVideoState extends State<SlideVideo> {
             child: GestureDetector(
               onTap: () {
                 setState(() {
-                  _focus.unfocus();
+                  if (_focus.hasFocus) {
+                    _focus.unfocus();
+                  }
+                  _showComments = false;
                 });
               },
             ),
           ),
         SizedBox(
-          height: 230,
+          height: 230 + _keyboardHeight,
           child: Stack(
             alignment: AlignmentDirectional.bottomCenter,
             children: [
@@ -166,7 +175,7 @@ class _SlideVideoState extends State<SlideVideo> {
                 Container(
                   color: Colors.white,
                   child: ListView.separated(
-                    padding: EdgeInsets.fromLTRB(16, 16, 16, inputHeight),
+                    padding: EdgeInsets.fromLTRB(16, 16, 16, commentPadding),
                     itemCount: 10,
                     separatorBuilder: (BuildContext context, int index) {
                       return const SizedBox(
@@ -178,35 +187,34 @@ class _SlideVideoState extends State<SlideVideo> {
                     },
                   ),
                 ),
-              Container(
-                key: _formKey,
-                height: inputHeight,
-                width: screenSize.width,
-                color: Colors.white,
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
-                  child: TextFieldStyle(
-                    focusNode: _focus,
-                    contentPadding: const EdgeInsets.fromLTRB(16, 10, 20, 10),
-                    hasValidate: false,
-                    hintText: 'Type your comment',
-                    keyboardType: TextInputType.text,
-                    controller: _commentController,
-                    maxLength: 50,
-                    onSaved: (value) {
-                      _commentController.text = value!.trim();
-                    },
-                    onChanged: (value) {},
+              Padding(
+                padding: EdgeInsets.fromLTRB(0, 0, 0, inputPadding),
+                child: Container(
+                  key: _formKey,
+                  height: inputHeight,
+                  width: screenSize.width,
+                  color: Colors.white,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
+                    child: TextFieldStyle(
+                      focusNode: _focus,
+                      contentPadding: const EdgeInsets.fromLTRB(16, 10, 20, 10),
+                      hasValidate: false,
+                      hintText: 'Type your comment',
+                      keyboardType: TextInputType.text,
+                      controller: _commentController,
+                      maxLength: 50,
+                      onSaved: (value) {
+                        _commentController.text = value!.trim();
+                      },
+                      onChanged: (value) {},
+                    ),
                   ),
                 ),
               ),
             ],
           ),
         ),
-        if (_showComments)
-          SizedBox(
-            height: keyboardHeight,
-          ),
       ],
     );
   }

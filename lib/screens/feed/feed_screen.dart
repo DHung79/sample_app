@@ -80,7 +80,6 @@ class FeedScreen extends StatelessWidget {
             FeedPlayerAppBar(
               title: 'Slider Video',
             ),
-            // CommentField(),
           ],
         ),
       ),
