@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../apis/database/user/user.dart';
 import '../../../../themes/theme_config.dart';
-import '../../../../widgets/img_from_url.dart';
+import '../../../../widgets/image_widgets/img_from_url.dart';
 import '../user_detail/user_detail_screen.dart';
 import 'dynamic_ink_well.dart';
 

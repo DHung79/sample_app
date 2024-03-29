@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import '../themes/theme_config.dart';
+import '../../themes/theme_config.dart';
 
 class ImgFromUrl extends StatelessWidget {
   final String url;

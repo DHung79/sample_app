@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:sample_app/widgets/scroll_behavior.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'routes/route_config.dart';
 import 'themes/theme_config.dart';

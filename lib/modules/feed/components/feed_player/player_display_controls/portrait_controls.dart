@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 import '../../../../../themes/theme_config.dart';
-import '../../../../../widgets/img_from_url.dart';
+import '../../../../../widgets/image_widgets/img_from_url.dart';
 import '../multi_manager/flick_multi_manager.dart';
 
 class FeedPlayerPortraitControls extends StatelessWidget {

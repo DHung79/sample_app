@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../apis/database/bank/bank.dart';
 import '../../../apis/configs/rest/rest_api_handler_data.dart';
 import '../../../themes/theme_config.dart';
-import '../../../widgets/img_from_url.dart';
+import '../../../widgets/image_widgets/img_from_url.dart';
 
 class BankScreen extends StatelessWidget {
   const BankScreen({super.key});
@@ -15,8 +15,9 @@ class BankScreen extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
       child: Column(
         children: [
+
           CustomButtonStyle.roundDark(
-            color: Colors.amberAccent,
+            color: ColorPalettes.pBlue,
             onPressed: () {
               showBankList(context);
             },

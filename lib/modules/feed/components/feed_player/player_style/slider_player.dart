@@ -3,7 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import '../../../../../themes/theme_config.dart';
-import '../../../../../widgets/img_from_url.dart';
+import '../../../../../widgets/image_widgets/img_from_url.dart';
 import '../multi_manager/flick_multi_manager.dart';
 import '../multi_manager/flick_multi_player.dart';
 
@@ -196,7 +196,7 @@ class _SlideVideoState extends State<SlideVideo> {
                   color: Colors.white,
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
-                    child: TextFieldStyle(
+                    child: FormFieldText(
                       focusNode: _focus,
                       contentPadding: const EdgeInsets.fromLTRB(16, 10, 20, 10),
                       hasValidate: false,

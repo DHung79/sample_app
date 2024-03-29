@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../routes/route_names.dart';
 import '../../themes/theme_config.dart';
-import '../../widgets/app_bar.dart';
-import '../../widgets/layout_widget.dart';
+import '../../widgets/layout_widgets/layout_app_bar.dart';
+import '../../widgets/layout_widgets/layout_scaffold.dart';
 import 'components/bank_screen.dart';
 import 'components/shop_screen.dart';
 
@@ -17,7 +17,7 @@ class ShippingScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(80.0),
-        child: CustomAppBar(
+        child: LayoutAppBar(
           child: _appBar(context),
         ),
       ),
@@ -38,7 +38,7 @@ class ShippingScreen extends StatelessWidget {
                     context: context,
                     transitionDuration: 350,
                     tween: NavigatorStyle.pushRight,
-                    toScreen: const LayoutWidget(
+                    toScreen: const LayoutScaffold(
                       body: SafeArea(
                         child: ShopScreen(),
                       ),
@@ -61,7 +61,7 @@ class ShippingScreen extends StatelessWidget {
                     context: context,
                     transitionDuration: 350,
                     tween: NavigatorStyle.pushRight,
-                    toScreen: const LayoutWidget(
+                    toScreen: const LayoutScaffold(
                       body: SafeArea(
                         child: BankScreen(),
                       ),

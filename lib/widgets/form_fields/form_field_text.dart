@@ -1,10 +1,10 @@
 import 'package:control_style/control_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../widgets/highlight_text.dart';
-import 'theme_config.dart';
+import '../text_widgets/highlight_text.dart';
+import '../../themes/theme_config.dart';
 
-class TextFieldStyle extends StatelessWidget {
+class FormFieldText extends StatelessWidget {
   final TextEditingController? controller;
   final TextInputType? keyboardType;
   final List<TextInputFormatter>? inputFormatters;
@@ -40,7 +40,7 @@ class TextFieldStyle extends StatelessWidget {
   final bool? enabled;
   final bool showCounter;
   final bool autofocus;
-  const TextFieldStyle({
+  const FormFieldText({
     super.key,
     this.controller,
     this.keyboardType,

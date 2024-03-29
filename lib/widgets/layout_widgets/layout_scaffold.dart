@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class LayoutWidget extends StatelessWidget {
+class LayoutScaffold extends StatelessWidget {
   final Widget? appBar;
   final Widget body;
-  const LayoutWidget({
+  const LayoutScaffold({
     super.key,
     this.appBar,
     required this.body,

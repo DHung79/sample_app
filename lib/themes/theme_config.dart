@@ -6,9 +6,8 @@ export 'svg_icons.dart';
 export 'divider_style.dart';
 export 'indicator_style.dart';
 export 'navigator_style.dart';
-export '../utils/logger/logger.dart';
-export 'display_date_time.dart';
-export 'text_field_style.dart';
+export '../widgets/form_fields/form_field_text.dart';
+export '../utils/utils.dart';
 
 class ThemeConfig {
   static ThemeData createTheme({
