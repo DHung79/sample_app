@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:visibility_detector/visibility_detector.dart';
-import 'multi_manager/flick_multi_manager.dart';
-import '../../utils/mock_data.dart';
-import 'player_style/post_player.dart';
-import 'player_style/slider_player.dart';
+import '../../components/multi_manager/flick_multi_manager.dart';
+import '../../packages/mock_data.dart';
+import '../player_style/post_player.dart';
+import '../player_style/slider_player.dart';
 
 class FeedPlayer extends StatefulWidget {
   final bool isSlider;

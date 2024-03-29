@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flick_video_player/flick_video_player.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
-import '../../../../../themes/theme_config.dart';
-import '../custom_package/played_time.dart';
-import '../custom_package/total_duration.dart';
+import '../../../../themes/theme_config.dart';
+import '../../../../widgets/image_widgets/img_from_url.dart';
 import '../multi_manager/flick_multi_manager.dart';
 
-class FeedPlayerLandscapeControls extends StatelessWidget {
-  const FeedPlayerLandscapeControls({
+class FeedPlayerPortraitControls extends StatelessWidget {
+  const FeedPlayerPortraitControls({
     super.key,
     this.flickMultiManager,
     this.flickManager,
-    this.iconSize = 20,
+    this.iconSize = 32,
     this.fontSize = 12,
     this.progressBarSettings,
+    required this.avatar,
   });
 
   final FlickMultiManager? flickMultiManager;
@@ -22,18 +23,32 @@ class FeedPlayerLandscapeControls extends StatelessWidget {
   final double iconSize;
   final double fontSize;
   final FlickProgressBarSettings? progressBarSettings;
+  final String avatar;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       color: Colors.transparent,
-      padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
       child: Stack(
+        fit: StackFit.expand,
         children: [
+          Container(
+            color: Colors.black12,
+          ),
           _togglePlayAction(
             context: context,
           ),
           _videoActionBar(),
+          FlickAutoHideChild(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                FlickVideoProgressBar(
+                  flickProgressBarSettings: progressBarSettings,
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
@@ -94,62 +109,86 @@ class FeedPlayerLandscapeControls extends StatelessWidget {
   }
 
   Widget _videoActionBar() {
-    return FlickAutoHideChild(
-      child: Column(
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 0, 16, 48),
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
-        children: <Widget>[
-          FlickVideoProgressBar(
-            flickProgressBarSettings: progressBarSettings,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
-              FlickPlayToggle(
-                size: iconSize,
+              iconButon(
+                icon: Icons.favorite_rounded,
+                onTap: () {},
               ),
               SizedBox(
-                width: iconSize / 2,
+                height: iconSize,
               ),
-              FlickSoundToggle(
-                size: iconSize,
+              Transform.flip(
+                flipX: true,
+                child: iconButon(
+                  icon: Icons.sms_rounded,
+                  onTap: () {
+                    SystemChannels.textInput.invokeMethod("TextInput.show");
+                  },
+                ),
               ),
               SizedBox(
-                width: iconSize / 2,
+                height: iconSize,
               ),
-              Row(
-                children: <Widget>[
-                  PlayedTime(
-                    fontSize: fontSize,
-                  ),
-                  FlickAutoHideChild(
-                    child: Text(
-                      ' / ',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: fontSize,
+              iconButon(
+                icon: Icons.turned_in_rounded,
+                onTap: () {},
+              ),
+              SizedBox(
+                height: iconSize,
+              ),
+              iconButon(
+                icon: Icons.tiktok_rounded,
+                onTap: () {},
+              ),
+              SizedBox(
+                height: iconSize,
+              ),
+              ClipOval(
+                child: ImgFromUrl(
+                  url: avatar,
+                  width: iconSize,
+                  height: iconSize,
+                  placeholder: Container(
+                    color: ColorPalettes.g100,
+                    width: iconSize,
+                    height: iconSize,
+                    child: Center(
+                      child: Icon(
+                        Icons.person,
+                        size: iconSize - 10,
+                        color: TextColors.iconHighEm,
                       ),
                     ),
                   ),
-                  TotalDuration(
-                    fontSize: fontSize,
-                  ),
-                ],
-              ),
-              Expanded(
-                child: Container(),
-              ),
-              FlickSubtitleToggle(
-                size: iconSize,
-              ),
-              SizedBox(
-                width: iconSize / 2,
-              ),
-              FlickFullScreenToggle(
-                size: iconSize,
+                ),
               ),
             ],
           ),
         ],
+      ),
+    );
+  }
+
+  Widget iconButon({
+    Function()? onTap,
+    IconData? icon,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Icon(
+        icon,
+        color: ColorPalettes.white100,
+        shadows: [
+          BoxShadowStyle.e01,
+        ],
+        size: iconSize,
       ),
     );
   }

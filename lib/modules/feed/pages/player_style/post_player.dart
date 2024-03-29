@@ -1,10 +1,10 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-import '../../../../../themes/theme_config.dart';
-import '../../../../../widgets/image_widgets/img_from_url.dart';
-import '../multi_manager/flick_multi_manager.dart';
-import '../multi_manager/flick_multi_player.dart';
+import '../../../../themes/theme_config.dart';
+import '../../../../widgets/image_widgets/img_from_url.dart';
+import '../../components/multi_manager/flick_multi_manager.dart';
+import '../../components/multi_manager/flick_multi_player.dart';
 
 class PostPlayer extends StatefulWidget {
   final List items;

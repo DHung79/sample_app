@@ -6,7 +6,7 @@ export 'svg_icons.dart';
 export 'divider_style.dart';
 export 'indicator_style.dart';
 export 'navigator_style.dart';
-export '../widgets/form_fields/form_field_text.dart';
+export '../widgets/form_field_widgets/form_field_text.dart';
 export '../utils/utils.dart';
 
 class ThemeConfig {

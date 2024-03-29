@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'pages/feed_player/app_bar.dart';
+import 'pages/feed_player/feed_player.dart';
+import '../../routes/routes.dart';
 import '../../themes/theme_config.dart';
-import 'components/app_bar.dart';
-import 'components/feed_player/app_bar.dart';
-import 'components/feed_player/feed_player.dart';
 
 class FeedScreen extends StatelessWidget {
   const FeedScreen({super.key});
@@ -12,9 +12,9 @@ class FeedScreen extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(80.0),
-        child: FeedAppBar(),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(80.0),
+        child: _appBar(context),
       ),
       body: SafeArea(
         child: Padding(
@@ -44,6 +44,75 @@ class FeedScreen extends StatelessWidget {
                 },
               ),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  AppBar _appBar(BuildContext context) {
+    final statusBarHeight = MediaQuery.of(context).viewPadding.top;
+    return AppBar(
+      automaticallyImplyLeading: false,
+      backgroundColor: Colors.blueAccent,
+      // systemOverlayStyle: const SystemUiOverlayStyle(
+      //   statusBarColor: Colors.blueAccent,
+      //   systemNavigationBarColor: Colors.blueAccent,
+      // ),
+      flexibleSpace: Padding(
+        padding: EdgeInsets.fromLTRB(8, statusBarHeight + 8, 8, 8),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            _appBarButton(
+              icon: Icons.home,
+              ontap: () {
+                context.go(
+                  '/$homeRoute',
+                );
+              },
+            ),
+            Expanded(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Feed Screen',
+                    style: GGTextStyle.h2Bold(
+                      color: TextColors.textWhite,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            _appBarButton(
+              visionable: false,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _appBarButton({
+    Function()? ontap,
+    IconData? icon,
+    Decoration? decoration,
+    bool visionable = true,
+  }) {
+    return Opacity(
+      opacity: visionable ? 1 : 0,
+      child: GestureDetector(
+        onTap: ontap,
+        child: Container(
+          decoration: decoration,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+            child: Icon(
+              icon ?? Icons.navigate_next_sharp,
+              color: TextColors.textWhite,
+              size: 32,
+            ),
           ),
         ),
       ),

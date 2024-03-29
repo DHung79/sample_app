@@ -2,10 +2,10 @@ import 'dart:io';
 
 import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-import '../../../../../themes/theme_config.dart';
-import '../player_display_controls/landscape_controls.dart';
-import '../player_display_controls/portrait_controls.dart';
-import '../custom_package/flick_video_player.dart' as custom;
+import '../../../../themes/theme_config.dart';
+import '../player_controls/landscape_controls.dart';
+import '../player_controls/portrait_controls.dart';
+import '../../packages/custom_package/flick_video_player.dart' as custom;
 import 'flick_multi_manager.dart';
 
 import 'package:flutter/material.dart';
