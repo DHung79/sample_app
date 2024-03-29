@@ -1,5 +1,5 @@
 import 'dart:ui';
-import '../logger/logger.dart';
+import '../utils/logger/logger.dart';
 
 class ImgBaseSize {
   static Size avatar = const Size(1080, 720);

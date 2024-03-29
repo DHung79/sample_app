@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../screens/shipping/shipping_screen.dart';
-import '../logger/logger.dart';
-import '../screens/coming_soon/coming_soon_screen.dart';
-import '../screens/feed/feed_screen.dart';
-import '../screens/home/home_screen.dart';
-import '../screens/user/user_screen.dart';
-import '../screens/splash/splash_screen.dart';
+import '../modules/shipping/shipping_screen.dart';
+import '../utils/logger/logger.dart';
+import '../modules/coming_soon/coming_soon_screen.dart';
+import '../modules/feed/feed_screen.dart';
+import '../modules/home/home_screen.dart';
+import '../modules/user/user_screen.dart';
+import '../modules/splash/splash_screen.dart';
 import 'route_names.dart';
 
 String currentRoute = '';
