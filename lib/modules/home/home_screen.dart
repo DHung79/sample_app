@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:sample_app/routes/route_names.dart';
-
+import '../../routes/route_names.dart';
 import '../../themes/theme_config.dart';
 import 'components/app_bar.dart';
 
@@ -37,7 +35,7 @@ class HomeScreen extends StatelessWidget {
                   },
                 ),
                 _navigaterButton(
-                  name: 'Shipping Sample',
+                  name: 'Translate Sample',
                   onPressed: () {
                     context.go('/$shippingRoute');
                   },

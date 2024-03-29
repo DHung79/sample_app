@@ -1,77 +1,25 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import '../../../apis/database/bank/bank.dart';
 import '../../../apis/configs/rest/rest_api_handler_data.dart';
 import '../../../themes/theme_config.dart';
 import '../../../widgets/image_widgets/img_from_url.dart';
 
-class BankScreen extends StatelessWidget {
-  const BankScreen({super.key});
+class BankDialog extends StatelessWidget {
+  const BankDialog({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
-      child: Column(
-        children: [
-
-          CustomButtonStyle.roundDark(
-            color: ColorPalettes.pBlue,
-            onPressed: () {
-              showBankList(context);
-            },
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-              child: Text(
-                'get banks',
-                style: CustomTextStyle.boldStandard(
-                  color: TextColors.textWhite,
-                ),
-              ),
-            ),
-          ),
-          // Padding(
-          //   padding: const EdgeInsets.fromLTRB(0, 16, 0, 16),
-          //   child: CustomButtonStyle.roundDark(
-          //     color: Colors.amberAccent,
-          //     onPressed: () {
-          //       showBankList(context);
-          //     },
-          //     child: Padding(
-          //       padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-          //       child: Text(
-          //         'get banks',
-          //         style: CustomTextStyle.boldStandard(
-          //           color: TextColors.textWhite,
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // ),
-        ],
+    return const AlertDialog(
+      surfaceTintColor: Colors.transparent,
+      backgroundColor: Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(4.0),
+        ),
       ),
-    );
-  }
-
-  showBankList(BuildContext context) {
-    showDialog(
-      context: context,
-      barrierDismissible: true,
-      barrierColor: Colors.black12,
-      builder: (BuildContext context) {
-        return const AlertDialog(
-          surfaceTintColor: Colors.transparent,
-          backgroundColor: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(4.0),
-            ),
-          ),
-          contentPadding: EdgeInsets.zero,
-          content: BankListView(),
-        );
-      },
+      contentPadding: EdgeInsets.zero,
+      content: BankListView(),
     );
   }
 }

@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import '../../routes/route_names.dart';
 import '../../themes/theme_config.dart';
 import '../../widgets/layout_widgets/layout_app_bar.dart';
 import '../../widgets/layout_widgets/layout_scaffold.dart';
-import 'components/bank_screen.dart';
-import 'components/shop_screen.dart';
+import 'components/bank_dialog.dart';
+import 'pages/translate_img_screen.dart';
 
-class ShippingScreen extends StatelessWidget {
-  const ShippingScreen({super.key});
+class TranslateScreen extends StatelessWidget {
+  const TranslateScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,21 +27,19 @@ class ShippingScreen extends StatelessWidget {
             children: [
               CustomButtonStyle.roundDark(
                 child: Text(
-                  'Shop UI',
+                  'Banks Dialog',
                   style: CustomTextStyle.boldStandard(
                     color: TextColors.textWhite,
                   ),
                 ),
                 onPressed: () {
-                  NavigatorStyle.slideNavigator(
+                  showDialog(
                     context: context,
-                    transitionDuration: 350,
-                    tween: NavigatorStyle.pushRight,
-                    toScreen: const LayoutScaffold(
-                      body: SafeArea(
-                        child: ShopScreen(),
-                      ),
-                    ),
+                    barrierDismissible: true,
+                    barrierColor: Colors.black12,
+                    builder: (BuildContext context) {
+                      return const BankDialog();
+                    },
                   );
                 },
               ),
@@ -51,7 +48,7 @@ class ShippingScreen extends StatelessWidget {
               ),
               CustomButtonStyle.roundDark(
                 child: Text(
-                  'bank Api',
+                  'Translate Image',
                   style: CustomTextStyle.boldStandard(
                     color: TextColors.textWhite,
                   ),
@@ -63,7 +60,7 @@ class ShippingScreen extends StatelessWidget {
                     tween: NavigatorStyle.pushRight,
                     toScreen: const LayoutScaffold(
                       body: SafeArea(
-                        child: BankScreen(),
+                        child: TranslateImgScreen(),
                       ),
                     ),
                   );
@@ -100,7 +97,7 @@ class ShippingScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Shipping',
+                  'Translate',
                   style: GGTextStyle.h2Bold(
                     color: TextColors.textWhite,
                   ),

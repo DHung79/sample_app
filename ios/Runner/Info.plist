@@ -22,6 +22,30 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<!-- pick file pemission -->
+	<!-- FileType.any or FileType.custom -->
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>remote-notification</string>
+	</array>
+	<!-- FileType.audio -->
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Explain why your app uses music</string>
+	<!-- File from browser -->
+	<key>UISupportsDocumentBrowser</key>
+	<true/>
+	<!-- FileType.all -->
+	<key>LSSupportsOpeningDocumentsInPlace</key>
+	<true/>
+	<!-- FileType.image or FileType.video -->
+	<key>NSPhotoLibraryUsageDescription</key>
+    <string>Privacy - Photo Library Usage Description</string>
+    <key>NSMotionUsageDescription</key>
+    <string>Motion usage description</string>
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>NSPhotoLibraryAddUsageDescription</string>
+	<!-- end pick file pemission -->
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:sample_app/modules/coming_soon/coming_soon_screen.dart';
 import '../../../routes/route_names.dart';
 import '../../../themes/theme_config.dart';

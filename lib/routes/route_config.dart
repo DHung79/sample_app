@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import '../modules/shipping/shipping_screen.dart';
+import '../modules/tranlate/translate_screen.dart';
 import '../utils/logger/logger.dart';
 import '../modules/coming_soon/coming_soon_screen.dart';
 import '../modules/feed/feed_screen.dart';
@@ -66,7 +65,7 @@ final GoRouter router = GoRouter(
             return _screenFor(
               state: state,
               route: shippingRoute,
-              child: const ShippingScreen(),
+              child: const TranslateScreen(),
             );
           },
         ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import '../../routes/route_names.dart';
 import 'pages/feed_player/app_bar.dart';
 import 'pages/feed_player/feed_player.dart';
-import '../../routes/routes.dart';
 import '../../themes/theme_config.dart';
 
 class FeedScreen extends StatelessWidget {
