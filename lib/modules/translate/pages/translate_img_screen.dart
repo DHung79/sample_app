@@ -13,6 +13,7 @@ class TranslateImgScreen extends StatefulWidget {
 
 class _TranslateImgScreenState extends State<TranslateImgScreen> {
   File? filePicked;
+  
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(

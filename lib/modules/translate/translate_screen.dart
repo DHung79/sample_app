@@ -5,6 +5,7 @@ import '../../widgets/layout_widgets/layout_app_bar.dart';
 import '../../widgets/layout_widgets/layout_scaffold.dart';
 import 'components/bank_dialog.dart';
 import 'pages/translate_img_screen.dart';
+import 'pages/translate_ocr_screen.dart';
 
 class TranslateScreen extends StatelessWidget {
   const TranslateScreen({super.key});
@@ -61,6 +62,29 @@ class TranslateScreen extends StatelessWidget {
                     toScreen: const LayoutScaffold(
                       body: SafeArea(
                         child: TranslateImgScreen(),
+                      ),
+                    ),
+                  );
+                },
+              ),
+              const SizedBox(
+                height: 24,
+              ),
+              CustomButtonStyle.roundDark(
+                child: Text(
+                  'Translate OCR',
+                  style: CustomTextStyle.boldStandard(
+                    color: TextColors.textWhite,
+                  ),
+                ),
+                onPressed: () {
+                  NavigatorStyle.slideNavigator(
+                    context: context,
+                    transitionDuration: 350,
+                    tween: NavigatorStyle.pushRight,
+                    toScreen: const LayoutScaffold(
+                      body: SafeArea(
+                        child: TranslateOCRScreen(),
                       ),
                     ),
                   );

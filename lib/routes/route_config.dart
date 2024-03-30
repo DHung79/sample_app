@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../modules/tranlate/translate_screen.dart';
+import '../modules/translate/translate_screen.dart';
 import '../utils/logger/logger.dart';
 import '../modules/coming_soon/coming_soon_screen.dart';
 import '../modules/feed/feed_screen.dart';
