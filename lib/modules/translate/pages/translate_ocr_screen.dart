@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'dart:developer';
-import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 import '../../../apis/configs/rest/rest_api_handler_data.dart';
 import '../../../themes/theme_config.dart';
 import '../packages/flutter_scalable_ocr.dart';
@@ -15,12 +13,19 @@ class TranslateOCRScreen extends StatefulWidget {
 }
 
 class _TranslateOCRScreenState extends State<TranslateOCRScreen> {
-  String text = '';
+  final StreamController<TranslateController> controller =
+      StreamController<TranslateController>();
+  String rawText = '';
   String translateText = '';
-  final StreamController<String> controller = StreamController<String>();
-
-  void setText(value) {
-    controller.add(value);
+  String listenText = '';
+  Future<void> setText(value) async {
+    final translateText = await translate(value);
+    controller.add(
+      TranslateController(rawText: value, translateText: translateText),
+    );
+    setState(() {
+      listenText = value;
+    });
   }
 
   @override
@@ -37,73 +42,91 @@ class _TranslateOCRScreenState extends State<TranslateOCRScreen> {
         child: Column(
           children: [
             ScalableOCR(
-                boxHeight: MediaQuery.of(context).size.height / 3,
+                boxHeight: MediaQuery.of(context).size.height / 2,
                 getRawData: (value) {
                   inspect(value);
                 },
                 getScannedText: (value) {
                   setText(value);
                 }),
-            StreamBuilder<String>(
-              stream: controller.stream,
-              builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-                final streamText = snapshot.data != null ? snapshot.data! : "";
-                text = streamText;
-                return Text("Readed text: $streamText");
-              },
-            ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
-              child: Center(
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    backgroundColor: Colors.blueAccent,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+              padding: const EdgeInsets.fromLTRB(0, 16, 0, 16),
+              child: StreamBuilder(
+                stream: controller.stream,
+                builder: (BuildContext context,
+                    AsyncSnapshot<TranslateController> snapshot) {
+                  if (snapshot.hasData) {
+                    final streamText = snapshot.data!.rawText;
+                    return Text(
+                      "Readed text: $streamText",
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                    );
+                  } else {
+                    return Container();
+                  }
+                },
+              ),
+            ),
+            IntrinsicHeight(
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Raw text',
+                          style: CustomTextStyle.boldStandard(),
+                        ),
+                        Text(rawText),
+                      ],
                     ),
                   ),
-                  child: Text(
-                    'Translate to Vietnamese',
-                    style: CustomTextStyle.boldStandard(
-                      color: TextColors.textWhite,
+                  VerticalDivider(
+                    color: TextColors.iconHighEm,
+                    thickness: 1,
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Translate text',
+                          style: CustomTextStyle.boldStandard(),
+                        ),
+                        Text(translateText),
+                      ],
                     ),
                   ),
-                  onPressed: () async {
-                    translateText = await translate(text);
-                    setState(() {});
-                  },
+                ],
+              ),
+            ),
+            TextButton(
+              style: TextButton.styleFrom(
+                backgroundColor: Colors.blueAccent,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              onPressed: () async {
+                rawText = listenText;
+                translateText = await translate(rawText);
+                setState(() {});
+              },
+              child: Text(
+                'Translate',
+                style: CustomTextStyle.boldStandard(
+                  color: TextColors.textWhite,
                 ),
               ),
             ),
-            if (translateText.isNotEmpty)
-              Text("Translate text: $translateText"),
           ],
         ),
       ),
     );
-  }
-
-  Future<String?> _textRecognition(File file) async {
-    final textRecognizer = TextRecognizer(script: TextRecognitionScript.latin);
-    final inputImage = InputImage.fromFile(file);
-    final RecognizedText recognizedText =
-        await textRecognizer.processImage(inputImage);
-    String text = recognizedText.text;
-    textRecognizer.close();
-    return text;
-    // for (TextBlock block in recognizedText.blocks) {
-    //   final Rect rect = block.boundingBox;
-    //   final List<Point<int>> cornerPoints = block.cornerPoints;
-    //   final String text = block.text;
-    //   final List<String> languages = block.recognizedLanguages;
-
-    //   for (TextLine line in block.lines) {
-    //     // Same getters as TextBlock
-    //     for (TextElement element in line.elements) {
-    //       // Same getters as TextBlock
-    //     }
-    //   }
-    // }
   }
 }
 
@@ -126,8 +149,8 @@ Future<String> translate(String text) async {
     final response = await RestApiHandlerData.getDynamic(
       path: path,
     );
-    logDebug('path: $path');
-    logDebug('response: ${response}');
+    // logDebug('path: $path');
+    // logDebug('response: $response');
     final data = response[0];
 
     data.forEach((element) {
@@ -136,6 +159,14 @@ Future<String> translate(String text) async {
   } catch (e) {
     result = text;
   }
-  logDebug('result: $result');
   return result;
+}
+
+class TranslateController {
+  final String rawText;
+  final String translateText;
+  TranslateController({
+    this.rawText = '',
+    this.translateText = '',
+  });
 }
