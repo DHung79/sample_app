@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../apis/database/user/user.dart';
 import '../../themes/theme_config.dart';
+import '../../widgets/layout_widgets/layout_scaffold.dart';
 import 'components/app_bar.dart';
 import 'components/user_card/user_card.dart';
 
@@ -53,7 +54,7 @@ class _UserScreenState extends State<UserScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return LayoutScaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: ColorPalettes.nWhite,
       appBar: const PreferredSize(

@@ -1,7 +1,6 @@
 library flutter_scalable_ocr;
 
 import 'dart:developer';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 // import 'package:satya_textocr/src_path/SatyaTextKit.dart';
@@ -85,9 +84,9 @@ class ScalableOCRState extends State<ScalableOCR> {
 
   @override
   Widget build(BuildContext context) {
-    double sizeH = MediaQuery.of(context).size.height / 100;
+    // double sizeH = MediaQuery.of(context).size.height / 100;
     return Padding(
-        padding: EdgeInsets.all(sizeH * 3),
+        padding: EdgeInsets.all(8),
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -96,14 +95,14 @@ class ScalableOCRState extends State<ScalableOCR> {
                       _controller?.value.isInitialized == false
                   ? Container(
                       width: MediaQuery.of(context).size.width,
-                      height: sizeH * 19,
+                      height: widget.boxHeight,
                       decoration: BoxDecoration(
                         color: Colors.grey,
                         borderRadius: BorderRadius.circular(17),
                       ),
                     )
                   : _liveFeedBody(),
-              SizedBox(height: sizeH * 2),
+              // SizedBox(height: sizeH * 2),
             ],
           ),
         ));
@@ -139,20 +138,21 @@ class ScalableOCRState extends State<ScalableOCR> {
                         scale: cameraController.value.aspectRatio /
                             previewAspectRatio,
                         child: Center(
-                          child: CameraPreview(cameraController, child:
-                              LayoutBuilder(builder: (BuildContext context,
-                                  BoxConstraints constraints) {
-                            maxWidth = constraints.maxWidth;
-                            maxHeight = constraints.maxHeight;
-
-                            return GestureDetector(
-                              behavior: HitTestBehavior.opaque,
-                              onScaleStart: _handleScaleStart,
-                              onScaleUpdate: _handleScaleUpdate,
-                              onTapDown: (TapDownDetails details) =>
-                                  onViewFinderTap(details, constraints),
-                            );
-                          })),
+                          child: CameraPreview(
+                            cameraController,
+                            child: LayoutBuilder(builder: (BuildContext context,
+                                BoxConstraints constraints) {
+                              maxWidth = constraints.maxWidth;
+                              maxHeight = constraints.maxHeight;
+                              return GestureDetector(
+                                behavior: HitTestBehavior.opaque,
+                                onScaleStart: _handleScaleStart,
+                                onScaleUpdate: _handleScaleUpdate,
+                                onTapDown: (TapDownDetails details) =>
+                                    onViewFinderTap(details, constraints),
+                              );
+                            }),
+                          ),
                         ),
                       ),
                     ),

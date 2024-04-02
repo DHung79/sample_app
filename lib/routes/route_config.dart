@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../modules/shop/shop_screen.dart';
 import '../modules/translate/translate_screen.dart';
 import '../utils/logger/logger.dart';
 import '../modules/coming_soon/coming_soon_screen.dart';
@@ -66,6 +67,26 @@ final GoRouter router = GoRouter(
               state: state,
               route: shippingRoute,
               child: const TranslateScreen(),
+            );
+          },
+        ),
+        GoRoute(
+          path: shopRoute,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return _screenFor(
+              state: state,
+              route: shopRoute,
+              child: const ShopScreen(),
+            );
+          },
+        ),
+        GoRoute(
+          path: friendsRoute,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return _screenFor(
+              state: state,
+              route: friendsRoute,
+              child: const ShopScreen(),
             );
           },
         ),

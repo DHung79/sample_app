@@ -18,6 +18,7 @@ class _TranslateOCRScreenState extends State<TranslateOCRScreen> {
   String rawText = '';
   String translateText = '';
   String listenText = '';
+  
   Future<void> setText(value) async {
     final translateText = await translate(value);
     controller.add(

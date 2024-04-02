@@ -30,7 +30,7 @@ class _SliderPlayerState extends State<SliderPlayer> {
     final screenSize = MediaQuery.of(context).size;
     final screenPadding = MediaQuery.of(context).padding;
     final playerHeight =
-        screenSize.height - screenPadding.top - screenPadding.bottom;
+        screenSize.height - screenPadding.top - screenPadding.bottom - 70;
     return CarouselSlider.builder(
       options: CarouselOptions(
         height: playerHeight,
@@ -46,6 +46,7 @@ class _SliderPlayerState extends State<SliderPlayer> {
         enlargeCenterPage: true,
         enlargeFactor: 0,
         onPageChanged: (index, reason) {},
+        padEnds: false,
         scrollDirection: Axis.vertical,
         scrollPhysics: _scrollable
             ? const NeverScrollableScrollPhysics()
@@ -118,25 +119,17 @@ class _SlideVideoState extends State<SlideVideo> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return Column(
       children: [
-        Column(
-          children: [
-            Expanded(
-              child: FlickMultiPlayer(
-                url: widget.item['trailer_url'],
-                flickMultiManager: widget.flickMultiManager,
-                cacheManager: widget.cacheManager,
-                isSlider: true,
-                image: widget.item['avatar'],
-              ),
-            ),
-            const SizedBox(
-              height: 60,
-            ),
-          ],
+        Expanded(
+          child: FlickMultiPlayer(
+            url: widget.item['trailer_url'],
+            flickMultiManager: widget.flickMultiManager,
+            cacheManager: widget.cacheManager,
+            isSlider: true,
+            image: widget.item['avatar'],
+          ),
         ),
-        _commentField(),
       ],
     );
   }

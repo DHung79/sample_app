@@ -566,26 +566,19 @@ class CustomButtonStyle {
               });
             });
           },
-          child: Row(
-            mainAxisSize: mainAxisSize,
-            children: [
-              if (!textOnRight && textWidget != null) textWidget,
-              Padding(
-                padding: iconPadding ?? const EdgeInsets.all(8),
-                child: svgIcon != null
-                    ? SvgIcon(
-                        svgIcon,
-                        color: iconColor ?? TextColors.iconHighEm,
-                        size: iconSize,
-                      )
-                    : Icon(
-                        icon,
-                        color: iconColor ?? TextColors.iconHighEm,
-                        size: iconSize,
-                      ),
-              ),
-              if (textOnRight && textWidget != null) textWidget,
-            ],
+          child: Padding(
+            padding: iconPadding ?? const EdgeInsets.all(8),
+            child: svgIcon != null
+                ? SvgIcon(
+                    svgIcon,
+                    color: iconColor ?? TextColors.iconHighEm,
+                    size: iconSize,
+                  )
+                : Icon(
+                    icon,
+                    color: iconColor ?? TextColors.iconHighEm,
+                    size: iconSize,
+                  ),
           ),
         ),
       );
