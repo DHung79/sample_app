@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../../routes/route_names.dart';
 import '../../themes/theme_config.dart';
 import '../../widgets/layout_widgets/layout_app_bar.dart';
-import '../../widgets/layout_widgets/layout_scaffold.dart';
 import 'components/bank_dialog.dart';
 import 'pages/translate_img_screen.dart';
 import 'pages/translate_ocr_screen.dart';
@@ -59,7 +58,7 @@ class TranslateScreen extends StatelessWidget {
                     context: context,
                     transitionDuration: 350,
                     tween: NavigatorStyle.pushRight,
-                    toScreen: const LayoutScaffold(
+                    toScreen: const Scaffold(
                       body: SafeArea(
                         child: TranslateImgScreen(),
                       ),
@@ -82,7 +81,7 @@ class TranslateScreen extends StatelessWidget {
                     context: context,
                     transitionDuration: 350,
                     tween: NavigatorStyle.pushRight,
-                    toScreen: const LayoutScaffold(
+                    toScreen: const Scaffold(
                       body: SafeArea(
                         child: TranslateOCRScreen(),
                       ),
@@ -111,9 +110,7 @@ class TranslateScreen extends StatelessWidget {
               size: 32,
             ),
             onTap: () {
-              context.go(
-                '/$homeRoute',
-              );
+              context.go(homeRoute);
             },
           ),
           Expanded(

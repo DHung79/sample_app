@@ -24,19 +24,19 @@ class ButtonIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: color,
-        border: Border.all(
-          color: borderColor ?? ColorPalettes.transparent,
-          width: 1,
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        decoration: BoxDecoration(
+          color: color,
+          border: Border.all(
+            color: borderColor ?? ColorPalettes.transparent,
+            width: 1,
+          ),
+          borderRadius: BorderRadius.circular(radius),
+          boxShadow: boxShadow,
+          shape: shape,
         ),
-        borderRadius: BorderRadius.circular(radius),
-        boxShadow: boxShadow,
-        shape: shape,
-      ),
-      child: InkWell(
-        onTap: onTap,
         child: child,
       ),
     );

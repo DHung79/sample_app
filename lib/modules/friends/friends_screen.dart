@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../themes/theme_config.dart';
 
-class ShopScreen extends StatelessWidget {
-  const ShopScreen({super.key});
+class FriendsScreen extends StatelessWidget {
+  const FriendsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +11,6 @@ class ShopScreen extends StatelessWidget {
       backgroundColor: Colors.blueAccent,
       body: SafeArea(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(
@@ -20,7 +19,7 @@ class ShopScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Shop',
+                    'Friends',
                     style: GGTextStyle.h2Bold(
                       color: TextColors.textWhite,
                     ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:sample_app/routes/route_names.dart';
 import '../../../../themes/theme_config.dart';
 
 class FeedPlayerAppBar extends StatelessWidget {
@@ -22,7 +22,7 @@ class FeedPlayerAppBar extends StatelessWidget {
               _appBarButton(
                 icon: Icons.arrow_back_ios_new_rounded,
                 onTap: () {
-                  context.pop();
+                  context.go(homeRoute);
                 },
               ),
               Expanded(

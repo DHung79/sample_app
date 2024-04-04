@@ -1,118 +1,124 @@
 import 'package:flutter/material.dart';
-import 'package:sample_app/themes/theme_config.dart';
-
-import '../../routes/route_names.dart';
+import '../../themes/theme_config.dart';
 import '../button_widgets/button_icon.dart';
 
 class BottomNavBar extends StatefulWidget {
-  const BottomNavBar({super.key});
+  final List<BottomNavBarItem> tabs;
+  final double height;
+  const BottomNavBar({
+    super.key,
+    required this.tabs,
+    this.height = 70,
+  });
 
   @override
   State<BottomNavBar> createState() => _BottomNavBarState();
 }
 
-class _BottomNavBarState extends State<BottomNavBar> {
-  final lightTheme = [
-    '/$shopRoute',
-    '/$userRoute',
-    '/$messageRoute',
-  ];
-
-  BottomBarTheme theme = BottomBarTheme.init();
-
-  _getBottomBarTheme() {
-    if (lightTheme.contains(currentRoute)) {
-      theme = BottomBarTheme.light();
-    } else {
-      theme = BottomBarTheme.dark();
-    }
-  }
+class _BottomNavBarState extends State<BottomNavBar>
+    with TickerProviderStateMixin {
+  late final TabController _tabController;
 
   @override
   void initState() {
-    Future.delayed(const Duration(milliseconds: 50), () {
-      _getBottomBarTheme();
-      setState(() {});
-    });
-
+    _tabController = TabController(
+      length: widget.tabs.length,
+      vsync: this,
+    );
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     final bottomPadding = MediaQuery.of(context).padding.bottom;
+    final backgroudColor =
+        widget.tabs[_tabController.index].theme.backgroudColor;
     return AnimatedContainer(
       duration: const Duration(milliseconds: 500),
-      color: theme.backgroudColor,
+      decoration: BoxDecoration(
+        color: backgroudColor,
+        boxShadow: [BoxShadowStyle.bottomSheet],
+      ),
       child: Padding(
         padding: EdgeInsets.fromLTRB(0, 0, 0, bottomPadding),
         child: Column(
           children: [
             SizedBox(
-              height: 70,
+              height: widget.height,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  BottomNavBarItem(
-                    theme: theme,
-                    title: 'Home',
-                    icon: Icons.home,
-                    outlineIcon: Icons.home_outlined,
-                    routes: const [
-                      '/$homeRoute',
-                      initialRoute,
-                      '/$feedRoute',
-                    ],
-                    onTap: () {
-                      context.go('/$feedRoute');
-                    },
-                  ),
-                  BottomNavBarItem(
-                    theme: theme,
-                    title: 'Shop',
-                    icon: Icons.shopping_bag,
-                    outlineIcon: Icons.shopping_bag_outlined,
-                    routes: const [
-                      '/$shopRoute',
-                    ],
-                    onTap: () {
-                      setState(() {
-                        context.go('/$shopRoute');
-                      });
-                    },
-                  ),
-                  BottomNavBarItem(
-                    theme: theme,
-                    title: 'Friends',
-                    icon: Icons.people,
-                    outlineIcon: Icons.people_outline,
-                    routes: const [
-                      '/$friendsRoute',
-                    ],
-                    onTap: () {
-                      setState(() {
-                        context.go('/$friendsRoute');
-                      });
-                    },
-                  ),
-                  BottomNavBarItem(
-                    theme: theme,
-                    title: 'User',
-                    icon: Icons.person,
-                    outlineIcon: Icons.person_outline,
-                    routes: const [
-                      '/$userRoute',
-                    ],
-                    onTap: () {
-                      setState(() {
-                        context.go('/$userRoute');
-                      });
-                    },
-                  ),
+                  for (var tab in widget.tabs)
+                    BottomBarItemWidget(
+                      item: tab,
+                      isActive:
+                          _tabController.index == widget.tabs.indexOf(tab),
+                      onTap: () {
+                        setState(() {
+                          _tabController.index = widget.tabs.indexOf(tab);
+                          tab.onTap();
+                        });
+                      },
+                    ),
                 ],
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class BottomBarItemWidget extends StatelessWidget {
+  final BottomNavBarItem item;
+  final bool isActive;
+  final Function() onTap;
+  const BottomBarItemWidget({
+    super.key,
+    required this.item,
+    required this.isActive,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = item.theme;
+    final buttonIcon = isActive ? item.icon : item.outlineIcon;
+    final buttonIconColor =
+        isActive ? theme.iconSelectedColor : theme.iconUnselectColor;
+    final buttonTextStyle =
+        isActive ? theme.textSelectedStyle : theme.textUnselectStyle;
+    return AnimatedSwitcher(
+      transitionBuilder: (child, animation) {
+        return FadeTransition(
+          opacity: animation,
+          child: child,
+        );
+      },
+      duration: const Duration(milliseconds: 500),
+      child: ButtonIcon(
+        key: ValueKey(isActive),
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+          child: Column(
+            children: [
+              Icon(
+                buttonIcon,
+                color: buttonIconColor,
+                size: 24,
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 2, 0, 0),
+                child: Text(
+                  item.title,
+                  style: buttonTextStyle,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -135,13 +141,13 @@ class BottomBarTheme {
   static BottomBarTheme init() {
     return BottomBarTheme(
       backgroudColor: ColorPalettes.g500,
-      iconSelectedColor: ColorPalettes.transparent,
+      iconSelectedColor: ColorPalettes.oGreen3,
       textSelectedStyle: CustomTextStyle.boldSub(
-        color: ColorPalettes.transparent,
+        color: ColorPalettes.oGreen3,
       ),
-      iconUnselectColor: ColorPalettes.transparent,
+      iconUnselectColor: ColorPalettes.oGreen3,
       textUnselectStyle: CustomTextStyle.mediumSub(
-        color: ColorPalettes.transparent,
+        color: ColorPalettes.oGreen3,
       ),
     );
   }
@@ -175,52 +181,18 @@ class BottomBarTheme {
   }
 }
 
-class BottomNavBarItem extends StatelessWidget {
+class BottomNavBarItem {
+  final BottomBarTheme theme;
   final String title;
   final IconData? icon;
   final IconData? outlineIcon;
-  final List<String> routes;
-  final Function()? onTap;
-  final BottomBarTheme theme;
-  const BottomNavBarItem({
-    super.key,
+  final Function() onTap;
+
+  BottomNavBarItem({
+    required this.theme,
     required this.title,
     this.icon,
     this.outlineIcon,
-    required this.routes,
-    this.onTap,
-    required this.theme,
+    required this.onTap,
   });
-
-  @override
-  Widget build(BuildContext context) {
-    final isActive = routes.contains(currentRoute);
-
-    return ButtonIcon(
-      onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-        child: Column(
-          children: [
-            Icon(
-              isActive ? icon : outlineIcon,
-              color:
-                  isActive ? theme.iconSelectedColor : theme.iconUnselectColor,
-              size: 24,
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 2, 0, 0),
-              child: Text(
-                title,
-                style: isActive
-                    ? theme.textSelectedStyle
-                    : theme.textUnselectStyle,
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 }

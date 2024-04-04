@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import 'bottom_nav_bar.dart';
 
 class LayoutScaffold extends StatelessWidget {
   final Widget? appBar;
   final bool? resizeToAvoidBottomInset;
   final Color? backgroundColor;
   final Widget body;
+  final Widget? bottomNavigationBar;
   const LayoutScaffold({
     super.key,
     this.appBar,
     this.resizeToAvoidBottomInset,
     this.backgroundColor,
     required this.body,
+    this.bottomNavigationBar,
   });
 
   @override
@@ -25,17 +26,8 @@ class LayoutScaffold extends StatelessWidget {
               child: appBar!,
             )
           : null,
-      body: Stack(
-        children: [
-          body,
-          const Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              BottomNavBar(),
-            ],
-          )
-        ],
-      ),
+      body: body,
+      bottomNavigationBar: bottomNavigationBar,
     );
   }
 }

@@ -12,7 +12,7 @@ class ComingSoonAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final statusBarHeight = MediaQuery.of(context).viewPadding.top;
-    const String goToHomeRoute = '/$homeRoute';
+    // const String goToHomeRoute = '/$homeRoute';
     return AppBar(
       automaticallyImplyLeading: false,
       backgroundColor: Colors.blueAccent,
@@ -30,10 +30,8 @@ class ComingSoonAppBar extends StatelessWidget {
                     .currentConfiguration
                     .uri
                     .toString();
-                if (currentRoute != goToHomeRoute) {
-                  context.go(
-                    goToHomeRoute,
-                  );
+                if (currentRoute != homeRoute) {
+                  context.go(homeRoute);
                 } else {
                   context.pop();
                 }

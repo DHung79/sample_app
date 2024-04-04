@@ -25,19 +25,25 @@ class HomeScreen extends StatelessWidget {
                 _navigaterButton(
                   name: 'List User Sample',
                   onPressed: () {
-                    context.go('/$userRoute');
+                    context.go(userRoute);
                   },
                 ),
                 _navigaterButton(
                   name: 'Feed Sample',
                   onPressed: () {
-                    context.go('/$feedRoute');
+                    context.go(feedRoute);
                   },
                 ),
                 _navigaterButton(
                   name: 'Translate Sample',
                   onPressed: () {
-                    context.go('/$shippingRoute');
+                    context.go(shippingRoute);
+                  },
+                ),
+                _navigaterButton(
+                  name: 'VK App',
+                  onPressed: () {
+                    context.go(vkAppRoute);
                   },
                 ),
               ],

@@ -1,9 +1,9 @@
-import 'dart:math';
+// import 'dart:math';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-import '../../../../themes/theme_config.dart';
-import '../../../../widgets/image_widgets/img_from_url.dart';
+// import '../../../../themes/theme_config.dart';
+// import '../../../../widgets/image_widgets/img_from_url.dart';
 import '../../components/multi_manager/flick_multi_manager.dart';
 import '../../components/multi_manager/flick_multi_player.dart';
 
@@ -89,11 +89,11 @@ class SlideVideo extends StatefulWidget {
 }
 
 class _SlideVideoState extends State<SlideVideo> {
-  final _commentController = TextEditingController();
+  // final _commentController = TextEditingController();
   final _focus = FocusNode();
-  bool _showComments = false;
-  final _formKey = GlobalKey<FormState>();
-  double _keyboardHeight = 0;
+  // bool _showComments = false;
+  // final _formKey = GlobalKey<FormState>();
+  // double _keyboardHeight = 0;
 
   @override
   void initState() {
@@ -111,7 +111,7 @@ class _SlideVideoState extends State<SlideVideo> {
   _onFocus() {
     setState(() {
       if (_focus.hasFocus) {
-        _showComments = true;
+        // _showComments = true;
         widget.onFocus();
       }
     });
@@ -134,186 +134,186 @@ class _SlideVideoState extends State<SlideVideo> {
     );
   }
 
-  Widget _commentField() {
-    final screenSize = MediaQuery.of(context).size;
-    if (MediaQuery.of(context).viewInsets.bottom >= _keyboardHeight) {
-      _keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
-    }
-    const double inputHeight = 60;
-    double commentPadding =
-        _focus.hasFocus ? _keyboardHeight + inputHeight : inputHeight;
-    double inputPadding = _focus.hasFocus ? _keyboardHeight : 0;
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        if (_showComments)
-          Expanded(
-            child: GestureDetector(
-              onTap: () {
-                setState(() {
-                  if (_focus.hasFocus) {
-                    _focus.unfocus();
-                  }
-                  _showComments = false;
-                });
-              },
-            ),
-          ),
-        SizedBox(
-          height: 230 + _keyboardHeight,
-          child: Stack(
-            alignment: AlignmentDirectional.bottomCenter,
-            children: [
-              if (_showComments)
-                Container(
-                  color: Colors.white,
-                  child: ListView.separated(
-                    padding: EdgeInsets.fromLTRB(16, 16, 16, commentPadding),
-                    itemCount: 10,
-                    separatorBuilder: (BuildContext context, int index) {
-                      return const SizedBox(
-                        height: 16,
-                      );
-                    },
-                    itemBuilder: (BuildContext context, int index) {
-                      return _comment();
-                    },
-                  ),
-                ),
-              Padding(
-                padding: EdgeInsets.fromLTRB(0, 0, 0, inputPadding),
-                child: Container(
-                  key: _formKey,
-                  height: inputHeight,
-                  width: screenSize.width,
-                  color: Colors.white,
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
-                    child: FormFieldText(
-                      focusNode: _focus,
-                      contentPadding: const EdgeInsets.fromLTRB(16, 10, 20, 10),
-                      hasValidate: false,
-                      hintText: 'Type your comment',
-                      keyboardType: TextInputType.text,
-                      controller: _commentController,
-                      maxLength: 50,
-                      onSaved: (value) {
-                        _commentController.text = value!.trim();
-                      },
-                      onChanged: (value) {},
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
+  // Widget _commentField() {
+  //   final screenSize = MediaQuery.of(context).size;
+  //   if (MediaQuery.of(context).viewInsets.bottom >= _keyboardHeight) {
+  //     _keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
+  //   }
+  //   const double inputHeight = 60;
+  //   double commentPadding =
+  //       _focus.hasFocus ? _keyboardHeight + inputHeight : inputHeight;
+  //   double inputPadding = _focus.hasFocus ? _keyboardHeight : 0;
+  //   return Column(
+  //     mainAxisAlignment: MainAxisAlignment.end,
+  //     children: [
+  //       if (_showComments)
+  //         Expanded(
+  //           child: GestureDetector(
+  //             onTap: () {
+  //               setState(() {
+  //                 if (_focus.hasFocus) {
+  //                   _focus.unfocus();
+  //                 }
+  //                 _showComments = false;
+  //               });
+  //             },
+  //           ),
+  //         ),
+  //       SizedBox(
+  //         height: 230 + _keyboardHeight,
+  //         child: Stack(
+  //           alignment: AlignmentDirectional.bottomCenter,
+  //           children: [
+  //             if (_showComments)
+  //               Container(
+  //                 color: Colors.white,
+  //                 child: ListView.separated(
+  //                   padding: EdgeInsets.fromLTRB(16, 16, 16, commentPadding),
+  //                   itemCount: 10,
+  //                   separatorBuilder: (BuildContext context, int index) {
+  //                     return const SizedBox(
+  //                       height: 16,
+  //                     );
+  //                   },
+  //                   itemBuilder: (BuildContext context, int index) {
+  //                     return _comment();
+  //                   },
+  //                 ),
+  //               ),
+  //             Padding(
+  //               padding: EdgeInsets.fromLTRB(0, 0, 0, inputPadding),
+  //               child: Container(
+  //                 key: _formKey,
+  //                 height: inputHeight,
+  //                 width: screenSize.width,
+  //                 color: Colors.white,
+  //                 child: Padding(
+  //                   padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
+  //                   child: FormFieldText(
+  //                     focusNode: _focus,
+  //                     contentPadding: const EdgeInsets.fromLTRB(16, 10, 20, 10),
+  //                     hasValidate: false,
+  //                     hintText: 'Type your comment',
+  //                     keyboardType: TextInputType.text,
+  //                     controller: _commentController,
+  //                     maxLength: 50,
+  //                     onSaved: (value) {
+  //                       _commentController.text = value!.trim();
+  //                     },
+  //                     onChanged: (value) {},
+  //                   ),
+  //                 ),
+  //               ),
+  //             ),
+  //           ],
+  //         ),
+  //       ),
+  //     ],
+  //   );
+  // }
 
-  Widget _comment() {
-    final now = DateTime.now();
-    final randomSeconds = Random().nextInt(24 * 60 * 60);
-    final postTime = now.subtract(
-      Duration(
-        seconds: randomSeconds,
-      ),
-    );
+  // Widget _comment() {
+  //   final now = DateTime.now();
+  //   final randomSeconds = Random().nextInt(24 * 60 * 60);
+  //   final postTime = now.subtract(
+  //     Duration(
+  //       seconds: randomSeconds,
+  //     ),
+  //   );
 
-    double imgSize = 40;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ClipOval(
-                child: ImgFromUrl(
-                  url: widget.item['avatar'],
-                  width: imgSize,
-                  height: imgSize,
-                  placeholder: Container(
-                    color: ColorPalettes.g100,
-                    width: imgSize,
-                    height: imgSize,
-                    child: Center(
-                      child: Icon(
-                        Icons.person,
-                        size: 40,
-                        color: TextColors.iconHighEm,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          color: ColorPalettes.pBlue,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.fromLTRB(12, 4, 12, 8),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(0, 0, 0, 2),
-                                child: Text(
-                                  'User Avatar',
-                                  style: CustomTextStyle.boldBody(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                              Text(
-                                widget.item['title'],
-                                style: CustomTextStyle.mediumBody(
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            timeAgoFromNow(
-                              postTime,
-                              context,
-                            ),
-                            style: CustomTextStyle.mediumBody(
-                              color: TextColors.iconHighEm,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(4, 0, 4, 0),
-                            child: Icon(
-                              Icons.public_outlined,
-                              color: TextColors.iconHighEm,
-                              size: 16,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
+  //   double imgSize = 40;
+  //   return Column(
+  //     crossAxisAlignment: CrossAxisAlignment.start,
+  //     mainAxisSize: MainAxisSize.min,
+  //     children: [
+  //       Padding(
+  //         padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
+  //         child: Row(
+  //           crossAxisAlignment: CrossAxisAlignment.start,
+  //           children: [
+  //             ClipOval(
+  //               child: ImgFromUrl(
+  //                 url: widget.item['avatar'],
+  //                 width: imgSize,
+  //                 height: imgSize,
+  //                 placeholder: Container(
+  //                   color: ColorPalettes.g100,
+  //                   width: imgSize,
+  //                   height: imgSize,
+  //                   child: Center(
+  //                     child: Icon(
+  //                       Icons.person,
+  //                       size: 40,
+  //                       color: TextColors.iconHighEm,
+  //                     ),
+  //                   ),
+  //                 ),
+  //               ),
+  //             ),
+  //             Expanded(
+  //               child: Padding(
+  //                 padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+  //                 child: Column(
+  //                   crossAxisAlignment: CrossAxisAlignment.start,
+  //                   children: [
+  //                     Container(
+  //                       decoration: BoxDecoration(
+  //                         color: ColorPalettes.pBlue,
+  //                         borderRadius: BorderRadius.circular(12),
+  //                       ),
+  //                       child: Padding(
+  //                         padding: const EdgeInsets.fromLTRB(12, 4, 12, 8),
+  //                         child: Column(
+  //                           crossAxisAlignment: CrossAxisAlignment.start,
+  //                           children: [
+  //                             Padding(
+  //                               padding: const EdgeInsets.fromLTRB(0, 0, 0, 2),
+  //                               child: Text(
+  //                                 'User Avatar',
+  //                                 style: CustomTextStyle.boldBody(
+  //                                   color: Colors.white,
+  //                                 ),
+  //                               ),
+  //                             ),
+  //                             Text(
+  //                               widget.item['title'],
+  //                               style: CustomTextStyle.mediumBody(
+  //                                 color: Colors.white,
+  //                               ),
+  //                             ),
+  //                           ],
+  //                         ),
+  //                       ),
+  //                     ),
+  //                     Row(
+  //                       children: [
+  //                         Text(
+  //                           timeAgoFromNow(
+  //                             postTime,
+  //                             context,
+  //                           ),
+  //                           style: CustomTextStyle.mediumBody(
+  //                             color: TextColors.iconHighEm,
+  //                           ),
+  //                         ),
+  //                         Padding(
+  //                           padding: const EdgeInsets.fromLTRB(4, 0, 4, 0),
+  //                           child: Icon(
+  //                             Icons.public_outlined,
+  //                             color: TextColors.iconHighEm,
+  //                             size: 16,
+  //                           ),
+  //                         ),
+  //                       ],
+  //                     ),
+  //                   ],
+  //                 ),
+  //               ),
+  //             ),
+  //           ],
+  //         ),
+  //       ),
+  //     ],
+  //   );
+  // }
 }

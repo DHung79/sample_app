@@ -27,9 +27,7 @@ class UserAppBar extends StatelessWidget {
               //   shape: BoxShape.circle,
               // ),
               ontap: () {
-                context.go(
-                  '/$homeRoute',
-                );
+                context.go(homeRoute);
               },
             ),
             Expanded(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../modules/shop/shop_screen.dart';
 import '../modules/translate/translate_screen.dart';
+import '../modules/vk_app/vk_app_screen.dart';
 import '../utils/logger/logger.dart';
 import '../modules/coming_soon/coming_soon_screen.dart';
 import '../modules/feed/feed_screen.dart';
@@ -9,88 +9,76 @@ import '../modules/user/user_screen.dart';
 import '../modules/splash/splash_screen.dart';
 import 'route_names.dart';
 
-String currentRoute = '';
-String previousRoute = '';
-
+final navigatorKey = GlobalKey<NavigatorState>();
 final GoRouter router = GoRouter(
+  navigatorKey: navigatorKey,
   routes: <RouteBase>[
     GoRoute(
+      name: initialRoute,
       path: initialRoute,
       builder: (BuildContext context, GoRouterState state) {
-        if (currentRoute != previousRoute) {
-          previousRoute = currentRoute;
-        }
-        currentRoute = state.uri.toString();
-        // logDebug('previousRoute: $previousRoute');
-        // logDebug('currentRoute: $currentRoute');
-        if (previousRoute.isEmpty) {
+        final currentRoute = state.uri.toString();
+        if (currentRoute == initialRoute) {
           return const SplashScreen();
         } else {
           return const HomeScreen();
         }
       },
-      routes: <RouteBase>[
-        GoRoute(
-          path: homeRoute,
-          pageBuilder: (BuildContext context, GoRouterState state) {
-            return _screenFor(
-              state: state,
-              route: homeRoute,
-              child: const HomeScreen(),
-            );
-          },
-        ),
-        GoRoute(
-          path: userRoute,
-          pageBuilder: (BuildContext context, GoRouterState state) {
-            return _screenFor(
-              state: state,
-              route: userRoute,
-              child: const UserScreen(),
-            );
-          },
-        ),
-        GoRoute(
-          path: feedRoute,
-          pageBuilder: (BuildContext context, GoRouterState state) {
-            return _screenFor(
-              state: state,
-              route: feedRoute,
-              child: const FeedScreen(),
-            );
-          },
-        ),
-        GoRoute(
-          path: shippingRoute,
-          pageBuilder: (BuildContext context, GoRouterState state) {
-            return _screenFor(
-              state: state,
-              route: shippingRoute,
-              child: const TranslateScreen(),
-            );
-          },
-        ),
-        GoRoute(
-          path: shopRoute,
-          pageBuilder: (BuildContext context, GoRouterState state) {
-            return _screenFor(
-              state: state,
-              route: shopRoute,
-              child: const ShopScreen(),
-            );
-          },
-        ),
-        GoRoute(
-          path: friendsRoute,
-          pageBuilder: (BuildContext context, GoRouterState state) {
-            return _screenFor(
-              state: state,
-              route: friendsRoute,
-              child: const ShopScreen(),
-            );
-          },
-        ),
-      ],
+    ),
+    GoRoute(
+      name: homeRoute,
+      path: homeRoute,
+      pageBuilder: (BuildContext context, GoRouterState state) {
+        return _screenFor(
+          state: state,
+          route: homeRoute,
+          child: const HomeScreen(),
+        );
+      },
+    ),
+    GoRoute(
+      name: userRoute,
+      path: userRoute,
+      pageBuilder: (BuildContext context, GoRouterState state) {
+        return _screenFor(
+          state: state,
+          route: userRoute,
+          child: const UserScreen(),
+        );
+      },
+    ),
+    GoRoute(
+      name: feedRoute,
+      path: feedRoute,
+      pageBuilder: (BuildContext context, GoRouterState state) {
+        return _screenFor(
+          state: state,
+          route: feedRoute,
+          child: const FeedScreen(),
+        );
+      },
+    ),
+    GoRoute(
+      name: shippingRoute,
+      path: shippingRoute,
+      pageBuilder: (BuildContext context, GoRouterState state) {
+        return _screenFor(
+          state: state,
+          route: shippingRoute,
+          child: const TranslateScreen(),
+        );
+      },
+    ),
+    GoRoute(
+      name: vkAppRoute,
+      path: vkAppRoute,
+      pageBuilder: (BuildContext context, GoRouterState state) {
+        return _screenFor(
+          state: state,
+          route: vkAppRoute,
+          child: const VKAppScreen(),
+        );
+      },
     ),
   ],
   errorBuilder: (context, state) {
