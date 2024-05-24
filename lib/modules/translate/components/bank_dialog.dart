@@ -1,12 +1,13 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import '../../../apis/configs/rest/models/rest_api_response.dart';
 import '../../../apis/database/bank/bank.dart';
 import '../../../apis/configs/rest/rest_api_handler_data.dart';
 import '../../../themes/theme_config.dart';
 import '../../../widgets/image_widgets/img_from_url.dart';
 
 class BankDialog extends StatelessWidget {
-  const BankDialog({super.key});
+  const BankDialog({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class BankDialog extends StatelessWidget {
 }
 
 class BankListView extends StatefulWidget {
-  const BankListView({super.key});
+  const BankListView({Key? key}) : super(key: key);
 
   @override
   State<BankListView> createState() => _BankListViewState();
@@ -54,7 +55,7 @@ class _BankListViewState extends State<BankListView> {
         minWidth: dialogWidth,
         maxWidth: dialogWidth,
       ),
-      child: StreamBuilder(
+      child: StreamBuilder<ApiResponse<ListBankModel?>>(
         stream: _bankBloc.allData,
         builder: (context, snapshot) {
           if (snapshot.hasData) {

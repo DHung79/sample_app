@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../themes/theme_config.dart';
 
 class HighlightText extends StatefulWidget {
@@ -13,7 +14,7 @@ class HighlightText extends StatefulWidget {
   final TextAlign textAlign;
   final bool isSelectable;
   const HighlightText({
-    super.key,
+    Key? key,
     this.backgroundColor,
     required this.text,
     required this.textStyle,
@@ -24,7 +25,7 @@ class HighlightText extends StatefulWidget {
     this.highlightWithoutCase = true,
     this.textAlign = TextAlign.start,
     this.isSelectable = false,
-  });
+  }) : super(key: key);
 
   @override
   State<HighlightText> createState() => _HighlightTextState();
@@ -35,8 +36,6 @@ class _HighlightTextState extends State<HighlightText> {
   Widget build(BuildContext context) {
     return widget.isSelectable
         ? SelectableText.rich(
-            maxLines: widget.maxLines,
-            textAlign: widget.textAlign,
             TextSpan(
               children: highlightText(
                 source: widget.text,
@@ -47,6 +46,8 @@ class _HighlightTextState extends State<HighlightText> {
               style: widget.textStyle ??
                   CustomTextStyle.regularSub(color: ColorPalettes.g600),
             ),
+            maxLines: widget.maxLines,
+            textAlign: widget.textAlign,
           )
         : RichText(
             maxLines: widget.maxLines,
@@ -122,7 +123,7 @@ class JTHighlightTexts extends StatefulWidget {
   final bool highlightWithoutCase;
   final TextAlign textAlign;
   const JTHighlightTexts({
-    super.key,
+    Key? key,
     this.backgroundColor,
     required this.text,
     required this.textStyle,
@@ -132,7 +133,7 @@ class JTHighlightTexts extends StatefulWidget {
     this.overflow = TextOverflow.clip,
     this.highlightWithoutCase = true,
     this.textAlign = TextAlign.start,
-  });
+  }) : super(key: key);
 
   @override
   State<JTHighlightTexts> createState() => _JTHighlightTextsState();
@@ -152,8 +153,8 @@ class _JTHighlightTextsState extends State<JTHighlightTexts> {
               CustomTextStyle.regularSub(color: ColorPalettes.g800),
           highlightWithoutCase: widget.highlightWithoutCase,
         ),
-        style:
-            widget.textStyle ?? CustomTextStyle.regularSub(color: ColorPalettes.g600),
+        style: widget.textStyle ??
+            CustomTextStyle.regularSub(color: ColorPalettes.g600),
       ),
     );
   }
@@ -232,7 +233,8 @@ class _JTHighlightTextsState extends State<JTHighlightTexts> {
             TextSpan(
               text: text,
               style: highlightStyle?.copyWith(
-                backgroundColor: widget.backgroundColor ?? ColorPalettes.oYellow1,
+                backgroundColor:
+                    widget.backgroundColor ?? ColorPalettes.oYellow1,
               ),
             ),
           );

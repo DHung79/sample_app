@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:visibility_detector/visibility_detector.dart';
+
 import '../../components/multi_manager/flick_multi_manager.dart';
 import '../../packages/mock_data.dart';
 import '../player_style/post_player.dart';
@@ -9,9 +10,9 @@ import '../player_style/slider_player.dart';
 class FeedPlayer extends StatefulWidget {
   final bool isSlider;
   const FeedPlayer({
-    super.key,
+    Key? key,
     this.isSlider = true,
-  });
+  }) : super(key: key);
 
   @override
   State<FeedPlayer> createState() => _FeedPlayerState();

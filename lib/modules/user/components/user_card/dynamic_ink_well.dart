@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class DynamicInkWell extends StatefulWidget {
   const DynamicInkWell({
+    Key? key,
     required this.child,
     required this.onTap,
-    super.key,
-  });
+  }) : super(key: key);
 
   final Widget Function(bool tappedDown) child;
   final Function() onTap;

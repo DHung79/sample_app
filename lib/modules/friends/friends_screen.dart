@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../themes/theme_config.dart';
 
 class FriendsScreen extends StatelessWidget {
-  const FriendsScreen({super.key});
+  const FriendsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

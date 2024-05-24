@@ -24,7 +24,7 @@ final List<Locale> supportedLocales = <Locale>[
 Locale currentLocale = supportedLocales[0];
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -5,10 +5,10 @@ import 'package:provider/provider.dart';
 /// Returns a text widget with left duration of the video.
 class PlayedTime extends StatelessWidget {
   const PlayedTime({
-    super.key,
+    Key? key,
     this.fontSize,
     this.color,
-  });
+  }) : super(key: key);
 
   final double? fontSize;
   final Color? color;

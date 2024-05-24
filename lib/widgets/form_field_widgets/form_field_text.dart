@@ -1,150 +1,103 @@
 import 'package:control_style/control_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../text_widgets/highlight_text.dart';
+
 import '../../themes/theme_config.dart';
+import '../text_widgets/highlight_text.dart';
 
 class FormFieldText extends StatelessWidget {
+  final bool? enabled;
+  final bool readOnly;
+  final FocusNode? focusNode;
+  final bool autofocus;
+  final int maxLines;
+  final int? minLines;
+  final int? maxLength;
   final TextEditingController? controller;
+  final String? Function(String?)? validator;
   final TextInputType? keyboardType;
   final List<TextInputFormatter>? inputFormatters;
   final TextInputAction? textInputAction;
-  final Function(String?)? onSaved;
-  final Function(String)? onChanged;
-  final String? Function(String?)? validator;
-  final bool isPassword;
   final bool obscureText;
-  final Function()? passwordIconOnPressed;
+  final EdgeInsets scrollPadding;
+  final TextStyle? style;
+  final Color? fillColor;
+  final String? counterText;
+  final EdgeInsetsGeometry? contentPadding;
+  final Widget? prefixIcon;
+  final Widget? suffixIcon;
   final String? hintText;
   final TextStyle? hintStyle;
-  final Widget? prefixIconWidget;
-  final SvgIconData? prefixIcon;
-  final Color? prefixIconColor;
-  final Color? prefixIconFocusColor;
   final bool isUnderLineBorder;
   final bool disableError;
-  final bool readOnly;
-  final EdgeInsetsGeometry prefixIconPadding;
-  final TextStyle? style;
-  final int? minLines;
-  final int maxLines;
-  final EdgeInsetsGeometry? contentPadding;
-  final Color? fillColor;
+  final Function(String?)? onSaved;
+  final Function(String)? onChanged;
   final Function(String)? onFieldSubmitted;
-  final Widget? suffixIcon;
-  final int? maxLength;
-  final bool hasValidate;
-  final Widget? validateIcon;
-  final FocusNode? focusNode;
-  final EdgeInsets scrollPadding;
-  final bool? enabled;
-  final bool showCounter;
-  final bool autofocus;
   const FormFieldText({
-    super.key,
+    Key? key,
+    this.enabled,
+    this.readOnly = false,
+    this.focusNode,
+    this.autofocus = false,
+    this.maxLines = 1,
+    this.minLines,
+    this.maxLength,
     this.controller,
+    this.validator,
     this.keyboardType,
     this.inputFormatters,
     this.textInputAction,
-    this.onSaved,
-    this.onChanged,
-    this.validator,
-    this.isPassword = false,
     this.obscureText = false,
-    this.passwordIconOnPressed,
+    this.scrollPadding = const EdgeInsets.all(20.0),
+    this.style,
+    this.fillColor,
+    this.counterText,
+    this.contentPadding,
+    this.prefixIcon,
+    this.suffixIcon,
     this.hintText,
     this.hintStyle,
-    this.prefixIconWidget,
-    this.prefixIcon,
-    this.prefixIconColor,
-    this.prefixIconFocusColor,
     this.isUnderLineBorder = false,
     this.disableError = false,
-    this.readOnly = false,
-    this.prefixIconPadding = const EdgeInsets.fromLTRB(10, 10, 20, 10),
-    this.style,
-    this.minLines,
-    this.maxLines = 1,
-    this.contentPadding,
-    this.fillColor,
+    this.onSaved,
+    this.onChanged,
     this.onFieldSubmitted,
-    this.suffixIcon,
-    this.maxLength,
-    this.hasValidate = false,
-    this.validateIcon,
-    this.focusNode,
-    this.scrollPadding = const EdgeInsets.all(20.0),
-    this.enabled,
-    this.showCounter = false,
-    this.autofocus = false,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      autofocus: autofocus,
       enabled: enabled,
-      scrollPadding: scrollPadding,
-      focusNode: focusNode,
-      maxLength: maxLength,
-      minLines: minLines,
-      maxLines: maxLines,
       readOnly: readOnly,
+      focusNode: focusNode,
+      autofocus: autofocus,
+      maxLines: maxLines,
+      minLines: minLines,
+      maxLength: maxLength,
+      controller: controller,
+      validator: validator,
       keyboardType: keyboardType,
       inputFormatters: inputFormatters,
+      textInputAction: textInputAction,
       obscureText: obscureText,
+      scrollPadding: scrollPadding,
       style: style ??
           CustomTextStyle.mediumBody(
             color: TextColors.textHighEm,
           ),
       decoration: InputDecoration(
         isDense: true,
-        counterText: showCounter ? null : '',
-        contentPadding: contentPadding ?? const EdgeInsets.fromLTRB(0, 0, 4, 0),
-        prefixIcon: prefixIconWidget ??
-            (prefixIcon != null
-                ? Padding(
-                    padding: prefixIconPadding,
-                    child: hasValidate
-                        ? validateIcon ??
-                            SvgIcon(
-                              SvgIcons.warningOutline,
-                              color: ColorPalettes.error500,
-                              size: 24,
-                            )
-                        : SvgIcon(
-                            prefixIcon,
-                            color: TextColors.textHighEm,
-                            size: 24,
-                          ),
-                  )
-                : null),
-        suffixIcon: isPassword
-            ? ClipRRect(
-                borderRadius: const BorderRadius.horizontal(
-                  right: Radius.circular(12),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(1),
-                  child: CustomButtonStyle.buttonNomarl(
-                    childPadding: EdgeInsets.zero,
-                    mainAxisSize: MainAxisSize.min,
-                    onTap: passwordIconOnPressed,
-                    child: obscureText
-                        ? SvgIcon(
-                            SvgIcons.eye,
-                            // color: ColorPalettes.g700,
-                          )
-                        : SvgIcon(
-                            SvgIcons.eyeOff,
-                            // color: ColorPalettes.g700,
-                          ),
-                  ),
-                ),
-              )
-            : suffixIcon,
         filled: true,
         fillColor: fillColor ?? SurfaceColors.surfaceWhite,
+        counterText: counterText,
+        contentPadding: contentPadding,
+        prefixIcon: prefixIcon,
+        suffixIcon: suffixIcon,
+        hintText: hintText,
+        hintStyle: hintStyle ??
+            CustomTextStyle.mediumBody(
+              color: TextColors.textLowEm,
+            ),
         enabledBorder: buttonBorder(
           isUnderLine: isUnderLineBorder,
           color: OutlineColors.med,
@@ -173,16 +126,9 @@ class FormFieldText extends StatelessWidget {
             : CustomTextStyle.mediumSub(
                 color: ColorPalettes.error500,
               ),
-        hintText: hintText,
-        hintStyle: hintStyle ??
-            CustomTextStyle.mediumBody(
-              color: TextColors.textLowEm,
-            ),
       ),
-      controller: controller,
       onSaved: onSaved,
       onChanged: onChanged,
-      validator: validator,
       onFieldSubmitted: onFieldSubmitted,
     );
   }
@@ -225,12 +171,12 @@ class JTInputWithHeader extends StatelessWidget {
   final TextStyle? textStyle;
   final TextStyle? highlightStyle;
   const JTInputWithHeader({
-    super.key,
+    Key? key,
     required this.header,
     required this.child,
     this.textStyle,
     this.highlightStyle,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

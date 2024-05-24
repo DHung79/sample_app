@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:flick_video_player/flick_video_player.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
+
 import '../../../../themes/theme_config.dart';
 import '../../packages/custom_package/played_time.dart';
 import '../../packages/custom_package/total_duration.dart';
@@ -9,13 +10,13 @@ import '../multi_manager/flick_multi_manager.dart';
 
 class FeedPlayerLandscapeControls extends StatelessWidget {
   const FeedPlayerLandscapeControls({
-    super.key,
+    Key? key,
     this.flickMultiManager,
     this.flickManager,
     this.iconSize = 20,
     this.fontSize = 12,
     this.progressBarSettings,
-  });
+  }) : super(key: key);
 
   final FlickMultiManager? flickMultiManager;
   final FlickManager? flickManager;

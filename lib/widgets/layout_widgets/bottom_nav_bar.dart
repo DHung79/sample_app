@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../themes/theme_config.dart';
 import '../button_widgets/button_icon.dart';
 
@@ -6,10 +7,10 @@ class BottomNavBar extends StatefulWidget {
   final List<BottomNavBarItem> tabs;
   final double height;
   const BottomNavBar({
-    super.key,
+    Key? key,
     required this.tabs,
     this.height = 70,
-  });
+  }) : super(key: key);
 
   @override
   State<BottomNavBar> createState() => _BottomNavBarState();
@@ -75,11 +76,11 @@ class BottomBarItemWidget extends StatelessWidget {
   final bool isActive;
   final Function() onTap;
   const BottomBarItemWidget({
-    super.key,
+    Key? key,
     required this.item,
     required this.isActive,
     required this.onTap,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

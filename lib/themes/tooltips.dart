@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'theme_config.dart';
 
 class Tooltips extends StatelessWidget {
@@ -11,7 +12,7 @@ class Tooltips extends StatelessWidget {
   final double maxHeight;
 
   const Tooltips({
-    super.key,
+    Key? key,
     required this.title,
     this.style,
     this.child,
@@ -19,7 +20,7 @@ class Tooltips extends StatelessWidget {
     this.maxWidth = 200,
     this.minHeight = 0,
     this.maxHeight = double.infinity,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

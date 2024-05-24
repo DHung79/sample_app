@@ -5,7 +5,7 @@ import 'pages/feed_player/feed_player.dart';
 import '../../themes/theme_config.dart';
 
 class FeedScreen extends StatelessWidget {
-  const FeedScreen({super.key});
+  const FeedScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

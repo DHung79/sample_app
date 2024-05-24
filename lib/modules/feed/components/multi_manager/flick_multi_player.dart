@@ -1,16 +1,16 @@
 import 'dart:io';
 
 import 'package:flick_video_player/flick_video_player.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:video_player/video_player.dart';
+import 'package:visibility_detector/visibility_detector.dart';
+
 import '../../../../themes/theme_config.dart';
+import '../../packages/custom_package/flick_video_player.dart' as custom;
 import '../player_controls/landscape_controls.dart';
 import '../player_controls/portrait_controls.dart';
-import '../../packages/custom_package/flick_video_player.dart' as custom;
 import 'flick_multi_manager.dart';
-
-import 'package:flutter/material.dart';
-import 'package:visibility_detector/visibility_detector.dart';
-import 'package:video_player/video_player.dart';
 
 class FlickMultiPlayer extends StatefulWidget {
   final String url;
@@ -19,13 +19,13 @@ class FlickMultiPlayer extends StatefulWidget {
   final DefaultCacheManager cacheManager;
   final bool isSlider;
   const FlickMultiPlayer({
-    super.key,
+    Key? key,
     required this.url,
     this.image,
     required this.flickMultiManager,
     required this.cacheManager,
     required this.isSlider,
-  });
+  }) : super(key: key);
 
   @override
   State<FlickMultiPlayer> createState() => _FlickMultiPlayerState();

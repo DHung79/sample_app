@@ -9,7 +9,7 @@ import 'web_key_bindings.dart';
 
 class FlickVideoPlayer extends StatefulWidget {
   const FlickVideoPlayer({
-    super.key,
+    Key? key,
     required this.flickManager,
     this.flickVideoWithControls = const FlickVideoWithControls(
       controls: FlickPortraitControls(),
@@ -28,7 +28,7 @@ class FlickVideoPlayer extends StatefulWidget {
     this.wakelockEnabled = true,
     this.wakelockEnabledFullscreen = true,
     this.webKeyDownHandler = flickDefaultWebKeyDownHandler,
-  });
+  }) : super(key: key);
 
   final FlickManager flickManager;
 
@@ -91,7 +91,7 @@ class _FlickVideoPlayerState extends State<FlickVideoPlayer>
     flickManager = widget.flickManager;
     flickManager.registerContext(context);
     flickManager.flickControlManager!.addListener(listener);
-    
+
     if (widget.wakelockEnabled) {
       Wakelock.enable();
     }

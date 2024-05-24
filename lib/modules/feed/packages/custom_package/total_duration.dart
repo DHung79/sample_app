@@ -5,10 +5,10 @@ import 'package:provider/provider.dart';
 /// Returns a text widget with total duration of the video.
 class TotalDuration extends StatelessWidget {
   const TotalDuration({
-    super.key,
+    Key? key,
     this.fontSize,
     this.color,
-  });
+  }) : super(key: key);
 
   final double? fontSize;
   final Color? color;

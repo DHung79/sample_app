@@ -7,9 +7,9 @@ import 'components/app_bar.dart';
 class ComingSoonScreen extends StatelessWidget {
   final String? appBarTitle;
   const ComingSoonScreen({
-    super.key,
+    Key? key,
     this.appBarTitle,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

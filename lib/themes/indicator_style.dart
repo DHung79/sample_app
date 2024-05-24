@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+
 import 'package:sample_app/themes/theme_config.dart';
 
 class IndicatorStyle extends StatelessWidget {
   final double size;
   final Color? color;
   const IndicatorStyle({
-    super.key,
+    Key? key,
     this.size = 32,
     this.color,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

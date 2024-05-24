@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+
 import '../../../routes/route_names.dart';
 import '../../../themes/theme_config.dart';
 
 class ComingSoonAppBar extends StatelessWidget {
   final String? title;
   const ComingSoonAppBar({
-    super.key,
+    Key? key,
     this.title,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

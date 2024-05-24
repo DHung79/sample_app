@@ -6,7 +6,7 @@ import '../../../themes/theme_config.dart';
 import '../packages/flutter_scalable_ocr.dart';
 
 class TranslateOCRScreen extends StatefulWidget {
-  const TranslateOCRScreen({super.key});
+  const TranslateOCRScreen({Key? key}) : super(key: key);
 
   @override
   State<TranslateOCRScreen> createState() => _TranslateOCRScreenState();
@@ -18,7 +18,7 @@ class _TranslateOCRScreenState extends State<TranslateOCRScreen> {
   String rawText = '';
   String translateText = '';
   String listenText = '';
-  
+
   Future<void> setText(value) async {
     final translateText = await translate(value);
     controller.add(

@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+
 import '../../themes/theme_config.dart';
 
 class ImgFromUrl extends StatelessWidget {
@@ -10,14 +11,14 @@ class ImgFromUrl extends StatelessWidget {
   final double? height;
   final int? duration;
   const ImgFromUrl({
-    super.key,
+    Key? key,
     required this.url,
     this.fit = BoxFit.contain,
     this.placeholder,
     this.width,
     this.height,
     this.duration,
-  });
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final transitionDuration = Duration(milliseconds: duration ?? 1);

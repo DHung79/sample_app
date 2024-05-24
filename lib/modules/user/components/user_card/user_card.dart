@@ -1,4 +1,5 @@
 import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import '../../../../apis/database/user/user.dart';
@@ -9,10 +10,10 @@ import 'dynamic_ink_well.dart';
 
 class UserCard extends StatelessWidget {
   const UserCard({
+    Key? key,
     required this.user,
     required this.size,
-    super.key,
-  });
+  }) : super(key: key);
 
   final UserModel user;
   final double size;

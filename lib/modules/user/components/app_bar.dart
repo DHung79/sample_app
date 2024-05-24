@@ -4,7 +4,7 @@ import '../../../routes/route_names.dart';
 import '../../../themes/theme_config.dart';
 
 class UserAppBar extends StatelessWidget {
-  const UserAppBar({super.key});
+  const UserAppBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

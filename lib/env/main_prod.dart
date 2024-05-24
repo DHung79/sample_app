@@ -5,7 +5,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../routes/route_config.dart';
 import '../themes/theme_config.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(
@@ -25,7 +24,7 @@ final List<Locale> supportedLocales = <Locale>[
 Locale currentLocale = supportedLocales[0];
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

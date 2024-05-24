@@ -8,7 +8,7 @@ import '../shop/shop_screen.dart';
 import '../user/user_screen.dart';
 
 class VKAppScreen extends StatefulWidget {
-  const VKAppScreen({super.key});
+  const VKAppScreen({Key? key}) : super(key: key);
 
   @override
   State<VKAppScreen> createState() => _VKAppScreenState();

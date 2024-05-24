@@ -7,7 +7,7 @@ import 'pages/translate_img_screen.dart';
 import 'pages/translate_ocr_screen.dart';
 
 class TranslateScreen extends StatelessWidget {
-  const TranslateScreen({super.key});
+  const TranslateScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

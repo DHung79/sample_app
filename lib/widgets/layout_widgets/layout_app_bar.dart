@@ -8,13 +8,13 @@ class LayoutAppBar extends StatelessWidget {
   final Color? statusBarColor;
   final Widget? child;
   const LayoutAppBar({
-    super.key,
+    Key? key,
     this.backgroundColor = Colors.blueAccent,
     this.systemNavigationBarColor = Colors.blueAccent,
     this.systemNavigationBarDividerColor,
     this.statusBarColor = Colors.blueAccent,
     this.child,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

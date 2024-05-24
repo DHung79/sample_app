@@ -5,7 +5,7 @@ import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart
 import '../../../themes/theme_config.dart';
 
 class TranslateImgScreen extends StatefulWidget {
-  const TranslateImgScreen({super.key});
+  const TranslateImgScreen({Key? key}) : super(key: key);
 
   @override
   State<TranslateImgScreen> createState() => _TranslateImgScreenState();
@@ -13,7 +13,7 @@ class TranslateImgScreen extends StatefulWidget {
 
 class _TranslateImgScreenState extends State<TranslateImgScreen> {
   File? filePicked;
-  
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -55,7 +55,7 @@ class _TranslateImgScreenState extends State<TranslateImgScreen> {
               ),
             ),
             if (filePicked != null)
-              FutureBuilder(
+              FutureBuilder<String?>(
                 future: _textRecognition(filePicked!),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {

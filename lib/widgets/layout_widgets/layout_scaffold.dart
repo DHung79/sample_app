@@ -7,13 +7,13 @@ class LayoutScaffold extends StatelessWidget {
   final Widget body;
   final Widget? bottomNavigationBar;
   const LayoutScaffold({
-    super.key,
+    Key? key,
     this.appBar,
     this.resizeToAvoidBottomInset,
     this.backgroundColor,
     required this.body,
     this.bottomNavigationBar,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

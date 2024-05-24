@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import '../../apis/configs/rest/models/rest_api_response.dart';
 import '../../apis/database/user/user.dart';
 import '../../themes/theme_config.dart';
 import 'components/app_bar.dart';
 import 'components/user_card/user_card.dart';
 
 class UserScreen extends StatefulWidget {
-  const UserScreen({super.key});
+  const UserScreen({Key? key}) : super(key: key);
 
   @override
   State<UserScreen> createState() => _UserScreenState();
@@ -77,7 +78,7 @@ class _UserScreenState extends State<UserScreen> {
   Widget _userList() {
     return Padding(
       padding: const EdgeInsets.fromLTRB(0, 24, 0, 24),
-      child: StreamBuilder(
+      child: StreamBuilder<ApiResponse<ShippingModel?>>(
         stream: _userBloc.allData,
         builder: (context, snapshot) {
           if (snapshot.hasData) {

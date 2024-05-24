@@ -1,22 +1,23 @@
-import 'package:flutter/material.dart';
 import 'package:flick_video_player/flick_video_player.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
+
 import '../../../../themes/theme_config.dart';
 import '../../../../widgets/image_widgets/img_from_url.dart';
 import '../multi_manager/flick_multi_manager.dart';
 
 class FeedPlayerPortraitControls extends StatelessWidget {
   const FeedPlayerPortraitControls({
-    super.key,
+    Key? key,
     this.flickMultiManager,
     this.flickManager,
     this.iconSize = 32,
     this.fontSize = 12,
     this.progressBarSettings,
     required this.avatar,
-  });
+  }) : super(key: key);
 
   final FlickMultiManager? flickMultiManager;
   final FlickManager? flickManager;

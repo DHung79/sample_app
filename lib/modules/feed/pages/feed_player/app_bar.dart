@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+
 import 'package:sample_app/routes/route_names.dart';
+
 import '../../../../themes/theme_config.dart';
 
 class FeedPlayerAppBar extends StatelessWidget {
   final String title;
   const FeedPlayerAppBar({
-    super.key,
+    Key? key,
     this.title = '',
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

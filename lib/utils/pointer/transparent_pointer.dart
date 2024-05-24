@@ -3,9 +3,9 @@ import 'package:flutter/rendering.dart';
 
 class TransparentPointer extends SingleChildRenderObjectWidget {
   const TransparentPointer({
-    required super.child,
-    super.key,
-  });
+    Key? key,
+    required Widget? child,
+  }) : super(key: key);
 
   @override
   RenderObject createRenderObject(BuildContext context) {

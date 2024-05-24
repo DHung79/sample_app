@@ -10,7 +10,7 @@ import 'package:camera/camera.dart';
 // import 'package:satya_textocr/satya_textocr.dart';
 class ScalableOCR extends StatefulWidget {
   const ScalableOCR(
-      {super.key,
+      {Key? key,
       this.boxLeftOff = 4,
       this.boxRightOff = 4,
       this.boxBottomOff = 2.7,
@@ -18,7 +18,8 @@ class ScalableOCR extends StatefulWidget {
       this.boxHeight,
       required this.getScannedText,
       this.getRawData,
-      this.paintboxCustom});
+      this.paintboxCustom})
+      : super(key: key);
 
   /// Offset on recalculated image left
   final double boxLeftOff;

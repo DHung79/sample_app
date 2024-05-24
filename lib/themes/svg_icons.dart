@@ -511,13 +511,13 @@ class SvgIcons {
 }
 
 class SvgIcon extends StatelessWidget {
-  const SvgIcon(
-    this.icon, {
-    super.key,
+  const SvgIcon(SvgIconData arrowBackward, {
+    Key? key,
+    this.icon,
     this.size,
     this.color,
     this.semanticLabel,
-  });
+  }) : super(key: key);
 
   final SvgIconData? icon;
   final double? size;

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../apis/database/user/user.dart';
 import '../../../../themes/theme_config.dart';
 import '../../../../widgets/image_widgets/img_from_url.dart';
@@ -7,9 +8,9 @@ import 'app_bar.dart';
 class UserDetailScreen extends StatelessWidget {
   final UserModel user;
   const UserDetailScreen({
-    super.key,
+    Key? key,
     required this.user,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
