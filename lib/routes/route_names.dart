@@ -8,4 +8,5 @@ const String vkAppRoute = '/vk-app';
 const String userRoute = '/user';
 const String feedRoute = '/feed';
 const String shippingRoute = '/shipping';
+const String faceIDRoute = '/faceID';
 

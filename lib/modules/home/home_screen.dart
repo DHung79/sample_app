@@ -46,6 +46,12 @@ class HomeScreen extends StatelessWidget {
                     context.go(vkAppRoute);
                   },
                 ),
+                _navigaterButton(
+                  name: 'faceID',
+                  onPressed: () {
+                    context.go(faceIDRoute);
+                  },
+                ),
               ],
             ),
           ),

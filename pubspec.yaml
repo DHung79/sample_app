@@ -63,6 +63,7 @@ dependencies:
   camera: ^0.10.5+9
   google_fonts: ^6.2.0
   http: ^1.2.0
+  custom_refresh_indicator: ^3.1.0
 
 dev_dependencies:
   flutter_test:

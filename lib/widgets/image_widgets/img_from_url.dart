@@ -10,6 +10,7 @@ class ImgFromUrl extends StatelessWidget {
   final double? width;
   final double? height;
   final int? duration;
+  final bool useOldImageOnUrlChange;
   const ImgFromUrl({
     Key? key,
     required this.url,
@@ -18,6 +19,7 @@ class ImgFromUrl extends StatelessWidget {
     this.width,
     this.height,
     this.duration,
+    this.useOldImageOnUrlChange = true,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -30,13 +32,28 @@ class ImgFromUrl extends StatelessWidget {
       placeholderFadeInDuration: transitionDuration,
       fit: fit,
       imageUrl: url,
+      useOldImageOnUrlChange: useOldImageOnUrlChange,
+      //imageBuilder: to not show placeholder when image is loaded
+      imageBuilder: (context, imageProvider) {
+        return Container(
+          width: width,
+          height: height,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: imageProvider,
+              fit: fit,
+            ),
+          ),
+        );
+      },
       placeholder: (context, url) {
         return placeholder ??
-            Center(
-              child: Image(
-                width: width,
-                height: height,
-                image: AssetImage(ImgAssets.placeholder),
+            Container(
+              width: width,
+              height: height,
+              decoration: BoxDecoration(
+                color: Colors.grey,
+                borderRadius: BorderRadius.circular(8),
               ),
             );
       },
@@ -44,10 +61,13 @@ class ImgFromUrl extends StatelessWidget {
         return Center(
           child: Opacity(
             opacity: 0.5,
-            child: Image(
+            child: Container(
               width: width,
               height: height,
-              image: AssetImage(ImgAssets.brokenImg),
+              decoration: BoxDecoration(
+                color: Colors.grey,
+                borderRadius: BorderRadius.circular(8),
+              ),
             ),
           ),
         );

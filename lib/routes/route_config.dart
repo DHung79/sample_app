@@ -80,6 +80,17 @@ final GoRouter router = GoRouter(
         );
       },
     ),
+    GoRoute(
+      name: faceIDRoute,
+      path: faceIDRoute,
+      pageBuilder: (BuildContext context, GoRouterState state) {
+        return _screenFor(
+          state: state,
+          route: faceIDRoute,
+          child: const VKAppScreen(),
+        );
+      },
+    ),
   ],
   errorBuilder: (context, state) {
     logDebug('Route error builder : ${state.uri.toString()}');
