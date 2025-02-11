@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../apis/configs/rest/models/rest_api_response.dart';
+import '../../apis/database/user/bloc/user_bloc_controller.dart';
 import '../../apis/database/user/user.dart';
 import '../../themes/theme_config.dart';
 import 'components/app_bar.dart';
@@ -13,7 +14,7 @@ class UserScreen extends StatefulWidget {
 }
 
 class _UserScreenState extends State<UserScreen> {
-  final _userBloc = UserBloc();
+  final _userBloc = UserBlocController().userBloc;
   final _scrollController = ScrollController();
   int limit = 10;
   int maxPage = 1;
