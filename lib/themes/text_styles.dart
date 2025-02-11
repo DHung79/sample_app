@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -272,8 +274,8 @@ class GGTextStyle {
       fontWeight: FontWeight.w400,
       color: color,
       fontSize: 14,
-      fontFeatures: [
-        const FontFeature.enable('sups'),
+      fontFeatures: const <FontFeature>[
+        FontFeature.enable('sups'),
       ],
     );
   }

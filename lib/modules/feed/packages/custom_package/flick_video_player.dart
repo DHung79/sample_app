@@ -153,17 +153,15 @@ class _FlickVideoPlayerState extends State<FlickVideoPlayer>
         setState(() {});
       });
     } else {
-      _overlayEntry = OverlayEntry(
-          canSizeOverlay: true,
-          builder: (context) {
-            return Scaffold(
-              body: FlickManagerBuilder(
-                flickManager: flickManager,
-                child: widget.flickVideoWithControlsFullscreen ??
-                    widget.flickVideoWithControls,
-              ),
-            );
-          });
+      _overlayEntry = OverlayEntry(builder: (context) {
+        return Scaffold(
+          body: FlickManagerBuilder(
+            flickManager: flickManager,
+            child: widget.flickVideoWithControlsFullscreen ??
+                widget.flickVideoWithControls,
+          ),
+        );
+      });
 
       Overlay.of(context).insert(_overlayEntry!);
     }
