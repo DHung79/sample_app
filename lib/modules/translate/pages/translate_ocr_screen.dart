@@ -21,12 +21,14 @@ class _TranslateOCRScreenState extends State<TranslateOCRScreen> {
 
   Future<void> setText(value) async {
     final translateText = await translate(value);
-    controller.add(
-      TranslateController(rawText: value, translateText: translateText),
-    );
-    setState(() {
-      listenText = value;
-    });
+    if (!controller.isClosed) {
+      controller.add(
+        TranslateController(rawText: value, translateText: translateText),
+      );
+      setState(() {
+        listenText = value;
+      });
+    }
   }
 
   @override

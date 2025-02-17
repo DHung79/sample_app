@@ -27,27 +27,6 @@ class TranslateScreen extends StatelessWidget {
             children: [
               CustomButtonStyle.roundDark(
                 child: Text(
-                  'Banks Dialog',
-                  style: CustomTextStyle.boldStandard(
-                    color: TextColors.textWhite,
-                  ),
-                ),
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    barrierDismissible: true,
-                    barrierColor: Colors.black12,
-                    builder: (BuildContext context) {
-                      return const BankDialog();
-                    },
-                  );
-                },
-              ),
-              const SizedBox(
-                height: 24,
-              ),
-              CustomButtonStyle.roundDark(
-                child: Text(
                   'Translate Image',
                   style: CustomTextStyle.boldStandard(
                     color: TextColors.textWhite,

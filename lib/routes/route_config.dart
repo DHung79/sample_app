@@ -59,35 +59,13 @@ final GoRouter router = GoRouter(
       },
     ),
     GoRoute(
-      name: shippingRoute,
-      path: shippingRoute,
+      name: translateRoute,
+      path: translateRoute,
       pageBuilder: (BuildContext context, GoRouterState state) {
         return _screenFor(
           state: state,
-          route: shippingRoute,
+          route: translateRoute,
           child: const TranslateScreen(),
-        );
-      },
-    ),
-    GoRoute(
-      name: vkAppRoute,
-      path: vkAppRoute,
-      pageBuilder: (BuildContext context, GoRouterState state) {
-        return _screenFor(
-          state: state,
-          route: vkAppRoute,
-          child: const VKAppScreen(),
-        );
-      },
-    ),
-    GoRoute(
-      name: faceIDRoute,
-      path: faceIDRoute,
-      pageBuilder: (BuildContext context, GoRouterState state) {
-        return _screenFor(
-          state: state,
-          route: faceIDRoute,
-          child: const VKAppScreen(),
         );
       },
     ),

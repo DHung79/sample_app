@@ -7,6 +7,7 @@ import '../../../../themes/theme_config.dart';
 import '../../../../widgets/image_widgets/img_from_url.dart';
 import '../user_detail/user_detail_screen.dart';
 import 'dynamic_ink_well.dart';
+import 'user_info.dart';
 
 class UserCard extends StatelessWidget {
   const UserCard({
@@ -40,21 +41,30 @@ class UserCard extends StatelessWidget {
                   child: Material(
                     color: Colors.transparent,
                     child: Container(
-                      margin: const EdgeInsets.fromLTRB(0, 0, 48, 0),
                       decoration: BoxDecoration(
                         borderRadius:
                             const BorderRadius.all(Radius.circular(16)),
                         color: estimatedColor,
                       ),
-                      padding: const EdgeInsets.fromLTRB(16, 16, 48, 16),
+                      padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          Text(
-                            userFullName,
-                            style: CustomTextStyle.boldH6(
-                              color: Colors.white,
-                            ),
+                          Row(
+                            children: [
+                              Text(
+                                userFullName,
+                                style: CustomTextStyle.boldH6(
+                                  color: Colors.white,
+                                ).copyWith(
+                                  shadows: [
+                                    BoxShadowStyle.widgetShadow,
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              UserInfo.userGender(user.gender),
+                            ],
                           ),
                         ],
                       ),
@@ -62,7 +72,7 @@ class UserCard extends StatelessWidget {
                   ),
                 ),
                 Positioned(
-                  right: 54,
+                  right: 0,
                   top: 8,
                   child: IconButton(
                     icon: const Icon(
@@ -114,8 +124,36 @@ class UserCard extends StatelessWidget {
                     child: AnimatedScale(
                       scale: tappedDown ? 0.85 : 1.0,
                       duration: const Duration(milliseconds: 100),
-                      child: ImgFromUrl(
-                        url: user.image,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.fromLTRB(16, 48, 16, 0),
+                              child: ImgFromUrl(
+                                url: user.image,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(24, 8, 24, 24),
+                            child: Row(
+                              children: [
+                                Text(
+                                  user.age.toString(),
+                                  style: CustomTextStyle.boldH6(
+                                    color: TextColors.textWhite,
+                                  ).copyWith(
+                                    shadows: [
+                                      BoxShadowStyle.widgetShadow,
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
                       ),
                     ),
                   ),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../apis/database/user/user.dart';
 import '../../../../themes/theme_config.dart';
 import '../../../../widgets/image_widgets/img_from_url.dart';
+import '../user_card/user_info.dart';
 import 'app_bar.dart';
 
 class UserDetailScreen extends StatelessWidget {
@@ -50,6 +51,7 @@ class UserDetailScreen extends StatelessWidget {
     return Hero(
       tag: '${user.id}image',
       child: ImgFromUrl(
+        height: 200,
         url: user.image,
       ),
     );
@@ -62,91 +64,40 @@ class UserDetailScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _userInfo(
+          UserInfo.userInfo(
             title: 'Name',
             contentText: userFullName,
           ),
-          _userInfo(
+          UserInfo.userInfo(
             title: 'Age',
             contentText: user.age.toString(),
           ),
-          _userInfo(
+          UserInfo.userInfo(
             title: 'Gender',
-            customContent: _userGender(user.gender),
+            customContent: UserInfo.userGender(user.gender),
           ),
-          _userInfo(
+          UserInfo.userInfo(
             title: 'Day of birth',
             contentText: user.birthDate,
           ),
-          _userInfo(
+          UserInfo.userInfo(
             title: 'Email',
             contentText: user.email,
           ),
-          _userInfo(
+          UserInfo.userInfo(
             title: 'Phone',
             contentText: user.phone,
           ),
-          _userInfo(
+          UserInfo.userInfo(
             title: 'Height',
             contentText: '${user.height / 100} m',
           ),
-          _userInfo(
+          UserInfo.userInfo(
             title: 'Weight',
             contentText: '${user.weight} kg',
           ),
         ],
       ),
-    );
-  }
-
-  Widget _userInfo({
-    required String title,
-    String? contentText,
-    Widget? customContent,
-  }) {
-    return Wrap(
-      children: [
-        Text(
-          title,
-          style: CustomTextStyle.boldH6(
-            color: TextColors.textWhite,
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(4, 0, 16, 0),
-          child: Text(
-            ':',
-            style: CustomTextStyle.boldH6(
-              color: TextColors.textWhite,
-            ),
-          ),
-        ),
-        if (contentText != null)
-          Text(
-            contentText,
-            style: CustomTextStyle.mediumH6(
-              color: TextColors.textWhite.withOpacity(0.85),
-            ),
-          ),
-        if (customContent != null) customContent,
-      ],
-    );
-  }
-
-  Widget _userGender(String gender) {
-    IconData? icon;
-    Color? iconColor;
-    if (gender.toLowerCase() == 'male') {
-      icon = Icons.male_rounded;
-      iconColor = Colors.blue.shade300;
-    } else {
-      icon = Icons.female_rounded;
-      iconColor = Colors.pink.shade300;
-    }
-    return Icon(
-      icon,
-      size: 35,
-      color: iconColor,
     );
   }
 }

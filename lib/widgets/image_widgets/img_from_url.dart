@@ -48,13 +48,10 @@ class ImgFromUrl extends StatelessWidget {
       },
       placeholder: (context, url) {
         return placeholder ??
-            Container(
+            SizedBox(
               width: width,
               height: height,
-              decoration: BoxDecoration(
-                color: Colors.grey,
-                borderRadius: BorderRadius.circular(8),
-              ),
+              child: const IndicatorStyle(),
             );
       },
       errorWidget: (context, url, error) {

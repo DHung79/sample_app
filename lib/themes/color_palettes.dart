@@ -413,6 +413,13 @@ class BoxShadowStyle {
     offset: Offset(0, 0),
     blurRadius: 24,
   );
+  static BoxShadow widgetShadow = const BoxShadow(
+    color: Colors.black,
+    offset: Offset(1, 1),
+    blurRadius: 2,
+    spreadRadius: 1,
+    blurStyle: BlurStyle.solid,
+  );
 }
 
 Color hexToColor(String hex) {

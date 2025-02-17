@@ -14,7 +14,7 @@ class UserModel extends BaseModel {
   final String _birthDate;
   final String _image;
   final String _bloodGroup;
-  final int _height;
+  final double _height;
   final double _weight;
   final String _eyeColor;
   final String _domain;
@@ -36,7 +36,7 @@ class UserModel extends BaseModel {
         _birthDate = json['birthDate'] ?? '',
         _image = json['image'] ?? '',
         _bloodGroup = json['bloodGroup'] ?? '',
-        _height = json['height'],
+        _height = json['height'].toDouble(),
         _weight = json['weight'].toDouble(),
         _eyeColor = json['eyeColor'] ?? '',
         _domain = json['domain'] ?? '',
@@ -80,7 +80,7 @@ class UserModel extends BaseModel {
   String get birthDate => _birthDate;
   String get image => _image;
   String get bloodGroup => _bloodGroup;
-  int get height => _height;
+  double get height => _height;
   double get weight => _weight;
   String get eyeColor => _eyeColor;
   String get domain => _domain;

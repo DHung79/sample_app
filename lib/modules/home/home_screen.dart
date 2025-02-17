@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../routes/route_names.dart';
 import '../../themes/theme_config.dart';
+import '../translate/components/bank_dialog.dart';
 import 'components/app_bar.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -37,21 +38,34 @@ class HomeScreen extends StatelessWidget {
                 _navigaterButton(
                   name: 'Translate Sample',
                   onPressed: () {
-                    context.go(shippingRoute);
+                    context.go(translateRoute);
                   },
                 ),
                 _navigaterButton(
-                  name: 'VK App',
+                  name: 'Banks Dialog',
                   onPressed: () {
-                    context.go(vkAppRoute);
+                    showDialog(
+                      context: context,
+                      barrierDismissible: true,
+                      barrierColor: Colors.black12,
+                      builder: (BuildContext context) {
+                        return const BankDialog();
+                      },
+                    );
                   },
                 ),
-                _navigaterButton(
-                  name: 'faceID',
-                  onPressed: () {
-                    context.go(faceIDRoute);
-                  },
-                ),
+                // _navigaterButton(
+                //   name: 'VK App',
+                //   onPressed: () {
+                //     context.go(vkAppRoute);
+                //   },
+                // ),
+                // _navigaterButton(
+                //   name: 'faceID',
+                //   onPressed: () {
+                //     context.go(faceIDRoute);
+                //   },
+                // ),
               ],
             ),
           ),

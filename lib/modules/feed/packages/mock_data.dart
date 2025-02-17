@@ -21,39 +21,39 @@ List<String> names = [
 ];
 List<SampleVideo> videos = [
   SampleVideo(
-    name: 'Waves in the water',
+    name: 'stir fried Tom Yum seafood dried spaghetti - Fusion food style',
     fileUrl:
-        'https://assets.mixkit.co/videos/preview/mixkit-waves-in-the-water-1164-large.mp4',
+        'https://video-previews.elements.envatousercontent.com/4b17859e-ee17-41e0-a92b-fc221ea32aea/watermarked_preview/watermarked_preview.mp4',
   ),
   SampleVideo(
-    name: 'Girl in neon sign',
+    name: 'Restaurant, hand and eating sushi for lunch, closeup food and nutrition with seafood',
     fileUrl:
-        'https://assets.mixkit.co/videos/preview/mixkit-girl-in-neon-sign-1232-large.mp4',
+        'https://video-previews.elements.envatousercontent.com/4a234b63-7205-4932-95e7-60bfc04623d1/watermarked_preview/watermarked_preview.mp4',
   ),
   SampleVideo(
-    name: 'Woman\'s feet splashing in the pool',
+    name: 'Expense Food Budgeting Indoor',
     fileUrl:
-        'https://assets.mixkit.co/videos/preview/mixkit-womans-feet-splashing-in-the-pool-1261-large.mp4',
+        'https://video-previews.elements.envatousercontent.com/be32de62-0050-4afa-ab29-b8cc2df4f57c/watermarked_preview/watermarked_preview.mp4',
   ),
   SampleVideo(
-    name: 'Tree with yellow flowers',
+    name: 'Aerial view of Dubai frame landmark during the sunset, Dubai, U.A.E',
     fileUrl:
-        'https://assets.mixkit.co/videos/preview/mixkit-tree-with-yellow-flowers-1173-large.mp4',
+        'https://video-previews.elements.envatousercontent.com/files/c7b61872-0a28-4204-bfdb-ba5c25705b9f/video_preview_h264.mp4',
   ),
   SampleVideo(
-    name: 'Abstract video of a man with heads like matrushka',
+    name: 'Cinematic World earth Loop Animation',
     fileUrl:
-        'https://assets.mixkit.co/videos/preview/mixkit-abstract-video-of-a-man-with-heads-like-matrushka-32647-large.mp4',
+        'https://video-previews.elements.envatousercontent.com/files/c54cae60-22ba-4497-aac7-6c7c9ca48ed4/video_preview_h264.mp4',
   ),
   SampleVideo(
-    name: 'Mother with her little daughter eating a marshmallow in nature',
+    name: 'Dramatic Ocean Coast',
     fileUrl:
-        'https://assets.mixkit.co/videos/preview/mixkit-mother-with-her-little-daughter-eating-a-marshmallow-in-nature-39764-large.mp4',
+        'https://video-previews.elements.envatousercontent.com/h264-video-previews/8af44033-2913-4c5b-8b35-9a2fe926c745/2004044.mp4',
   ),
   SampleVideo(
-    name: 'Hands holding a smart watch with the stopwatch running',
+    name: 'Dubai Marina Skyline Showing Skyscrapers Under Construction',
     fileUrl:
-        'https://assets.mixkit.co/videos/preview/mixkit-hands-holding-a-smart-watch-with-the-stopwatch-running-32808-large.mp4',
+        'https://video-previews.elements.envatousercontent.com/5b3185d6-41b1-4853-9077-2db9fd2a36e0/watermarked_preview/watermarked_preview.mp4',
   ),
 ];
 Map<String, dynamic> mockData = {
